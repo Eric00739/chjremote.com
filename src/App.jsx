@@ -217,20 +217,20 @@ const blogPosts = [
 
 const faqs = [
   {
-    q: "Can you clone fixed code remotes to rolling code receivers?",
-    a: "Yes. We bridge PT2262/EV1527 fixed code to HCS301 rolling code receivers with secure hopping encryption and keep button mapping 1:1."
+    q: "Do your universal remotes support both Rolling Code (HCS301) and Fixed Code (EV1527)?",
+    a: "Yes. Our Smart-Clone series uses a self-learning MCU covering ~95% of global brands (LiftMaster, Nice, Came). It supports mixed-frequency cloning (433MHz + 868MHz) on one device to cut distributor inventory."
   },
   {
-    q: "Do you provide SDK for secondary development on WiFi/Tuya modules?",
-    a: "We ship SDK/API for ESP32/Tuya modules (HTTP/MQTT/Webhook) plus PCB reference designs so integrators can embed their own cloud logic."
+    q: "Can you customize RF frequency (315/433/868MHz) and button functions for OEM orders?",
+    a: "Absolutely. From PCB layout to mold tooling, we tune frequencies (e.g., 433.92MHz ±75kHz) with SAW or crystal oscillators to meet local regulations and map buttons per your protocol."
   },
   {
-    q: "What is the lead time for OEM mold and PCB re-layout?",
-    a: "PCB re-layout + antenna tuning: 3-5 days; SLA 3D sample + soft tool: 7 days; mass production (ISO line): 10-15 days after approval."
+    q: "Do you provide SDK/API for Tuya WiFi modules and smart home integration?",
+    a: "Yes. We supply SDK/API plus full docs for WiFi-to-RF bridges and Tuya-compatible modules, enabling secondary development into your app, CRM, or cloud workflows."
   },
   {
-    q: "Are you a custom RF remote control PCB manufacturer in China with CE/FCC support?",
-    a: "Yes. We provide CE/FCC test reports, EMI mitigation, and fixture-based aging test for 433/868MHz to ensure compliance and stability."
+    q: "What certifications (FCC, CE, RoHS) do your remote controls hold for export?",
+    a: "Our remotes are export-ready with CE-RED (EU), FCC ID (USA), and RoHS. In-house aging and RF tests ensure every batch meets ISO9001 standards before shipment."
   }
 ];
 
