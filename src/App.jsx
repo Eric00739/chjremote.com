@@ -33,7 +33,7 @@ import Logo from "../logo/LOGO.png";
 
 // --- SEO Helper ---
 const SEO_METADATA = {
-  title: "RF Remote Control Manufacturer | OEM 433MHz/868MHz Factory | Chuangjiang",
+  title: "RF Remote Control Manufacturer | OEM 433MHz/868MHz Factory | CHJ Remotes",
   description:
     "CHJ Remotes: ISO9001 certified manufacturer of RF remote controls, rolling code transmitters, Tuya WiFi modules, and garage door receivers."
 };
@@ -64,7 +64,12 @@ const products = [
     voltage: "12V (27A)",
     image: `https://placehold.co/600x600/f8fafc/2E3192?text=CJ-433+Pro+Series`,
     tag: "Best Seller",
-    desc: "High-security rolling code transmitter with 100m range. Chrome-plated metal frame."
+    desc: "High-security rolling code transmitter with 100m range and universal 433MHz receiver replacement for garage door openers.",
+    specs: [
+      "Chipset: HCS301 / Rolling code encryption",
+      "Range: >100m with tuned PCB antenna",
+      "Enclosure: Zinc alloy frame, 12V 27A cell"
+    ]
   },
   {
     id: 2,
@@ -75,7 +80,12 @@ const products = [
     voltage: "AC 85-265V",
     image: `https://placehold.co/600x600/f8fafc/2E3192?text=WiFi+Smart+Receiver`,
     tag: "Tuya Certified",
-    desc: "Upgrade old garage doors to smart control. Works with App, Alexa, and Google Home."
+    desc: "Upgrade old garage doors to smart control. Works with App, Alexa, and Google Home; Tuya Zigbee switch module OEM ready.",
+    specs: [
+      "Chipset: ESP32 / Tuya module (WiFi & Zigbee ready)",
+      "Voltage: AC/DC 9-30V & 110-240V",
+      "Memory: Stores up to 500 remote codes"
+    ]
   },
   {
     id: 3,
@@ -86,7 +96,12 @@ const products = [
     voltage: "DC 3V (CR2032)",
     image: `https://placehold.co/600x600/f8fafc/2E3192?text=IP67+Waterproof`,
     tag: "Heavy Duty",
-    desc: "Designed for harsh environments. Dustproof, waterproof, and drop-resistant."
+    desc: "Designed for harsh environments. Dustproof, waterproof, and drop-resistant for industrial doors and hoists.",
+    specs: [
+      "Ingress: IP67 sealed enclosure, anti-drop shell",
+      "Battery: CR2032, low-power MCU design",
+      "RF: 868MHz learning code, tuned whip antenna"
+    ]
   },
   {
     id: 4,
@@ -126,24 +141,24 @@ const products = [
 const testimonials = [
   {
     id: 1,
-    name: "Markus Weber",
-    role: "Purchasing Manager, GateSys GmbH (Germany)",
+    name: "Purchasing Director",
+    role: "Top 3 Gate Automation Distributor (Italy)",
     content:
-      "We have been sourcing HCS301 remotes from Chuangjiang for 5 years. Their defect rate is below 0.1%, which is impressive.",
+      "CHJ solved our rolling code encryption conflict with LiftMaster systems. Their SDK support helped us launch in Germany within 3 months.",
     stars: 5
   },
   {
     id: 2,
-    name: "Carlos Silva",
-    role: "CEO, Seguran?a Total (Brazil)",
-    content: "The universal cloning remotes are a best seller in Brazil. Fast shipping to Sao Paulo and great packaging.",
+    name: "Hardware Lead",
+    role: "Access Control OEM Partner (USA)",
+    content: "They tuned 433/868MHz antenna to pass FCC/CE on first round and shared full RF test reports. Zero returns so far.",
     stars: 5
   },
   {
     id: 3,
-    name: "Sarah Johnson",
-    role: "Product Lead, SmartHome USA",
-    content: "Their Tuya WiFi modules integrated perfectly with our app. The technical support was outstanding.",
+    name: "R&D Manager",
+    role: "Smart Home Integrator (Brazil)",
+    content: "Tuya + RF hybrid receivers shipped with custom firmware hooks. Their engineers answered MCU coding questions overnight.",
     stars: 5
   }
 ];
@@ -202,20 +217,20 @@ const blogPosts = [
 
 const faqs = [
   {
-    q: "What is your MOQ (Minimum Order Quantity) for OEM?",
-    a: "For custom logo printing, our MOQ is 500 pcs. For fully custom PCB design or new mold development, we recommend starting with 1000 pcs to optimize cost."
+    q: "Can you clone fixed code remotes to rolling code receivers?",
+    a: "Yes. We bridge PT2262/EV1527 fixed code to HCS301 rolling code receivers with secure hopping encryption and keep button mapping 1:1."
   },
   {
-    q: "Can you produce remotes compatible with specific brands?",
-    a: "Yes, our engineers can customize the protocol to be compatible with major brands like LiftMaster, Nice, Came, etc., provided no patent infringement is involved."
+    q: "Do you provide SDK for secondary development on WiFi/Tuya modules?",
+    a: "We ship SDK/API for ESP32/Tuya modules (HTTP/MQTT/Webhook) plus PCB reference designs so integrators can embed their own cloud logic."
   },
   {
-    q: "What is the lead time for mass production?",
-    a: "Standard products: 3-5 days. OEM orders (with logo): 10-15 days. New ODM projects: 25-30 days including tooling."
+    q: "What is the lead time for OEM mold and PCB re-layout?",
+    a: "PCB re-layout + antenna tuning: 3-5 days; SLA 3D sample + soft tool: 7 days; mass production (ISO line): 10-15 days after approval."
   },
   {
-    q: "Do you provide SDK for the WiFi modules?",
-    a: "Yes, for our Tuya-based smart modules, we provide full API/SDK documentation for system integrators."
+    q: "Are you a custom RF remote control PCB manufacturer in China with CE/FCC support?",
+    a: "Yes. We provide CE/FCC test reports, EMI mitigation, and fixture-based aging test for 433/868MHz to ensure compliance and stability."
   }
 ];
 
@@ -376,17 +391,17 @@ export default function ChuangjiangWebsite() {
               </div>
 
               <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1]">
-                Precision <span className="text-[#2E3192]">RF Control</span> Solutions
+                OEM/ODM RF Control Manufacturer: 433MHz, 868MHz & LoRa/WiFi Modules
               </h1>
 
               <p className="text-xl text-slate-500 leading-relaxed max-w-lg">
-                We don't just assemble; we engineer. From custom PCB protocols to mold design, Chuangjiang is your end-to-end OEM partner for smart access control.
+                Specialize in HCS301/EV1527 encoding & Tuya smart integration. From PCB layout to mold injection, we deliver MP samples in 7 days.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button onClick={() => setActivePage("contact")}>Start OEM Project</Button>
                 <Button variant="secondary" onClick={() => setActivePage("products")}>
-                  <PlayCircle className="w-5 h-5 mr-2 text-[#2E3192]" /> View Products
+                  <PlayCircle className="w-5 h-5 mr-2 text-[#2E3192]" /> Browse Catalog (PDF)
                 </Button>
               </div>
 
@@ -435,10 +450,10 @@ export default function ChuangjiangWebsite() {
           <div className="grid md:grid-cols-4 gap-8 relative">
             <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 -z-0"></div>
             {[
-              { icon: Settings, title: "1. R&D Design", desc: "PCB layout & Mold 3D modeling within 3 days." },
-              { icon: Cpu, title: "2. Prototyping", desc: "3D printing samples & functional testing." },
-              { icon: Users, title: "3. Production", desc: "Auto-SMT lines & ultrasonic welding assembly." },
-              { icon: CheckCircle, title: "4. QC & Ship", desc: "RF signal analysis & aging test before packing." }
+              { icon: Settings, title: "1. PCB & Antenna Tuning", desc: "Altium layout + spectrum analysis tuned for >100m range." },
+              { icon: Cpu, title: "2. 3D Mold & MCU Coding", desc: "Custom firmware (C/ASM) plus SLA rapid prototyping." },
+              { icon: Users, title: "3. SMT & ISO Assembly", desc: "Yamaha SMT, AOI inspection, and 100% function test." },
+              { icon: CheckCircle, title: "4. Aging & RF Testing", desc: "-40°C~80°C chamber & salt spray for durability." }
             ].map((step, idx) => (
               <div key={idx} className="relative z-10 bg-white p-6 pt-0 text-center group">
                 <div className="w-24 h-24 mx-auto bg-white border-4 border-slate-100 rounded-full flex items-center justify-center mb-6 group-hover:border-[#2E3192] transition-colors duration-300 shadow-sm">
@@ -484,13 +499,23 @@ export default function ChuangjiangWebsite() {
                     <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
                     <span>{product.chip}</span>
                   </div>
-                  <p className="text-slate-500 mb-8 line-clamp-2 leading-relaxed">{product.desc}</p>
+                  <p className="text-slate-500 mb-4 leading-relaxed line-clamp-2">{product.desc}</p>
+                  {product.specs && (
+                    <ul className="text-sm text-slate-600 space-y-1 mb-6">
+                      {product.specs.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#ED8B00]"></span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                   <div className="mt-auto">
                     <button
                       onClick={() => setActivePage("contact")}
                       className="w-full py-3 border border-slate-200 rounded font-semibold text-slate-700 hover:bg-[#2E3192] hover:text-white hover:border-[#2E3192] transition-all"
                     >
-                      Request Specs
+                      Download Datasheet
                     </button>
                   </div>
                 </div>
@@ -999,7 +1024,7 @@ export default function ChuangjiangWebsite() {
                 CHJ Remotes
               </div>
               <p className="text-slate-400 leading-relaxed text-sm">
-                ISO9001 Certified Manufacturer specializing in RF remote controls, receiver modules, and smart home automation solutions since 2004.
+                ISO9001 certified custom RF remote control PCB manufacturer in China, building receiver modules and smart home automation solutions since 2004.
               </p>
             </div>
 
