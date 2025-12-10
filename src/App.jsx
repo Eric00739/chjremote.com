@@ -35,7 +35,7 @@ import Logo from "../logo/LOGO.png";
 const SEO_METADATA = {
   title: "RF Remote Control Manufacturer | OEM 433MHz/868MHz Factory | Chuangjiang",
   description:
-    "Dongguan Chuangjiang Electronics: ISO9001 certified manufacturer of RF remote controls, rolling code transmitters, Tuya WiFi modules, and garage door receivers."
+    "CHJ Remotes: ISO9001 certified manufacturer of RF remote controls, rolling code transmitters, Tuya WiFi modules, and garage door receivers."
 };
 
 // --- Contact Info Constants ---
@@ -162,7 +162,7 @@ const blogPosts = [
       <p class="mb-4">Fixed code remotes send the exact same binary signal every time you press the button. While these are cheap and easy to clone, they are vulnerable to "Replay Attacks" where a thief can record your signal and play it back later to open your door.</p>
       <h4 class="text-xl font-bold text-[#2E3192] mb-2">Why Rolling Code is Superior</h4>
       <p class="mb-4">Rolling code technology, developed by Microchip (HCS series), changes the code every time the button is pressed. An algorithm inside the transmitter and receiver calculates a new code based on a synchronized counter. Even if a thief intercepts the signal, that specific code is now invalid.</p>
-      <p>For high-security applications, Chuangjiang Electronics strongly recommends using our HCS301 based remotes.</p>
+      <p>For high-security applications, CHJ Remotes strongly recommends using our HCS301 based remotes.</p>
     `,
     image: `https://placehold.co/800x400/f1f5f9/2E3192?text=Security+Tech`
   },
@@ -613,7 +613,7 @@ export default function ChuangjiangWebsite() {
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">About Chuangjiang</h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Dongguan Chuangjiang Electronics Co., Ltd. is a premier manufacturer located in the heart of the world's electronics hub. We specialize in precision RF technology.
+            CHJ Remotes is a premier manufacturer located in the heart of the world's electronics hub. We specialize in precision RF technology.
           </p>
         </div>
       </div>
@@ -925,13 +925,13 @@ export default function ChuangjiangWebsite() {
       <header className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-lg py-3" : "bg-white py-5 shadow-sm"}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setActivePage("home")}>
-            <div className="w-12 h-12 border border-slate-200 rounded-full flex items-center justify-center bg-white shadow-sm overflow-hidden">
-              <img src={Logo} alt="Chuangjiang logo" className="w-full h-full object-contain" />
+            <div className="w-14 h-14 bg-white rounded-full border border-slate-200 shadow-sm p-1 flex items-center justify-center">
+              <img src={Logo} alt="CHJ logo" className="w-full h-full object-contain" />
             </div>
 
             <div>
-              <h1 className="text-xl font-extrabold text-[#2E3192] leading-none tracking-tight">CHUANGJIANG</h1>
-              <span className="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase">Electronics</span>
+              <h1 className="text-xl font-extrabold text-[#2E3192] leading-none tracking-tight">CHJ Remotes</h1>
+              <span className="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase">Remotes</span>
             </div>
           </div>
 
@@ -993,10 +993,10 @@ export default function ChuangjiangWebsite() {
           <div className="grid md:grid-cols-4 gap-12 border-b border-slate-800 pb-16">
             <div className="col-span-1 md:col-span-1">
               <div className="text-white font-bold text-2xl mb-6 flex items-center gap-3">
-                <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center text-xs bg-white overflow-hidden">
-                  <img src={Logo} alt="Chuangjiang footer logo" className="w-full h-full object-contain" />
+                <div className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center text-xs bg-white p-1">
+                  <img src={Logo} alt="CHJ footer logo" className="w-full h-full object-contain" />
                 </div>
-                CHUANGJIANG
+                CHJ Remotes
               </div>
               <p className="text-slate-400 leading-relaxed text-sm">
                 ISO9001 Certified Manufacturer specializing in RF remote controls, receiver modules, and smart home automation solutions since 2004.
@@ -1055,7 +1055,7 @@ export default function ChuangjiangWebsite() {
 
           <div className="pt-8 text-center text-sm text-slate-500">
             {/* Updated Copyright Year */}
-            <p>&copy; 2025 Dongguan Chuangjiang Electronics Co., Ltd. All rights reserved.</p>
+            <p>&copy; 2025 CHJ Remotes. All rights reserved.</p>
           </div>
         </div>
       </footer>
