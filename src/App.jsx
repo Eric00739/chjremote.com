@@ -824,14 +824,15 @@ export default function ChuangjiangWebsite() {
     return (
       <>
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
+      <section className="relative min-h-[82vh] flex items-center bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-[-10%] right-[-10%] w-[380px] h-[380px] bg-white/60 backdrop-blur-3xl rounded-full blur-3xl"></div>
           <div className="absolute bottom-[-15%] left-[-5%] w-[460px] h-[460px] bg-[#F5A524]/16 rounded-full blur-3xl"></div>
           <div className="absolute inset-6 bg-white/60 rounded-[28px] shadow-[0_25px_80px_-40px_rgba(0,0,0,0.35)] backdrop-blur-xl border border-white/70"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-white"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 pt-12 pb-10">
+        <div className="container mx-auto px-6 relative z-10 pt-10 pb-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in-up">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/80 text-[#1C2D5A] rounded-full text-xs font-semibold tracking-wide border border-slate-200 shadow-sm">
@@ -912,6 +913,17 @@ export default function ChuangjiangWebsite() {
                 </div>
               </div>
               <div className="mt-3 text-slate-500 text-sm text-right">High-Tech Remote 3D Render / Factory Demo</div>
+            </div>
+            {/* Mobile visual fallback */}
+            <div className="lg:hidden">
+              <div className="rounded-3xl overflow-hidden shadow-xl border border-white/70 bg-slate-900">
+                <img
+                  src="https://placehold.co/800x600/1C2D5A/ffffff?text=Factory+Tour"
+                  alt="Factory preview"
+                  className="w-full h-64 object-cover opacity-90"
+                />
+              </div>
+              <div className="mt-2 text-slate-500 text-xs text-left">Factory preview · Tap contact to request live demo</div>
             </div>
           </div>
         </div>
