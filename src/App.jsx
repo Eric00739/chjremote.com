@@ -57,6 +57,381 @@ const COLORS = {
   accent: "#F5A524" // Logo Dot Orange
 };
 
+// --- Language Support ---
+const LANGUAGE_OPTIONS = [
+  { code: "en", label: "EN" },
+  { code: "fr", label: "FR" },
+  { code: "pt", label: "PT" },
+  { code: "es", label: "ES" },
+  { code: "it", label: "IT" },
+  { code: "ru", label: "RU" }
+];
+
+const translations = {
+  en: {
+    nav: { home: "Home", about: "About", products: "Products", blog: "Blog", contact: "Contact", request: "Request Quote" },
+    hero: {
+      badgeFactory: "B2B Manufacturer | Factory Direct",
+      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
+      title: "B2B RF Remote & Receiver OEM/ODM | 433MHz / 868MHz | Tuya Hybrid",
+      subtitle: "B2B-only factory in Dongguan: rolling-code remotes, receivers, and Tuya + RF hybrids. We tune PCB antennas, provide firmware hooks, and deliver MP samples in 7 days.",
+      tags: ["ISO9001 | CE/FCC/ROHS ready", "In-house RF chamber & PCB/antenna tuning", "B2B clients only (no retail)"],
+      primaryCta: "Start OEM Project",
+      secondaryCta: "Download Catalog (PDF)",
+      stats: { exp: "20+", expLabel: "Years Experience", qc: "100%", qcLabel: "QC Tested", countries: "50+", countriesLabel: "Countries Served" }
+    },
+    highlights: [
+      { title: "Factory Direct B2B", desc: "No retail or dropshipping; engineering + production with NDA support." },
+      { title: "7-Day MP Samples", desc: "PCB layout, antenna tuning, and molded enclosure delivered with test report." },
+      { title: "Compliance & Shipping", desc: "CE/FCC/RoHS documents, HS codes ready, door-to-door to EU/US/LatAm." }
+    ],
+    industries: {
+      title: "Built for Gates, Doors, Smart Home, Industrial",
+      subtitle: "Protocols: HCS301/HCS361 rolling code, EV1527/PT2262 fixed/learning code, Tuya WiFi/Zigbee bridges, and multi-frequency clones.",
+      bullets: [
+        "Garage/gate automation distributors",
+        "Access control OEM / panel builders",
+        "Smart home integrators (Tuya/Alexa/Google)",
+        "Industrial hoists and shutters",
+        "Parking barrier arms & bollards",
+        "Aftermarket car remotes (315/433MHz)"
+      ],
+      techTitle: "Technical Delivery",
+      techList: [
+        "RF validation: shielding room sweep, antenna VSWR tuning, and range proof.",
+        "Firmware hooks: learning code tables, whitelist/blacklist, and Tuya SDK handoff.",
+        "Docs ready: CE/FCC/RoHS, HS code, packing list, and aging test records.",
+        "Support: engineer-to-engineer WhatsApp/Teams within GMT+8 business hours."
+      ],
+      ctaEngineer: "Book Engineer Call",
+      ctaCatalog: "Catalog & Specs PDF"
+    },
+    process: {
+      title: "From Concept to Delivery",
+      subtitle: "Our streamlined OEM/ODM workflow ensures your custom remotes are market-ready in record time."
+    },
+    trending: { title: "Trending Solutions" },
+    cases: { title: "Case Studies", subtitle: "Real projects: challenge -> solution -> outcome for distributors and OEM partners." },
+    testimonials: { title: "What Our Clients Say", subtitle: "Trusted by distributors and system integrators worldwide." },
+    faq: { title: "FAQ", subtitle: "Common queries regarding OEM, shipping, and compatibility." },
+    catalog: { title: "Product Catalog", subtitle: "OEM/ODM only - ready for distributors and system integrators. Download the PDF catalog or request a tuned PCB layout for your protocol." },
+    about: {
+      title: `About ${COMPANY_NAME}`,
+      subtitle: `Operating the brand ${BRAND_NAME}, we are a B2B-only RF remote manufacturer in Dongguan. No retail or dropshipping - only OEM/ODM for distributors and system integrators.`,
+      cards: [
+        { title: "B2B Only / Factory Direct", desc: "Direct engineering + production. We do not run consumer webshops." },
+        { title: "Brand Clarity", desc: `Use ${BRAND_NAME} to avoid confusion with other 'Chuanghui' companies in the market.` },
+        { title: "Export-Ready", desc: "ISO9001 plant with CE/FCC/RoHS capability and internal aging test lab." }
+      ]
+    },
+    contact: {
+      heroTitle: "Contact Our Factory",
+      heroSubtitle: "Direct Manufacturer Pricing. Professional Technical Support.",
+      b2bNote: "B2B projects only (distributors / OEM / system integrators). Please include application & volume."
+    },
+    blog: { title: "Industry Insights", subtitle: "Stay updated with the latest RF technology and company news." }
+  },
+  fr: {
+    nav: { home: "Accueil", about: "À propos", products: "Produits", blog: "Blog", contact: "Contact", request: "Demander un devis" },
+    hero: {
+      badgeFactory: "Fabricant B2B | Usine directe",
+      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
+      title: "Télécommandes RF & récepteurs OEM/ODM | 433/868 MHz | Hybride Tuya",
+      subtitle: "Usine B2B à Dongguan : rolling-code, récepteurs et hybrides Tuya + RF. Antennes accordées, firmware custom, échantillons MP en 7 jours.",
+      tags: ["ISO9001 | CE/FCC/ROHS", "Chambre RF interne & réglage antenne", "Clients B2B uniquement (pas de retail)"],
+      primaryCta: "Lancer un projet OEM",
+      secondaryCta: "Télécharger le catalogue (PDF)",
+      stats: { exp: "20+", expLabel: "Années d'expérience", qc: "100%", qcLabel: "Tests QC", countries: "50+", countriesLabel: "Pays desservis" }
+    },
+    highlights: [
+      { title: "B2B usine directe", desc: "Pas de retail ni dropshipping ; ingénierie + production sous NDA." },
+      { title: "Échantillons en 7 jours", desc: "PCB, antenne et boîtier livrés avec rapport de test." },
+      { title: "Conformité & logistique", desc: "Docs CE/FCC/RoHS, codes SH prêts, livraison UE/US/LatAm." }
+    ],
+    industries: {
+      title: "Portails, portes, smart home, industriel",
+      subtitle: "Protocoles : HCS301/HCS361, EV1527/PT2262, passerelles Tuya WiFi/Zigbee, clones multi-fréquences.",
+      bullets: [
+        "Distributeurs d'automatisme de portails",
+        "Constructeurs OEM d'accès / tableaux",
+        "Intégrateurs smart home (Tuya/Alexa/Google)",
+        "Treuils et volets industriels",
+        "Barrières et bornes de parking",
+        "Télécommandes auto 315/433MHz"
+      ],
+      techTitle: "Livraison technique",
+      techList: [
+        "Validation RF : chambre blindée, accord VSWR, portée vérifiée.",
+        "Firmware : tables d'apprentissage, listes blanche/noire, SDK Tuya.",
+        "Docs : CE/FCC/RoHS, code SH, packing list, vieillissement.",
+        "Support : ingénieur à ingénieur (WhatsApp/Teams, GMT+8)."
+      ],
+      ctaEngineer: "Appel avec ingénieur",
+      ctaCatalog: "Catalogue & fiches PDF"
+    },
+    process: { title: "Du concept à la livraison", subtitle: "Workflow OEM/ODM pour lancer vos télécommandes rapidement." },
+    trending: { title: "Solutions en vogue" },
+    cases: { title: "Études de cas", subtitle: "Projets réels : défi -> solution -> résultat pour distributeurs/OEM." },
+    testimonials: { title: "Ce que disent nos clients", subtitle: "Approuvé par distributeurs et intégrateurs." },
+    faq: { title: "FAQ", subtitle: "Questions fréquentes sur l'OEM, l'expédition et la compatibilité." },
+    catalog: { title: "Catalogue produit", subtitle: "OEM/ODM uniquement. Téléchargez le PDF ou demandez un PCB accordé à votre protocole." },
+    about: {
+      title: `À propos de ${COMPANY_NAME}`,
+      subtitle: `${BRAND_NAME} est une usine RF 100% B2B à Dongguan. Pas de retail ni dropshipping - seulement OEM/ODM.`,
+      cards: [
+        { title: "B2B uniquement / usine", desc: "Ingénierie + production directe, pas de site e-commerce grand public." },
+        { title: "Clarté de marque", desc: `Utilisez ${BRAND_NAME} pour éviter la confusion avec d'autres sociétés "Chuanghui".` },
+        { title: "Prêt export", desc: "ISO9001, CE/FCC/RoHS, labo de vieillissement intégré." }
+      ]
+    },
+    contact: {
+      heroTitle: "Contacter l'usine",
+      heroSubtitle: "Prix fabricant direct. Support technique pro.",
+      b2bNote: "Projets B2B uniquement (distributeurs / OEM / intégrateurs). Merci d'indiquer l'usage et le volume."
+    },
+    blog: { title: "Analyses industrie", subtitle: "Restez à jour sur la RF et nos actualités." }
+  },
+  pt: {
+    nav: { home: "Início", about: "Sobre", products: "Produtos", blog: "Blog", contact: "Contato", request: "Pedir cotação" },
+    hero: {
+      badgeFactory: "Fabricante B2B | Fábrica direta",
+      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
+      title: "Controles RF e receptores OEM/ODM | 433/868 MHz | Híbrido Tuya",
+      subtitle: "Fábrica B2B em Dongguan: rolling-code, receptores e híbridos Tuya + RF. Ajuste de antena, firmware custom e amostras MP em 7 dias.",
+      tags: ["ISO9001 | CE/FCC/ROHS", "Câmara RF interna e ajuste de antena", "Somente clientes B2B (sem varejo)"],
+      primaryCta: "Iniciar projeto OEM",
+      secondaryCta: "Baixar catálogo (PDF)",
+      stats: { exp: "20+", expLabel: "Anos de experiência", qc: "100%", qcLabel: "Testado em QC", countries: "50+", countriesLabel: "Países atendidos" }
+    },
+    highlights: [
+      { title: "B2B direto da fábrica", desc: "Sem varejo ou dropshipping; engenharia + produção com NDA." },
+      { title: "Amostras em 7 dias", desc: "PCB, antena e carcaça com relatório de testes." },
+      { title: "Conformidade e frete", desc: "Docs CE/FCC/RoHS, HS codes prontos, envio porta a porta UE/EUA/LatAm." }
+    ],
+    industries: {
+      title: "Portões, portas, smart home, industrial",
+      subtitle: "Protocolos: HCS301/HCS361, EV1527/PT2262, pontes Tuya WiFi/Zigbee e clones multifrequência.",
+      bullets: [
+        "Distribuidores de automação de portões",
+        "OEM de controle de acesso / painéis",
+        "Integradores smart home (Tuya/Alexa/Google)",
+        "Guinchos e persianas industriais",
+        "Cancelas e barreiras de estacionamento",
+        "Chaves automotivas 315/433MHz"
+      ],
+      techTitle: "Entrega técnica",
+      techList: [
+        "Validação RF: câmara blindada, ajuste VSWR e prova de alcance.",
+        "Firmware: tabelas de aprendizado, whitelist/blacklist, SDK Tuya.",
+        "Documentos: CE/FCC/RoHS, HS code, packing list, teste de envelhecimento.",
+        "Suporte: engenheiro para engenheiro (WhatsApp/Teams, GMT+8)."
+      ],
+      ctaEngineer: "Agendar com engenheiro",
+      ctaCatalog: "Catálogo e fichas PDF"
+    },
+    process: { title: "Do conceito à entrega", subtitle: "Fluxo OEM/ODM para lançar rápido." },
+    trending: { title: "Soluções em destaque" },
+    cases: { title: "Casos de sucesso", subtitle: "Projetos reais: desafio -> solução -> resultado para distribuidores/OEM." },
+    testimonials: { title: "O que dizem os clientes", subtitle: "Confiado por distribuidores e integradores." },
+    faq: { title: "FAQ", subtitle: "Dúvidas sobre OEM, frete e compatibilidade." },
+    catalog: { title: "Catálogo de produtos", subtitle: "Somente OEM/ODM. Baixe o PDF ou peça PCB ajustado ao seu protocolo." },
+    about: {
+      title: `Sobre ${COMPANY_NAME}`,
+      subtitle: `${BRAND_NAME} é uma fábrica RF 100% B2B em Dongguan. Sem varejo ou dropshipping - apenas OEM/ODM.`,
+      cards: [
+        { title: "Somente B2B / fábrica", desc: "Engenharia + produção direta, sem loja B2C." },
+        { title: "Clareza de marca", desc: `Use ${BRAND_NAME} para evitar confusão com outras empresas \"Chuanghui\".` },
+        { title: "Pronto para exportação", desc: "ISO9001, CE/FCC/RoHS, laboratório de envelhecimento interno." }
+      ]
+    },
+    contact: {
+      heroTitle: "Fale com a fábrica",
+      heroSubtitle: "Preço direto de fabricante. Suporte técnico profissional.",
+      b2bNote: "Projetos B2B apenas (distribuidores / OEM / integradores). Informe aplicação e volume."
+    },
+    blog: { title: "Insights do setor", subtitle: "Novidades em RF e notícias da empresa." }
+  },
+  es: {
+    nav: { home: "Inicio", about: "Sobre nosotros", products: "Productos", blog: "Blog", contact: "Contacto", request: "Solicitar cotización" },
+    hero: {
+      badgeFactory: "Fabricante B2B | Fábrica directa",
+      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
+      title: "Mandos RF y receptores OEM/ODM | 433/868 MHz | Híbrido Tuya",
+      subtitle: "Fábrica B2B en Dongguan: rolling-code, receptores e híbridos Tuya + RF. Ajuste de antena, firmware a medida y muestras MP en 7 días.",
+      tags: ["ISO9001 | CE/FCC/ROHS", "Cámara RF interna y ajuste de antena", "Solo clientes B2B (sin retail)"],
+      primaryCta: "Iniciar proyecto OEM",
+      secondaryCta: "Descargar catálogo (PDF)",
+      stats: { exp: "20+", expLabel: "Años de experiencia", qc: "100%", qcLabel: "QC probado", countries: "50+", countriesLabel: "Países servidos" }
+    },
+    highlights: [
+      { title: "B2B directo de fábrica", desc: "Sin retail ni dropshipping; ingeniería + producción con NDA." },
+      { title: "Muestras en 7 días", desc: "PCB, antena y carcasa con informe de pruebas." },
+      { title: "Cumplimiento y logística", desc: "Docs CE/FCC/RoHS, códigos HS listos, envío puerta a puerta UE/EEUU/LatAm." }
+    ],
+    industries: {
+      title: "Puertas, smart home, industrial",
+      subtitle: "Protocolos: HCS301/HCS361, EV1527/PT2262, bridges Tuya WiFi/Zigbee y clones multifrecuencia.",
+      bullets: [
+        "Distribuidores de automatización de portones",
+        "OEM de control de acceso / tableros",
+        "Integradores smart home (Tuya/Alexa/Google)",
+        "Polipastos y persianas industriales",
+        "Barras y bolardos de parking",
+        "Llaves de auto 315/433MHz"
+      ],
+      techTitle: "Entrega técnica",
+      techList: [
+        "Validación RF: cámara blindada, VSWR y prueba de alcance.",
+        "Firmware: tablas de aprendizaje, listas blanca/negra, SDK Tuya.",
+        "Documentos: CE/FCC/RoHS, código HS, packing list, pruebas de envejecimiento.",
+        "Soporte: ingeniero a ingeniero (WhatsApp/Teams, GMT+8)."
+      ],
+      ctaEngineer: "Agendar con ingeniero",
+      ctaCatalog: "Catálogo y fichas PDF"
+    },
+    process: { title: "Del concepto a la entrega", subtitle: "Flujo OEM/ODM para lanzar rápido tus mandos." },
+    trending: { title: "Soluciones destacadas" },
+    cases: { title: "Casos de éxito", subtitle: "Proyectos reales: reto -> solución -> resultado para distribuidores/OEM." },
+    testimonials: { title: "Lo que opinan", subtitle: "Confiado por distribuidores e integradores." },
+    faq: { title: "FAQ", subtitle: "Dudas sobre OEM, envío y compatibilidad." },
+    catalog: { title: "Catálogo de producto", subtitle: "Solo OEM/ODM. Descarga el PDF o pide PCB afinado a tu protocolo." },
+    about: {
+      title: `Sobre ${COMPANY_NAME}`,
+      subtitle: `${BRAND_NAME} es una fábrica RF 100% B2B en Dongguan. Sin retail ni dropshipping - solo OEM/ODM.`,
+      cards: [
+        { title: "Solo B2B / fábrica", desc: "Ingeniería + producción directa, sin tienda B2C." },
+        { title: "Claridad de marca", desc: `Usa ${BRAND_NAME} para evitar confusión con otras empresas \"Chuanghui\".` },
+        { title: "Listo para exportar", desc: "ISO9001, CE/FCC/RoHS, laboratorio de envejecimiento propio." }
+      ]
+    },
+    contact: {
+      heroTitle: "Contacta la fábrica",
+      heroSubtitle: "Precio directo de fabricante. Soporte técnico profesional.",
+      b2bNote: "Solo proyectos B2B (distribuidores / OEM / integradores). Indica uso y volumen."
+    },
+    blog: { title: "Ideas de la industria", subtitle: "Actualizaciones RF y noticias de la empresa." }
+  },
+  it: {
+    nav: { home: "Home", about: "Chi siamo", products: "Prodotti", blog: "Blog", contact: "Contatti", request: "Richiedi preventivo" },
+    hero: {
+      badgeFactory: "Produttore B2B | Fabbrica diretta",
+      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
+      title: "Radiocomandi RF e ricevitori OEM/ODM | 433/868 MHz | Ibrido Tuya",
+      subtitle: "Fabbrica B2B a Dongguan: rolling-code, ricevitori e ibridi Tuya + RF. Tuning antenna, firmware custom e campioni MP in 7 giorni.",
+      tags: ["ISO9001 | CE/FCC/ROHS", "Camera RF interna e tuning antenna", "Solo clienti B2B (no retail)"],
+      primaryCta: "Avvia progetto OEM",
+      secondaryCta: "Scarica catalogo (PDF)",
+      stats: { exp: "20+", expLabel: "Anni di esperienza", qc: "100%", qcLabel: "Test QC", countries: "50+", countriesLabel: "Paesi serviti" }
+    },
+    highlights: [
+      { title: "B2B diretto da fabbrica", desc: "Nessun retail o dropshipping; ingegneria + produzione con NDA." },
+      { title: "Campioni in 7 giorni", desc: "PCB, antenna e case con report di test." },
+      { title: "Conformità e logistica", desc: "Documenti CE/FCC/RoHS, codici HS pronti, consegna porta a porta UE/USA/LatAm." }
+    ],
+    industries: {
+      title: "Cancelli, porte, smart home, industriale",
+      subtitle: "Protocolli: HCS301/HCS361, EV1527/PT2262, bridge Tuya WiFi/Zigbee e cloni multi-frequenza.",
+      bullets: [
+        "Distributori di automazione cancelli",
+        "OEM controllo accessi / quadri",
+        "Integratori smart home (Tuya/Alexa/Google)",
+        "Argani e serrande industriali",
+        "Barriere parcheggio",
+        "Chiavi auto 315/433MHz"
+      ],
+      techTitle: "Consegna tecnica",
+      techList: [
+        "Validazione RF: camera schermata, VSWR, test di raggio.",
+        "Firmware: tabelle learning, whitelist/blacklist, SDK Tuya.",
+        "Documenti: CE/FCC/RoHS, codice HS, packing list, aging test.",
+        "Supporto: ingegnere a ingegnere (WhatsApp/Teams, GMT+8)."
+      ],
+      ctaEngineer: "Parla con ingegnere",
+      ctaCatalog: "Catalogo e schede PDF"
+    },
+    process: { title: "Dal concept alla consegna", subtitle: "Flusso OEM/ODM per lanciare rapidamente." },
+    trending: { title: "Soluzioni in evidenza" },
+    cases: { title: "Casi di studio", subtitle: "Progetti reali: sfida -> soluzione -> risultato per distributori/OEM." },
+    testimonials: { title: "Dicono di noi", subtitle: "Scelto da distributori e integratori." },
+    faq: { title: "FAQ", subtitle: "Domande su OEM, spedizione e compatibilità." },
+    catalog: { title: "Catalogo prodotti", subtitle: "Solo OEM/ODM. Scarica il PDF o chiedi PCB accordato." },
+    about: {
+      title: `Chi è ${COMPANY_NAME}`,
+      subtitle: `${BRAND_NAME} è una fabbrica RF 100% B2B a Dongguan. Niente retail o dropshipping - solo OEM/ODM.`,
+      cards: [
+        { title: "Solo B2B / fabbrica", desc: "Ingegneria + produzione diretta, nessun e-commerce B2C." },
+        { title: "Chiarezza di brand", desc: `Usa ${BRAND_NAME} per evitare confusione con altre aziende \"Chuanghui\".` },
+        { title: "Pronto export", desc: "ISO9001, CE/FCC/RoHS, laboratorio aging interno." }
+      ]
+    },
+    contact: {
+      heroTitle: "Contatta la fabbrica",
+      heroSubtitle: "Prezzo diretto e supporto tecnico professionale.",
+      b2bNote: "Solo progetti B2B (distributori / OEM / integratori). Indica applicazione e volume."
+    },
+    blog: { title: "Approfondimenti RF", subtitle: "Aggiornamenti tecnologici e notizie aziendali." }
+  },
+  ru: {
+    nav: { home: "Главная", about: "О нас", products: "Продукты", blog: "Блог", contact: "Контакты", request: "Запросить цену" },
+    hero: {
+      badgeFactory: "B2B производитель | Прямая фабрика",
+      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
+      title: "RF пульты и приёмники OEM/ODM | 433/868 МГц | Гибрид Tuya",
+      subtitle: "B2B-фабрика в Дунгуане: rolling-code, приёмники и гибриды Tuya + RF. Настройка антенны, прошивка на заказ, MP-образцы за 7 дней.",
+      tags: ["ISO9001 | CE/FCC/ROHS", "Собственная RF-камера и настройка антенны", "Только B2B (без розницы)"],
+      primaryCta: "Начать OEM-проект",
+      secondaryCta: "Скачать каталог (PDF)",
+      stats: { exp: "20+", expLabel: "Лет опыта", qc: "100%", qcLabel: "QC тест", countries: "50+", countriesLabel: "Стран" }
+    },
+    highlights: [
+      { title: "B2B напрямую с фабрики", desc: "Без розницы и дропшиппинга; инженерия + производство под NDA." },
+      { title: "Образцы за 7 дней", desc: "PCB, антенна и корпус с протоколом испытаний." },
+      { title: "Сертификация и логистика", desc: "CE/FCC/RoHS, коды HS, доставка до двери ЕС/США/ЛатАм." }
+    ],
+    industries: {
+      title: "Ворота, двери, умный дом, индустрия",
+      subtitle: "Протоколы: HCS301/HCS361, EV1527/PT2262, мосты Tuya WiFi/Zigbee, мультичастотные клоны.",
+      bullets: [
+        "Дистрибьюторы автоматики ворот",
+        "OEM систем контроля доступа / щитов",
+        "Интеграторы умного дома (Tuya/Alexa/Google)",
+        "Промышленные лебёдки и рольставни",
+        "Парковочные шлагбаумы и болларды",
+        "Авто ключи 315/433МГц"
+      ],
+      techTitle: "Техническая поставка",
+      techList: [
+        "RF-валидация: экранированная камера, VSWR, тест дальности.",
+        "Прошивка: таблицы обучения, whitelist/blacklist, SDK Tuya.",
+        "Документы: CE/FCC/RoHS, HS code, packing list, aging-тест.",
+        "Поддержка: инженер-инженеру (WhatsApp/Teams, GMT+8)."
+      ],
+      ctaEngineer: "Встреча с инженером",
+      ctaCatalog: "Каталог и спецификации PDF"
+    },
+    process: { title: "От концепта до поставки", subtitle: "OEM/ODM процесс для быстрого вывода продукта." },
+    trending: { title: "Популярные решения" },
+    cases: { title: "Кейсы", subtitle: "Реальные проекты: задача -> решение -> результат для дистрибьюторов/OEM." },
+    testimonials: { title: "Отзывы клиентов", subtitle: "Нас выбирают дистрибьюторы и интеграторы." },
+    faq: { title: "FAQ", subtitle: "Частые вопросы по OEM, доставке и совместимости." },
+    catalog: { title: "Каталог продукции", subtitle: "Только OEM/ODM. Скачайте PDF или запросите PCB под ваш протокол." },
+    about: {
+      title: `О ${COMPANY_NAME}`,
+      subtitle: `${BRAND_NAME} — фабрика RF 100% B2B в Дунгуане. Без розницы и дропшиппинга — только OEM/ODM.`,
+      cards: [
+        { title: "Только B2B / фабрика", desc: "Инженерия + производство, без B2C-магазина." },
+        { title: "Чистота бренда", desc: `Используйте ${BRAND_NAME}, чтобы исключить путаницу с другими компаниями \"Chuanghui\".` },
+        { title: "Готовность к экспорту", desc: "ISO9001, CE/FCC/RoHS, собственный aging-лаборатория." }
+      ]
+    },
+    contact: {
+      heroTitle: "Связаться с фабрикой",
+      heroSubtitle: "Цена производителя. Профессиональная поддержка.",
+      b2bNote: "Только B2B проекты (дистрибьюторы / OEM / интеграторы). Укажите применение и объём."
+    },
+    blog: { title: "Отраслевые обзоры", subtitle: "Новости RF и компании." }
+  }
+};
 // --- Mock Data ---
 
 const products = [
@@ -332,6 +707,7 @@ const FloatingContact = () => (
 // --- Main Application ---
 
 export default function ChuangjiangWebsite() {
+  const [lang, setLang] = useState("en");
   const [activePage, setActivePage] = useState("home");
   const [viewingPost, setViewingPost] = useState(null); // State for Single Blog Post View
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -340,6 +716,22 @@ export default function ChuangjiangWebsite() {
   // Comment System State
   const [comments, setComments] = useState(initialComments);
   const [newComment, setNewComment] = useState({ user: "", text: "" });
+
+  const t = (path) => {
+    const parts = path.split(".");
+    const source = translations[lang] || translations.en;
+    let value = source;
+    for (const p of parts) {
+      value = value?.[p];
+    }
+    if (value === undefined) {
+      value = translations.en;
+      for (const p of parts) {
+        value = value?.[p];
+      }
+    }
+    return value ?? path;
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -358,7 +750,8 @@ export default function ChuangjiangWebsite() {
       meta.content = SEO_METADATA.description;
       document.head.appendChild(meta);
     }
-  }, []);
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -407,37 +800,47 @@ export default function ChuangjiangWebsite() {
 
   // --- Render Functions ---
 
-  const renderHome = () => (
-    <>
+  const renderHome = () => {
+    const heroCopy = translations[lang]?.hero || translations.en.hero;
+    const highlightsCopy = translations[lang]?.highlights || translations.en.highlights;
+    const industriesCopy = translations[lang]?.industries || translations.en.industries;
+    const processCopy = translations[lang]?.process || translations.en.process;
+    const trendingCopy = translations[lang]?.trending || translations.en.trending;
+    const caseCopy = translations[lang]?.cases || translations.en.cases;
+    const testimonialCopy = translations[lang]?.testimonials || translations.en.testimonials;
+    const faqCopy = translations[lang]?.faq || translations.en.faq;
+    return (
+      <>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center bg-slate-50 overflow-hidden">
-        <div className="absolute inset-0 bg-white">
-          <div className="absolute top-0 right-0 w-2/3 h-full bg-slate-100 skew-x-[-12deg] translate-x-20 z-0"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50 z-0"></div>
+      <section className="relative min-h-[75vh] flex items-center bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-[-10%] right-[-10%] w-[420px] h-[420px] bg-white/60 backdrop-blur-3xl rounded-full blur-3xl"></div>
+          <div className="absolute bottom-[-20%] left-[-5%] w-[520px] h-[520px] bg-[#F5A524]/18 rounded-full blur-3xl"></div>
+          <div className="absolute inset-6 bg-white/60 rounded-[28px] shadow-[0_25px_80px_-40px_rgba(0,0,0,0.35)] backdrop-blur-xl border border-white/70"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 pt-20">
+        <div className="container mx-auto px-6 relative z-10 pt-14 pb-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in-up">
               <div className="flex flex-wrap gap-3">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#1C2D5A] rounded-full text-sm font-bold tracking-wide border border-blue-100">
-                  <ShieldCheck className="w-4 h-4" /> B2B Manufacturer | Factory Direct
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/85 text-[#1C2D5A] rounded-full text-sm font-bold tracking-wide border border-slate-200 shadow-sm">
+                  <ShieldCheck className="w-4 h-4" /> {heroCopy.badgeFactory}
                 </div>
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-full text-xs font-semibold tracking-wide border border-slate-200 shadow-sm">
-                  {COMPANY_NAME} | {BRAND_NAME}
+                  {heroCopy.badgeBrand}
                 </div>
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight max-w-3xl">
-                B2B RF Remote & Receiver OEM/ODM | 433MHz / 868MHz | Tuya Hybrid
+                {heroCopy.title}
               </h1>
 
               <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
-                B2B-only factory in Dongguan: rolling-code remotes, receivers, and Tuya + RF hybrids. We tune PCB antennas, provide firmware hooks, and deliver MP samples in 7 days.
+                {heroCopy.subtitle}
               </p>
 
               <div className="flex flex-wrap gap-3 text-sm text-slate-600">
-                {["ISO9001 | CE/FCC/ROHS ready", "In-house RF chamber & PCB/antenna tuning", "全球客户仅限B2B/不做零售"].map((tag) => (
+                {(heroCopy.tags || []).map((tag) => (
                   <span key={tag} className="inline-flex items-center gap-2 px-3 py-2 bg-white rounded-full border border-slate-200 shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#F5A524]"></span>
                     {tag}
@@ -446,37 +849,37 @@ export default function ChuangjiangWebsite() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button onClick={() => setActivePage("contact")}>Start OEM Project</Button>
+                <Button onClick={() => setActivePage("contact")}>{heroCopy.primaryCta}</Button>
                 <Button variant="secondary" onClick={() => window.open(CATALOG_URL, "_blank")}>
-                  <PlayCircle className="w-5 h-5 mr-2 text-[#1C2D5A]" /> Download Catalog (PDF)
+                  <PlayCircle className="w-5 h-5 mr-2 text-[#1C2D5A]" /> {heroCopy.secondaryCta}
                 </Button>
               </div>
 
               {/* Quick Stats */}
-              <div className="pt-12 grid grid-cols-3 gap-8 border-t border-slate-200">
+              <div className="pt-10 grid grid-cols-3 gap-6 border-t border-slate-200">
                 <div>
-                  <div className="text-3xl font-bold text-slate-900">20+</div>
-                  <div className="text-sm text-slate-500 mt-1">Years Experience</div>
+                  <div className="text-3xl font-bold text-slate-900">{heroCopy.stats.exp}</div>
+                  <div className="text-sm text-slate-500 mt-1">{heroCopy.stats.expLabel}</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-slate-900">100%</div>
-                  <div className="text-sm text-slate-500 mt-1">QC Tested</div>
+                  <div className="text-3xl font-bold text-slate-900">{heroCopy.stats.qc}</div>
+                  <div className="text-sm text-slate-500 mt-1">{heroCopy.stats.qcLabel}</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-slate-900">50+</div>
-                  <div className="text-sm text-slate-500 mt-1">Countries Served</div>
+                  <div className="text-3xl font-bold text-slate-900">{heroCopy.stats.countries}</div>
+                  <div className="text-sm text-slate-500 mt-1">{heroCopy.stats.countriesLabel}</div>
                 </div>
               </div>
             </div>
 
             {/* Hero Image */}
-            <div className="relative hidden lg:block h-[600px]">
+            <div className="relative hidden lg:block h-[520px]">
               <img
                 src={`https://placehold.co/800x800/transparent/1C2D5A?text=High-Tech+Remote+3D+Render`}
                 alt="RF Remote Control 3D Render"
                 className="w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute top-1/4 -left-10 bg-white p-4 rounded-xl shadow-xl border border-slate-100 flex items-center gap-3 animate-bounce-slow">
+              <div className="absolute top-1/4 -left-10 bg-white/85 backdrop-blur-lg p-4 rounded-2xl shadow-xl border border-white/70 flex items-center gap-3 animate-bounce-slow">
                 <div className="bg-green-100 p-2 rounded-full">
                   <Cpu className="w-6 h-6 text-green-600" />
                 </div>
@@ -528,7 +931,7 @@ export default function ChuangjiangWebsite() {
       {/* OEM Process */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
-          <SectionHeader title="From Concept to Delivery" subtitle="Our streamlined OEM/ODM workflow ensures your custom remotes are market-ready in record time." />
+          <SectionHeader title={processCopy.title} subtitle={processCopy.subtitle} />
           <div className="grid md:grid-cols-4 gap-8 relative">
             <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 -z-0"></div>
             {[
@@ -554,19 +957,12 @@ export default function ChuangjiangWebsite() {
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <SectionHeader
-              title="Built for Gates, Doors, Smart Home, Industrial"
-              subtitle="Protocols we master: HCS301/HCS361 rolling code, EV1527/PT2262 fixed/learning code, Tuya WiFi/Zigbee bridges, and multi-frequency clones."
+              title={industriesCopy.title}
+              subtitle={industriesCopy.subtitle}
               centered={false}
             />
             <div className="grid md:grid-cols-2 gap-4">
-              {[
-                "Garage/gate automation distributors",
-                "Access control OEM / panel builders",
-                "Smart home integrators (Tuya/Alexa/Google)",
-                "Industrial hoists and shutters",
-                "Parking barrier arms & bollards",
-                "Aftermarket car remotes (315/433MHz)"
-              ].map((item, idx) => (
+              {(industriesCopy.bullets || []).map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <span className="mt-1 inline-block w-2 h-2 rounded-full bg-[#F5A524]"></span>
                   <p className="text-sm text-slate-700">{item}</p>
@@ -575,31 +971,21 @@ export default function ChuangjiangWebsite() {
             </div>
           </div>
           <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
-            <h3 className="text-xl font-bold text-slate-900">Technical Delivery</h3>
+            <h3 className="text-xl font-bold text-slate-900">{industriesCopy.techTitle}</h3>
             <ul className="space-y-2 text-sm text-slate-700">
-              <li className="flex gap-2">
-                <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
-                <span>RF validation: shielding room sweep, antenna VSWR tuning, and range proof.</span>
-              </li>
-              <li className="flex gap-2">
-                <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
-                <span>Firmware hooks: learning code tables, whitelist/blacklist, and Tuya SDK handoff.</span>
-              </li>
-              <li className="flex gap-2">
-                <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
-                <span>Docs ready: CE/FCC/RoHS, HS code, packing list, and aging test records.</span>
-              </li>
-              <li className="flex gap-2">
-                <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
-                <span>Support: engineer-to-engineer WhatsApp/Teams within GMT+8 business hours.</span>
-              </li>
+              {(industriesCopy.techList || []).map((item, idx) => (
+                <li key={idx} className="flex gap-2">
+                  <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
+                  <span>{item}</span>
+                </li>
+              ))}
             </ul>
             <div className="pt-2 flex flex-wrap gap-3">
               <Button variant="primary" className="px-6 py-3" onClick={() => setActivePage("contact")}>
-                Book Engineer Call
+                {industriesCopy.ctaEngineer}
               </Button>
               <Button variant="secondary" className="px-6 py-3" onClick={() => window.open(CATALOG_URL, "_blank")}>
-                Catalog & Specs PDF
+                {industriesCopy.ctaCatalog}
               </Button>
             </div>
           </div>
@@ -611,7 +997,7 @@ export default function ChuangjiangWebsite() {
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-end mb-16">
             <div className="max-w-xl">
-              <h2 className="text-4xl font-bold text-slate-900 mb-4">Trending Solutions</h2>
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">{trendingCopy.title}</h2>
               <div className="w-16 h-1 bg-[#1C2D5A]"></div>
             </div>
             <Button variant="outline" className="hidden md:flex" onClick={() => setActivePage("products")}>
@@ -654,7 +1040,7 @@ export default function ChuangjiangWebsite() {
                       onClick={() => setActivePage("contact")}
                       className="w-full py-3 border border-slate-200 rounded font-semibold text-slate-700 hover:bg-[#1C2D5A] hover:text-white hover:border-[#1C2D5A] transition-all"
                     >
-                      Request OEM Quote
+                      {t("nav.request")}
                     </button>
                   </div>
                 </div>
@@ -667,7 +1053,7 @@ export default function ChuangjiangWebsite() {
       {/* Case Studies */}
       <section className="py-24 bg-white border-t border-slate-100">
         <div className="container mx-auto px-6">
-          <SectionHeader title="Case Studies" subtitle="Real projects: challenge → solution → outcome for distributors and OEM partners." />
+          <SectionHeader title={caseCopy.title} subtitle={caseCopy.subtitle} />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((item) => (
               <div key={item.id} className="bg-slate-50 border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
@@ -694,7 +1080,7 @@ export default function ChuangjiangWebsite() {
       {/* Testimonials */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
-          <SectionHeader title="What Our Clients Say" subtitle="Trusted by distributors and system integrators worldwide." />
+          <SectionHeader title={testimonialCopy.title} subtitle={testimonialCopy.subtitle} />
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((item) => (
               <div key={item.id} className="bg-slate-50 p-8 rounded-xl border border-slate-100 relative">
@@ -718,7 +1104,7 @@ export default function ChuangjiangWebsite() {
       {/* FAQ Section */}
       <section className="py-24 bg-slate-50 border-t border-slate-100">
         <div className="container mx-auto px-6 max-w-4xl">
-          <SectionHeader title="FAQ" subtitle="Common queries regarding OEM, shipping, and compatibility." centered={true} />
+          <SectionHeader title={faqCopy.title} subtitle={faqCopy.subtitle} centered={true} />
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
             {faqs.map((faq, idx) => (
               <AccordionItem key={idx} question={faq.q} answer={faq.a} />
@@ -728,15 +1114,16 @@ export default function ChuangjiangWebsite() {
       </section>
     </>
   );
-  const renderProducts = () => (
+  };
+  const renderProducts = () => {
+    const catalogCopy = translations[lang]?.catalog || translations.en.catalog;
+    return (
     <section className="py-12 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-6">
-        <div className="bg-[#1C2D5A] rounded-3xl p-12 mb-12 text-center text-white shadow-xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#1C2D5A] via-[#1C2D5A] to-[#0f1e4d] rounded-3xl p-12 mb-12 text-center text-white shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 relative z-10">Product Catalog</h1>
-          <p className="text-blue-100 max-w-2xl mx-auto text-lg relative z-10">
-            OEM/ODM only - ready for distributors and system integrators. Download the PDF catalog or request a tuned PCB layout for your protocol.
-          </p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 relative z-10">{catalogCopy.title}</h1>
+          <p className="text-blue-100 max-w-2xl mx-auto text-lg relative z-10">{catalogCopy.subtitle}</p>
           <div className="relative z-10 flex justify-center mt-6">
             <Button
               variant="secondary"
@@ -795,7 +1182,7 @@ export default function ChuangjiangWebsite() {
                         className="w-full flex items-center justify-center gap-2 text-[#1C2D5A] font-bold py-2 hover:bg-blue-50 rounded transition-colors"
                         onClick={() => setActivePage("contact")}
                       >
-                        <Mail className="w-4 h-4" /> Request B2B Quote
+                        <Mail className="w-4 h-4" /> {t("nav.request")}
                       </button>
                     </div>
                   </div>
@@ -807,32 +1194,32 @@ export default function ChuangjiangWebsite() {
       </div>
     </section>
   );
+  };
 
-  const renderAbout = () => (
+  const renderAbout = () => {
+    const aboutCopy = translations[lang]?.about || translations.en.about;
+    return (
     <div className="min-h-screen bg-white">
       {/* Intro */}
       <div className="bg-slate-100 py-20">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">About {COMPANY_NAME}</h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Operating the brand {BRAND_NAME}, we are a B2B-only RF remote manufacturer in Dongguan. No retail, no dropshipping - only OEM/ODM for distributors and system integrators.
-          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">{aboutCopy.title}</h1>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">{aboutCopy.subtitle}</p>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
-            {[
-              { icon: ShieldCheck, title: "B2B Only / 源头工厂", desc: "Direct engineering + production. We do not run consumer webshops." },
-              { icon: Globe, title: "Brand Clarity", desc: `Use ${BRAND_NAME} to avoid confusion with other 'Chuanghui' companies in the market.` },
-              { icon: Award, title: "Export-Ready", desc: "ISO9001 plant with CE/FCC/RoHS capability and internal aging test lab." }
-            ].map((item, idx) => (
+            {[ShieldCheck, Globe, Award].map((IconComp, idx) => {
+              const item = aboutCopy.cards[idx];
+              return (
               <div key={idx} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex items-start gap-4 text-left">
                 <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-[#1C2D5A]">
-                  <item.icon className="w-6 h-6" />
+                  <IconComp className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-800 mb-1">{item.title}</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                  <h4 className="font-bold text-slate-800 mb-1">{item?.title}</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">{item?.desc}</p>
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
       </div>
@@ -898,8 +1285,10 @@ export default function ChuangjiangWebsite() {
       </div>
     </div>
   );
+  };
   // --- IMPROVED BLOG LOGIC (Detail View + Comments) ---
   const renderBlog = () => {
+    const blogCopy = translations[lang]?.blog || translations.en.blog;
     if (viewingPost) {
       // Single Post View with Comments
       const postComments = comments.filter((c) => c.postId === viewingPost.id);
@@ -998,7 +1387,7 @@ export default function ChuangjiangWebsite() {
     return (
       <div className="min-h-screen bg-slate-50 py-12">
         <div className="container mx-auto px-6">
-          <SectionHeader title="Industry Insights" subtitle="Stay updated with the latest RF technology and company news." centered={true} />
+          <SectionHeader title={blogCopy.title} subtitle={blogCopy.subtitle} centered={true} />
           <div className="grid md:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <div
@@ -1027,13 +1416,15 @@ export default function ChuangjiangWebsite() {
       </div>
     );
   };
-  const renderContact = () => (
+  const renderContact = () => {
+    const contactCopy = translations[lang]?.contact || translations.en.contact;
+    return (
     <section className="bg-white min-h-screen">
-      <div className="h-96 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+      <div className="h-96 bg-gradient-to-br from-[#0f1e4d] via-[#1C2D5A] to-[#0f1e4d] relative flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-[#1C2D5A] opacity-20"></div>
         <div className="text-center relative z-10 px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Contact Our Factory</h1>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">Direct Manufacturer Pricing. Professional Technical Support.</p>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">{contactCopy.heroTitle}</h1>
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto">{contactCopy.heroSubtitle}</p>
         </div>
       </div>
 
@@ -1086,7 +1477,7 @@ export default function ChuangjiangWebsite() {
               <p className="text-slate-500 mb-3">We usually reply within 2 hours.</p>
               <div className="flex items-center gap-2 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 mb-6">
                 <ShieldCheck className="w-4 h-4 text-[#1C2D5A]" />
-                B2B projects only (distributors / OEM / system integrators). Please include application & volume.
+                {contactCopy.b2bNote}
               </div>
 
               {/* Note for GitHub Pages User: Replace 'action' with your Formspree endpoint */}
@@ -1123,6 +1514,7 @@ export default function ChuangjiangWebsite() {
       </div>
     </section>
   );
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-[#1C2D5A] selection:text-white">
@@ -1163,14 +1555,27 @@ export default function ChuangjiangWebsite() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            <NavLink page="home" label="Home" />
-            <NavLink page="about" label="About" />
-            <NavLink page="products" label="Products" />
-            <NavLink page="blog" label="Blog" />
-            <NavLink page="contact" label="Contact" />
-            <Button className="px-6 py-2.5 text-sm" onClick={() => setActivePage("contact")}>
-              Request Quote
-            </Button>
+            <NavLink page="home" label={t("nav.home")} />
+            <NavLink page="about" label={t("nav.about")} />
+            <NavLink page="products" label={t("nav.products")} />
+            <NavLink page="blog" label={t("nav.blog")} />
+            <NavLink page="contact" label={t("nav.contact")} />
+            <div className="flex items-center gap-3">
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value)}
+                className="bg-white border border-slate-200 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:border-[#1C2D5A] focus:outline-none"
+              >
+                {LANGUAGE_OPTIONS.map((option) => (
+                  <option key={option.code} value={option.code}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <Button className="px-6 py-2.5 text-sm" onClick={() => setActivePage("contact")}>
+                {t("nav.request")}
+              </Button>
+            </div>
           </nav>
 
           <button className="lg:hidden p-2 text-slate-800" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -1183,11 +1588,24 @@ export default function ChuangjiangWebsite() {
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 bg-white pt-24 px-6 lg:hidden animate-fade-in">
           <div className="flex flex-col space-y-4">
-            <NavLink page="home" label="Home" mobile />
-            <NavLink page="about" label="About" mobile />
-            <NavLink page="products" label="Products" mobile />
-            <NavLink page="blog" label="Blog" mobile />
-            <NavLink page="contact" label="Contact" mobile />
+            <NavLink page="home" label={t("nav.home")} mobile />
+            <NavLink page="about" label={t("nav.about")} mobile />
+            <NavLink page="products" label={t("nav.products")} mobile />
+            <NavLink page="blog" label={t("nav.blog")} mobile />
+            <NavLink page="contact" label={t("nav.contact")} mobile />
+            <div className="flex items-center gap-2">
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value)}
+                className="flex-1 bg-white border border-slate-200 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm"
+              >
+                {LANGUAGE_OPTIONS.map((option) => (
+                  <option key={option.code} value={option.code}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
             <Button
               className="w-full mt-8"
               onClick={() => {
@@ -1195,7 +1613,7 @@ export default function ChuangjiangWebsite() {
                 setIsMenuOpen(false);
               }}
             >
-              Get Quote Now
+              {t("nav.request")}
             </Button>
           </div>
         </div>
