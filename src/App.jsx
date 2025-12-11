@@ -31,11 +31,14 @@ import {
 } from "lucide-react";
 import Logo from "../logo/LOGO.png";
 
+// --- Brand Constants ---
+const COMPANY_NAME = "Dongguan Chuangjiang Electronics Co., Ltd.";
+const BRAND_NAME = "CHJ Remotes";
+
 // --- SEO Helper ---
 const SEO_METADATA = {
-  title: "RF Remote Control Manufacturer | OEM 433MHz/868MHz Factory | CHJ Remotes",
-  description:
-    "CHJ Remotes: ISO9001 certified manufacturer of RF remote controls, rolling code transmitters, Tuya WiFi modules, and garage door receivers."
+  title: `${COMPANY_NAME} | ${BRAND_NAME} - B2B RF Remote Control Manufacturer`,
+  description: `${COMPANY_NAME} (${BRAND_NAME}): ISO9001-certified, B2B-only factory for RF remotes, rolling code transmitters, Tuya WiFi/433MHz receivers, and OEM PCB layouts.`
 };
 
 // --- Contact Info Constants ---
@@ -46,10 +49,12 @@ const CONTACT_INFO = {
   email: "sales@chjremote.com"
 };
 
+const CATALOG_URL = "/catalog.pdf";
+
 // --- Brand Colors ---
 const COLORS = {
-  primary: "#2E3192", // Logo Text Blue
-  accent: "#ED8B00" // Logo Dot Orange
+  primary: "#1C2D5A", // Logo Text Blue
+  accent: "#F5A524" // Logo Dot Orange
 };
 
 // --- Mock Data ---
@@ -62,7 +67,7 @@ const products = [
     frequency: "433.92 MHz",
     chip: "HCS301 (Microchip)",
     voltage: "12V (27A)",
-    image: `https://placehold.co/600x600/f8fafc/2E3192?text=CJ-433+Pro+Series`,
+    image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=CJ-433+Pro+Series`,
     tag: "Best Seller",
     desc: "High-security rolling code transmitter with 100m range and universal 433MHz receiver replacement for garage door openers.",
     specs: [
@@ -78,7 +83,7 @@ const products = [
     frequency: "WiFi 2.4G + 433MHz",
     chip: "Tuya Smart Module",
     voltage: "AC 85-265V",
-    image: `https://placehold.co/600x600/f8fafc/2E3192?text=WiFi+Smart+Receiver`,
+    image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=WiFi+Smart+Receiver`,
     tag: "Tuya Certified",
     desc: "Upgrade old garage doors to smart control. Works with App, Alexa, and Google Home; Tuya Zigbee switch module OEM ready.",
     specs: [
@@ -94,7 +99,7 @@ const products = [
     frequency: "868.35 MHz",
     chip: "EV1527 (Learning)",
     voltage: "DC 3V (CR2032)",
-    image: `https://placehold.co/600x600/f8fafc/2E3192?text=IP67+Waterproof`,
+    image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=IP67+Waterproof`,
     tag: "Heavy Duty",
     desc: "Designed for harsh environments. Dustproof, waterproof, and drop-resistant for industrial doors and hoists.",
     specs: [
@@ -110,7 +115,7 @@ const products = [
     frequency: "Infrared",
     chip: "Smart AI Detection",
     voltage: "DC 12V-24V",
-    image: `https://placehold.co/800x800/f8fafc/2E3192?text=IR+Beam+Sensor`,
+    image: `https://placehold.co/800x800/f8fafc/1C2D5A?text=IR+Beam+Sensor`,
     tag: "100m Range",
     desc: "Anti-glare active infrared detector for perimeter security and automatic gates."
   },
@@ -121,7 +126,7 @@ const products = [
     frequency: "433.92 MHz",
     chip: "PT2262 (Fixed Code)",
     voltage: "AC 220V",
-    image: `https://placehold.co/400x400/e2e8f0/2E3192?text=Gate+Controller`,
+    image: `https://placehold.co/400x400/e2e8f0/1C2D5A?text=Gate+Controller`,
     tag: "Heavy Duty",
     desc: "External receiver box for tubular motors and sliding gates."
   },
@@ -132,7 +137,7 @@ const products = [
     frequency: "315/433 MHz",
     chip: "Multi-Frequency Clone",
     voltage: "DC 3V",
-    image: `https://placehold.co/400x400/e2e8f0/2E3192?text=Car+Key+Fob`,
+    image: `https://placehold.co/400x400/e2e8f0/1C2D5A?text=Car+Key+Fob`,
     tag: "Universal",
     desc: "Face-to-face copy remote for aftermarket car key replacement."
   }
@@ -163,6 +168,34 @@ const testimonials = [
   }
 ];
 
+// Case Studies (Problem > Solution > Outcome)
+const caseStudies = [
+  {
+    id: "cs-1",
+    title: "Rolling Code Conflict Resolved",
+    market: "Italy | Gate automation distributor",
+    challenge: "LiftMaster remotes caused RF collisions with local brand receivers, creating 12% return rate.",
+    solution: "Re-tuned HCS301 PCB + SAW oscillator, added whitelist firmware, and provided CE/FCC test report in one batch.",
+    outcome: "Returns dropped to 0.8% and the client launched in Germany within 3 months."
+  },
+  {
+    id: "cs-2",
+    title: "Tuya + RF Hybrid Retrofit",
+    market: "USA | Access control OEM",
+    challenge: "Needed app control without replacing legacy 433MHz fobs for 40K installed doors.",
+    solution: "Custom Tuya WiFi bridge + rolling-code receiver, SDK handoff, and antenna matching for long garages.",
+    outcome: "App adoption hit 72% in 60 days; no on-site rewiring required."
+  },
+  {
+    id: "cs-3",
+    title: "Industrial IP67 Handset",
+    market: "Brazil | Smart home integrator",
+    challenge: "Humid coastal sites killed consumer-grade remotes every rainy season.",
+    solution: "Designed IP67 housing, gold-plated PCB fingers, and salt-spray certification with batch aging test.",
+    outcome: "Warranty claims down 35%, enabling a premium maintenance plan upsell."
+  }
+];
+
 // Expanded Blog Data with Content
 const blogPosts = [
   {
@@ -173,13 +206,13 @@ const blogPosts = [
     excerpt: "Understanding the security differences between HCS301 and PT2262 for garage door openers.",
     content: `
       <p class="mb-4">When choosing a remote control system for garage doors or gate openers, security is the top priority. The two main encoding technologies in the market are <strong>Fixed Code (e.g., PT2262)</strong> and <strong>Rolling Code (e.g., HCS301)</strong>.</p>
-      <h4 class="text-xl font-bold text-[#2E3192] mb-2">The Vulnerability of Fixed Code</h4>
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">The Vulnerability of Fixed Code</h4>
       <p class="mb-4">Fixed code remotes send the exact same binary signal every time you press the button. While these are cheap and easy to clone, they are vulnerable to "Replay Attacks" where a thief can record your signal and play it back later to open your door.</p>
-      <h4 class="text-xl font-bold text-[#2E3192] mb-2">Why Rolling Code is Superior</h4>
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Why Rolling Code is Superior</h4>
       <p class="mb-4">Rolling code technology, developed by Microchip (HCS series), changes the code every time the button is pressed. An algorithm inside the transmitter and receiver calculates a new code based on a synchronized counter. Even if a thief intercepts the signal, that specific code is now invalid.</p>
       <p>For high-security applications, CHJ Remotes strongly recommends using our HCS301 based remotes.</p>
     `,
-    image: `https://placehold.co/800x400/f1f5f9/2E3192?text=Security+Tech`
+    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=Security+Tech`
   },
   {
     id: 2,
@@ -189,12 +222,12 @@ const blogPosts = [
     excerpt: "A step-by-step guide for cloning 433MHz remotes using our face-to-face copy series.",
     content: `
       <p class="mb-4">Our "Face-to-Face" copy remotes are designed to clone existing fixed code and learning code remotes without needing tools.</p>
-      <h4 class="text-xl font-bold text-[#2E3192] mb-2">Step 1: Clear History Code</h4>
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Step 1: Clear History Code</h4>
       <p class="mb-4">Press and hold buttons A and B simultaneously until the LED flashes 3 times. Release button B (keep holding A) and press B 3 times slowly. The LED will flash continuously.</p>
-      <h4 class="text-xl font-bold text-[#2E3192] mb-2">Step 2: Copy Code</h4>
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Step 2: Copy Code</h4>
       <p class="mb-4">Place the original remote and the copy remote back-to-back. Press and hold the corresponding buttons on both remotes. The LED on the copy remote will flash quickly, indicating success.</p>
     `,
-    image: `https://placehold.co/800x400/f1f5f9/2E3192?text=Programming+Guide`
+    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=Programming+Guide`
   },
   {
     id: 3,
@@ -211,7 +244,7 @@ const blogPosts = [
         <li>Voice Control (Alexa / Google Home)</li>
       </ul>
     `,
-    image: `https://placehold.co/800x400/f1f5f9/2E3192?text=Smart+Home`
+    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=Smart+Home`
   }
 ];
 
@@ -246,10 +279,10 @@ const Button = ({ children, variant = "primary", className = "", ...props }) => 
   const baseStyle =
     "px-8 py-4 rounded-lg font-bold transition-all duration-300 flex items-center justify-center tracking-wide text-sm uppercase";
   const variants = {
-    primary: `bg-[#ED8B00] hover:bg-[#d67d00] text-white shadow-lg hover:shadow-orange-500/30 transform hover:-translate-y-1`,
-    secondary: `bg-white text-slate-800 border border-slate-200 hover:border-[#2E3192] hover:text-[#2E3192] shadow-sm hover:shadow-md`,
-    outline: `bg-transparent border-2 border-[#2E3192] text-[#2E3192] hover:bg-[#2E3192] hover:text-white`,
-    small: `bg-[#ED8B00] hover:bg-[#d67d00] text-white text-xs px-4 py-2 rounded`
+    primary: `bg-[#F5A524] hover:bg-[#d68f12] text-white shadow-lg hover:shadow-amber-500/30 transform hover:-translate-y-1`,
+    secondary: `bg-white text-slate-800 border border-slate-200 hover:border-[#1C2D5A] hover:text-[#1C2D5A] shadow-sm hover:shadow-md`,
+    outline: `bg-transparent border-2 border-[#1C2D5A] text-[#1C2D5A] hover:bg-[#1C2D5A] hover:text-white`,
+    small: `bg-[#F5A524] hover:bg-[#d68f12] text-white text-xs px-4 py-2 rounded`
   };
 
   return (
@@ -262,7 +295,7 @@ const Button = ({ children, variant = "primary", className = "", ...props }) => 
 const SectionHeader = ({ title, subtitle, centered = true }) => (
   <div className={`mb-16 ${centered ? "text-center" : "text-left"}`}>
     <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">{title}</h2>
-    <div className={`w-20 h-1.5 bg-[#2E3192] mb-6 ${centered ? "mx-auto" : ""}`}></div>
+    <div className={`w-20 h-1.5 bg-[#1C2D5A] mb-6 ${centered ? "mx-auto" : ""}`}></div>
     <p className="text-lg text-slate-500 max-w-3xl leading-relaxed font-light mx-auto">{subtitle}</p>
   </div>
 );
@@ -272,11 +305,11 @@ const AccordionItem = ({ question, answer }) => {
   return (
     <div className="border-b border-slate-200 last:border-0">
       <button className="w-full py-6 flex justify-between items-center text-left focus:outline-none group" onClick={() => setIsOpen(!isOpen)}>
-        <span className="text-lg font-semibold text-slate-800 group-hover:text-[#2E3192] transition-colors pr-8">{question}</span>
-        {isOpen ? <ChevronUp className="text-[#2E3192]" /> : <ChevronDown className="text-slate-400" />}
+        <span className="text-lg font-semibold text-slate-800 group-hover:text-[#1C2D5A] transition-colors pr-8">{question}</span>
+        {isOpen ? <ChevronUp className="text-[#1C2D5A]" /> : <ChevronDown className="text-slate-400" />}
       </button>
       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-48 opacity-100 pb-6" : "max-h-0 opacity-0"}`}>
-        <p className="text-slate-600 leading-relaxed pl-4 border-l-2 border-[#ED8B00]">{answer}</p>
+        <p className="text-slate-600 leading-relaxed pl-4 border-l-2 border-[#F5A524]">{answer}</p>
       </div>
     </div>
   );
@@ -364,7 +397,7 @@ export default function ChuangjiangWebsite() {
         ${
           mobile
             ? "block w-full text-left py-4 text-xl border-b border-slate-100 text-slate-800 normal-case"
-            : `px-4 py-2 ${activePage === page ? "text-[#2E3192] font-bold" : "text-slate-600 hover:text-[#2E3192]"}`
+            : `px-4 py-2 ${activePage === page ? "text-[#1C2D5A] font-bold" : "text-slate-600 hover:text-[#1C2D5A]"}`
         }
       `}
     >
@@ -386,22 +419,36 @@ export default function ChuangjiangWebsite() {
         <div className="container mx-auto px-6 relative z-10 pt-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in-up">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#2E3192] rounded-full text-sm font-bold tracking-wide border border-blue-100">
-                <ShieldCheck className="w-4 h-4" /> Trusted by 500+ Global Distributors
+              <div className="flex flex-wrap gap-3">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#1C2D5A] rounded-full text-sm font-bold tracking-wide border border-blue-100">
+                  <ShieldCheck className="w-4 h-4" /> B2B Manufacturer | Factory Direct
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-full text-xs font-semibold tracking-wide border border-slate-200 shadow-sm">
+                  {COMPANY_NAME} | {BRAND_NAME}
+                </div>
               </div>
 
               <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1]">
-                OEM/ODM RF Control Manufacturer: 433MHz, 868MHz & LoRa/WiFi Modules
+                B2B RF Remote Control OEM/ODM | 433MHz / 868MHz | Tuya Hybrid
               </h1>
 
-              <p className="text-xl text-slate-500 leading-relaxed max-w-lg">
-                Specialize in HCS301/EV1527 encoding & Tuya smart integration. From PCB layout to mold injection, we deliver MP samples in 7 days.
+              <p className="text-xl text-slate-600 leading-relaxed max-w-2xl">
+                We are a B2B-only factory (no retail) in Dongguan, focused on rolling-code transmitters, receivers, and Tuya + RF hybrids. From PCB layout and antenna tuning to molds, we ship MP samples in 7 days.
               </p>
+
+              <div className="flex flex-wrap gap-3 text-sm text-slate-600">
+                {["ISO9001 | CE/FCC/ROHS ready", "In-house RF chamber & PCB/antenna tuning", "全球客户仅限B2B/不做零售"].map((tag) => (
+                  <span key={tag} className="inline-flex items-center gap-2 px-3 py-2 bg-white rounded-full border border-slate-200 shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F5A524]"></span>
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button onClick={() => setActivePage("contact")}>Start OEM Project</Button>
-                <Button variant="secondary" onClick={() => setActivePage("products")}>
-                  <PlayCircle className="w-5 h-5 mr-2 text-[#2E3192]" /> Browse Catalog (PDF)
+                <Button variant="secondary" onClick={() => window.open(CATALOG_URL, "_blank")}>
+                  <PlayCircle className="w-5 h-5 mr-2 text-[#1C2D5A]" /> Download Catalog (PDF)
                 </Button>
               </div>
 
@@ -425,7 +472,7 @@ export default function ChuangjiangWebsite() {
             {/* Hero Image */}
             <div className="relative hidden lg:block h-[600px]">
               <img
-                src={`https://placehold.co/800x800/transparent/2E3192?text=High-Tech+Remote+3D+Render`}
+                src={`https://placehold.co/800x800/transparent/1C2D5A?text=High-Tech+Remote+3D+Render`}
                 alt="RF Remote Control 3D Render"
                 className="w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
               />
@@ -456,8 +503,8 @@ export default function ChuangjiangWebsite() {
               { icon: CheckCircle, title: "4. Aging & RF Testing", desc: "-40°C~80°C chamber & salt spray for durability." }
             ].map((step, idx) => (
               <div key={idx} className="relative z-10 bg-white p-6 pt-0 text-center group">
-                <div className="w-24 h-24 mx-auto bg-white border-4 border-slate-100 rounded-full flex items-center justify-center mb-6 group-hover:border-[#2E3192] transition-colors duration-300 shadow-sm">
-                  <step.icon className="w-10 h-10 text-slate-400 group-hover:text-[#2E3192] transition-colors" />
+                <div className="w-24 h-24 mx-auto bg-white border-4 border-slate-100 rounded-full flex items-center justify-center mb-6 group-hover:border-[#1C2D5A] transition-colors duration-300 shadow-sm">
+                  <step.icon className="w-10 h-10 text-slate-400 group-hover:text-[#1C2D5A] transition-colors" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
                 <p className="text-slate-500 leading-relaxed">{step.desc}</p>
@@ -473,7 +520,7 @@ export default function ChuangjiangWebsite() {
           <div className="flex justify-between items-end mb-16">
             <div className="max-w-xl">
               <h2 className="text-4xl font-bold text-slate-900 mb-4">Trending Solutions</h2>
-              <div className="w-16 h-1 bg-[#2E3192]"></div>
+              <div className="w-16 h-1 bg-[#1C2D5A]"></div>
             </div>
             <Button variant="outline" className="hidden md:flex" onClick={() => setActivePage("products")}>
               Full Catalog <ArrowRight className="ml-2 w-4 h-4" />
@@ -493,7 +540,7 @@ export default function ChuangjiangWebsite() {
                   </div>
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold text-slate-800 mb-2 leading-tight group-hover:text-[#2E3192] transition-colors">{product.name}</h3>
+                  <h3 className="text-2xl font-bold text-slate-800 mb-2 leading-tight group-hover:text-[#1C2D5A] transition-colors">{product.name}</h3>
                   <div className="flex items-center gap-4 text-sm text-slate-500 mb-6 font-mono bg-slate-50 p-2 rounded">
                     <span>{product.frequency}</span>
                     <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
@@ -504,7 +551,7 @@ export default function ChuangjiangWebsite() {
                     <ul className="text-sm text-slate-600 space-y-1 mb-6">
                       {product.specs.map((item, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#ED8B00]"></span>
+                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#F5A524]"></span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -513,13 +560,40 @@ export default function ChuangjiangWebsite() {
                   <div className="mt-auto">
                     <button
                       onClick={() => setActivePage("contact")}
-                      className="w-full py-3 border border-slate-200 rounded font-semibold text-slate-700 hover:bg-[#2E3192] hover:text-white hover:border-[#2E3192] transition-all"
+                      className="w-full py-3 border border-slate-200 rounded font-semibold text-slate-700 hover:bg-[#1C2D5A] hover:text-white hover:border-[#1C2D5A] transition-all"
                     >
-                      Download Datasheet
+                      Request OEM Quote
                     </button>
                   </div>
                 </div>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="container mx-auto px-6">
+          <SectionHeader title="Case Studies" subtitle="Real projects: challenge → solution → outcome for distributors and OEM partners." />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {caseStudies.map((item) => (
+              <div key={item.id} className="bg-slate-50 border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-xs font-semibold text-[#1C2D5A] bg-white px-3 py-1 rounded-full border border-slate-200">{item.market}</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500">B2B Only</span>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug">{item.title}</h3>
+                <p className="text-slate-600 text-sm mb-4">Challenge: {item.challenge}</p>
+                <div className="bg-white border border-slate-200 rounded-xl p-4 mb-4">
+                  <div className="text-xs uppercase font-bold text-slate-500 mb-1">Solution</div>
+                  <p className="text-sm text-slate-700 leading-relaxed">{item.solution}</p>
+                </div>
+                <div className="mt-auto flex items-center justify-between pt-2">
+                  <div className="text-sm font-semibold text-[#F5A524] leading-snug max-w-[80%]">Outcome: {item.outcome}</div>
+                  <ArrowRight className="w-4 h-4 text-slate-300" />
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -532,7 +606,7 @@ export default function ChuangjiangWebsite() {
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((item) => (
               <div key={item.id} className="bg-slate-50 p-8 rounded-xl border border-slate-100 relative">
-                <div className="flex gap-1 text-[#ED8B00] mb-4">
+                <div className="flex gap-1 text-[#F5A524] mb-4">
                   {[...Array(item.stars)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 fill-current" />
                   ))}
@@ -565,10 +639,21 @@ export default function ChuangjiangWebsite() {
   const renderProducts = () => (
     <section className="py-12 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-6">
-        <div className="bg-[#2E3192] rounded-3xl p-12 mb-12 text-center text-white shadow-xl relative overflow-hidden">
+        <div className="bg-[#1C2D5A] rounded-3xl p-12 mb-12 text-center text-white shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 relative z-10">Product Catalog</h1>
-          <p className="text-blue-100 max-w-2xl mx-auto text-lg relative z-10">Explore our comprehensive range of RF solutions.</p>
+          <p className="text-blue-100 max-w-2xl mx-auto text-lg relative z-10">
+            OEM/ODM only - ready for distributors and system integrators. Download the PDF catalog or request a tuned PCB layout for your protocol.
+          </p>
+          <div className="relative z-10 flex justify-center mt-6">
+            <Button
+              variant="secondary"
+              className="bg-white text-[#1C2D5A] hover:text-white hover:bg-[#1C2D5A] border-white/40"
+              onClick={() => window.open(CATALOG_URL, "_blank")}
+            >
+              <Download className="w-5 h-5 mr-2" /> Download PDF
+            </Button>
+          </div>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12">
@@ -576,7 +661,7 @@ export default function ChuangjiangWebsite() {
           <aside className="lg:w-72 flex-shrink-0">
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 sticky top-28">
               <div className="flex items-center gap-2 mb-8 pb-4 border-b border-slate-100">
-                <Filter className="w-5 h-5 text-[#2E3192]" />
+                <Filter className="w-5 h-5 text-[#1C2D5A]" />
                 <span className="font-bold text-lg text-slate-900">Filters</span>
               </div>
               <div className="space-y-8">
@@ -585,8 +670,8 @@ export default function ChuangjiangWebsite() {
                   <div className="space-y-3">
                     {["315 MHz", "433.92 MHz", "868.35 MHz", "Multi-Freq"].map((freq, i) => (
                       <label key={i} className="flex items-center gap-3 cursor-pointer group">
-                        <div className="w-5 h-5 rounded border border-slate-300 group-hover:border-[#2E3192] flex items-center justify-center"></div>
-                        <span className="text-slate-600 group-hover:text-[#2E3192] transition-colors">{freq}</span>
+                        <div className="w-5 h-5 rounded border border-slate-300 group-hover:border-[#1C2D5A] flex items-center justify-center"></div>
+                        <span className="text-slate-600 group-hover:text-[#1C2D5A] transition-colors">{freq}</span>
                       </label>
                     ))}
                   </div>
@@ -607,18 +692,18 @@ export default function ChuangjiangWebsite() {
                       className="absolute top-0 left-0 w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className="bg-[#ED8B00] text-white text-xs font-bold px-3 py-1 rounded shadow-sm">{product.tag}</span>
+                      <span className="bg-[#F5A524] text-white text-xs font-bold px-3 py-1 rounded shadow-sm">{product.tag}</span>
                     </div>
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-wider">{product.category}</div>
-                    <h3 className="font-bold text-lg text-slate-900 mb-4 leading-snug hover:text-[#2E3192] cursor-pointer">{product.name}</h3>
+                    <h3 className="font-bold text-lg text-slate-900 mb-4 leading-snug hover:text-[#1C2D5A] cursor-pointer">{product.name}</h3>
                     <div className="mt-auto pt-4 border-t border-slate-100">
                       <button
-                        className="w-full flex items-center justify-center gap-2 text-[#2E3192] font-bold py-2 hover:bg-blue-50 rounded transition-colors"
+                        className="w-full flex items-center justify-center gap-2 text-[#1C2D5A] font-bold py-2 hover:bg-blue-50 rounded transition-colors"
                         onClick={() => setActivePage("contact")}
                       >
-                        <Mail className="w-4 h-4" /> Inquiry Price
+                        <Mail className="w-4 h-4" /> Request B2B Quote
                       </button>
                     </div>
                   </div>
@@ -636,10 +721,27 @@ export default function ChuangjiangWebsite() {
       {/* Intro */}
       <div className="bg-slate-100 py-20">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">About Chuangjiang</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">About {COMPANY_NAME}</h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            CHJ Remotes is a premier manufacturer located in the heart of the world's electronics hub. We specialize in precision RF technology.
+            Operating the brand {BRAND_NAME}, we are a B2B-only RF remote manufacturer in Dongguan. No retail, no dropshipping - only OEM/ODM for distributors and system integrators.
           </p>
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            {[
+              { icon: ShieldCheck, title: "B2B Only / 源头工厂", desc: "Direct engineering + production. We do not run consumer webshops." },
+              { icon: Globe, title: "Brand Clarity", desc: `Use ${BRAND_NAME} to avoid confusion with other 'Chuanghui' companies in the market.` },
+              { icon: Award, title: "Export-Ready", desc: "ISO9001 plant with CE/FCC/RoHS capability and internal aging test lab." }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex items-start gap-4 text-left">
+                <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-[#1C2D5A]">
+                  <item.icon className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800 mb-1">{item.title}</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -652,7 +754,7 @@ export default function ChuangjiangWebsite() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="group relative overflow-hidden rounded-xl shadow-lg">
               <img
-                src={`https://placehold.co/600x400/e2e8f0/2E3192?text=SMT+Production+Line`}
+                src={`https://placehold.co/600x400/e2e8f0/1C2D5A?text=SMT+Production+Line`}
                 alt="SMT Line"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
               />
@@ -663,7 +765,7 @@ export default function ChuangjiangWebsite() {
             </div>
             <div className="group relative overflow-hidden rounded-xl shadow-lg">
               <img
-                src={`https://placehold.co/600x400/e2e8f0/2E3192?text=Aging+Test+Room`}
+                src={`https://placehold.co/600x400/e2e8f0/1C2D5A?text=Aging+Test+Room`}
                 alt="Aging Room"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
               />
@@ -674,7 +776,7 @@ export default function ChuangjiangWebsite() {
             </div>
             <div className="group relative overflow-hidden rounded-xl shadow-lg">
               <img
-                src={`https://placehold.co/600x400/e2e8f0/2E3192?text=R%26D+Laboratory`}
+                src={`https://placehold.co/600x400/e2e8f0/1C2D5A?text=R%26D+Laboratory`}
                 alt="R&D Lab"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
               />
@@ -695,7 +797,7 @@ export default function ChuangjiangWebsite() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {["ISO 9001:2015", "CE Certified", "FCC Approved", "RoHS Compliant"].map((cert, i) => (
               <div key={i} className="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center gap-4 hover:shadow-md transition-shadow">
-                <Award className="w-12 h-12 text-[#ED8B00]" />
+                <Award className="w-12 h-12 text-[#F5A524]" />
                 <span className="font-bold text-slate-800">{cert}</span>
               </div>
             ))}
@@ -713,7 +815,7 @@ export default function ChuangjiangWebsite() {
       return (
         <div className="min-h-screen bg-slate-50 py-12">
           <div className="container mx-auto px-6 max-w-4xl">
-            <button onClick={() => setViewingPost(null)} className="flex items-center text-[#2E3192] font-bold mb-8 hover:underline">
+            <button onClick={() => setViewingPost(null)} className="flex items-center text-[#1C2D5A] font-bold mb-8 hover:underline">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back to All Articles
             </button>
 
@@ -736,7 +838,7 @@ export default function ChuangjiangWebsite() {
             {/* Comment Section (Marketing Master Feature) */}
             <div className="bg-white rounded-2xl shadow-sm p-8 md:p-12">
               <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-2">
-                <MessageSquare className="w-6 h-6 text-[#ED8B00]" />
+                <MessageSquare className="w-6 h-6 text-[#F5A524]" />
                 Discussion ({postComments.length})
               </h3>
 
@@ -746,7 +848,7 @@ export default function ChuangjiangWebsite() {
                   <div key={comment.id} className={`flex gap-4 ${comment.isAdmin ? "ml-8 bg-blue-50 p-4 rounded-lg" : ""}`}>
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white shrink-0 ${
-                        comment.isAdmin ? "bg-[#2E3192]" : "bg-slate-300"
+                        comment.isAdmin ? "bg-[#1C2D5A]" : "bg-slate-300"
                       }`}
                     >
                       {comment.user.charAt(0)}
@@ -754,7 +856,7 @@ export default function ChuangjiangWebsite() {
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-bold text-slate-900">{comment.user}</span>
-                        {comment.isAdmin && <span className="text-xs bg-[#2E3192] text-white px-2 py-0.5 rounded">Official</span>}
+                        {comment.isAdmin && <span className="text-xs bg-[#1C2D5A] text-white px-2 py-0.5 rounded">Official</span>}
                         <span className="text-xs text-slate-400">{comment.date}</span>
                       </div>
                       <p className="text-slate-600 text-sm">{comment.text}</p>
@@ -771,7 +873,7 @@ export default function ChuangjiangWebsite() {
                     <input
                       type="text"
                       placeholder="Your Name (Client / Partner)"
-                      className="w-full px-4 py-3 border border-slate-200 rounded focus:border-[#2E3192] outline-none"
+                      className="w-full px-4 py-3 border border-slate-200 rounded focus:border-[#1C2D5A] outline-none"
                       value={newComment.user}
                       onChange={(e) => setNewComment({ ...newComment, user: e.target.value })}
                       required
@@ -780,7 +882,7 @@ export default function ChuangjiangWebsite() {
                   <div>
                     <textarea
                       placeholder="Ask a question about this product..."
-                      className="w-full px-4 py-3 border border-slate-200 rounded focus:border-[#2E3192] outline-none h-24"
+                      className="w-full px-4 py-3 border border-slate-200 rounded focus:border-[#1C2D5A] outline-none h-24"
                       value={newComment.text}
                       onChange={(e) => setNewComment({ ...newComment, text: e.target.value })}
                       required
@@ -819,10 +921,10 @@ export default function ChuangjiangWebsite() {
                   <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div className="p-8">
-                  <div className="text-xs text-[#2E3192] font-bold mb-2 uppercase tracking-wide">{post.date}</div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-[#2E3192] transition-colors leading-tight">{post.title}</h3>
+                  <div className="text-xs text-[#1C2D5A] font-bold mb-2 uppercase tracking-wide">{post.date}</div>
+                  <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-[#1C2D5A] transition-colors leading-tight">{post.title}</h3>
                   <p className="text-slate-500 mb-6 text-sm leading-relaxed">{post.excerpt}</p>
-                  <span className="text-[#2E3192] font-bold flex items-center text-sm">
+                  <span className="text-[#1C2D5A] font-bold flex items-center text-sm">
                     Read Article <ArrowRight className="w-4 h-4 ml-1" />
                   </span>
                 </div>
@@ -836,7 +938,7 @@ export default function ChuangjiangWebsite() {
   const renderContact = () => (
     <section className="bg-white min-h-screen">
       <div className="h-96 bg-slate-900 relative flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[#2E3192] opacity-20"></div>
+        <div className="absolute inset-0 bg-[#1C2D5A] opacity-20"></div>
         <div className="text-center relative z-10 px-4">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Contact Our Factory</h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">Direct Manufacturer Pricing. Professional Technical Support.</p>
@@ -846,7 +948,7 @@ export default function ChuangjiangWebsite() {
       <div className="container mx-auto px-6 -mt-32 relative z-20 pb-24">
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
           {/* Left Info Panel */}
-          <div className="lg:w-2/5 bg-[#2E3192] p-12 text-white flex flex-col justify-between">
+          <div className="lg:w-2/5 bg-[#1C2D5A] p-12 text-white flex flex-col justify-between">
             <div>
               <h3 className="text-2xl font-bold mb-8">Get In Touch</h3>
               <div className="space-y-8">
@@ -889,30 +991,34 @@ export default function ChuangjiangWebsite() {
           <div className="lg:w-3/5 p-12 lg:p-16 bg-white">
             <div className="max-w-lg mx-auto">
               <h3 className="text-3xl font-bold text-slate-900 mb-2">Send Inquiry</h3>
-              <p className="text-slate-500 mb-8">We usually reply within 2 hours.</p>
+              <p className="text-slate-500 mb-3">We usually reply within 2 hours.</p>
+              <div className="flex items-center gap-2 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 mb-6">
+                <ShieldCheck className="w-4 h-4 text-[#1C2D5A]" />
+                B2B projects only (distributors / OEM / system integrators). Please include application & volume.
+              </div>
 
               {/* Note for GitHub Pages User: Replace 'action' with your Formspree endpoint */}
               <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert("Inquiry Simulated: For GitHub Pages, integrate Formspree or EmailJS here."); }}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-slate-700">First Name</label>
-                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#2E3192] outline-none transition" />
+                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-slate-700">Last Name</label>
-                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#2E3192] outline-none transition" />
+                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Business Email *</label>
-                  <input type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#2E3192] outline-none transition" required />
+                  <input type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" required />
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Message</label>
                   <textarea
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#2E3192] outline-none transition h-32"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition h-32"
                     placeholder="I need 433MHz remotes with rolling code..."
                   ></textarea>
                 </div>
@@ -927,7 +1033,7 @@ export default function ChuangjiangWebsite() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-[#2E3192] selection:text-white">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-[#1C2D5A] selection:text-white">
       {/* Top Bar */}
       <div className="bg-slate-900 text-slate-400 text-xs py-2 hidden lg:block">
         <div className="container mx-auto px-6 flex justify-between items-center">
@@ -940,6 +1046,7 @@ export default function ChuangjiangWebsite() {
             </span>
           </div>
           <div className="flex gap-4">
+            <span className="px-3 py-1 bg-white/10 rounded-full text-white font-semibold">B2B Only</span>
             <span className="hover:text-white cursor-pointer">Support</span>
             <span className="hover:text-white cursor-pointer">Login (Dealer)</span>
           </div>
@@ -955,8 +1062,10 @@ export default function ChuangjiangWebsite() {
             </div>
 
             <div>
-              <h1 className="text-xl font-extrabold text-[#2E3192] leading-none tracking-tight">CHJ Remotes</h1>
-              <span className="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase">Remotes</span>
+              <h1 className="text-xl font-extrabold text-[#1C2D5A] leading-none tracking-tight">{BRAND_NAME}</h1>
+              <span className="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase">
+                B2B OEM | {COMPANY_NAME}
+              </span>
             </div>
           </div>
 
@@ -1024,7 +1133,7 @@ export default function ChuangjiangWebsite() {
                 CHJ Remotes
               </div>
               <p className="text-slate-400 leading-relaxed text-sm">
-                ISO9001 certified custom RF remote control PCB manufacturer in China, building receiver modules and smart home automation solutions since 2004.
+                {COMPANY_NAME} ({BRAND_NAME}) is an ISO9001 B2B-only factory in Dongguan, China. We build RF remotes, receivers, and Tuya-ready smart modules with in-house PCB and antenna tuning since 2004.
               </p>
             </div>
 
@@ -1032,17 +1141,17 @@ export default function ChuangjiangWebsite() {
               <h4 className="text-white font-bold mb-6">Products</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <span className="hover:text-[#ED8B00] transition cursor-pointer" onClick={() => setActivePage("products")}>
+                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("products")}>
                     Universal Gate Remotes
                   </span>
                 </li>
                 <li>
-                  <span className="hover:text-[#ED8B00] transition cursor-pointer" onClick={() => setActivePage("products")}>
+                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("products")}>
                     Rolling Code (HCS301)
                   </span>
                 </li>
                 <li>
-                  <span className="hover:text-[#ED8B00] transition cursor-pointer" onClick={() => setActivePage("products")}>
+                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("products")}>
                     Tuya WiFi Receivers
                   </span>
                 </li>
@@ -1053,17 +1162,17 @@ export default function ChuangjiangWebsite() {
               <h4 className="text-white font-bold mb-6">Company</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <span className="hover:text-[#ED8B00] transition cursor-pointer" onClick={() => setActivePage("about")}>
+                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("about")}>
                     About Factory
                   </span>
                 </li>
                 <li>
-                  <span className="hover:text-[#ED8B00] transition cursor-pointer" onClick={() => setActivePage("about")}>
+                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("about")}>
                     Certificates
                   </span>
                 </li>
                 <li>
-                  <span className="hover:text-[#ED8B00] transition cursor-pointer" onClick={() => setActivePage("contact")}>
+                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("contact")}>
                     Contact Us
                   </span>
                 </li>
