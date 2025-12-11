@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Menu,
   X,
@@ -455,11 +455,7 @@ const products = [
     image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=CJ-433+Pro+Series`,
     tag: "Best Seller",
     desc: "High-security rolling code transmitter with 100m range and universal 433MHz receiver replacement for garage door openers.",
-    specs: [
-      "Chipset: HCS301 / Rolling code encryption",
-      "Range: >100m with tuned PCB antenna",
-      "Enclosure: Zinc alloy frame, 12V 27A cell"
-    ]
+    specs: ["Chipset: HCS301 / Rolling code", "Range: >100m tuned PCB antenna", "Enclosure: Zinc alloy, 12V 27A"]
   },
   {
     id: 2,
@@ -471,11 +467,7 @@ const products = [
     image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=WiFi+Smart+Receiver`,
     tag: "Tuya Certified",
     desc: "Upgrade old garage doors to smart control. Works with App, Alexa, and Google Home; Tuya Zigbee switch module OEM ready.",
-    specs: [
-      "Chipset: ESP32 / Tuya module (WiFi & Zigbee ready)",
-      "Voltage: AC/DC 9-30V & 110-240V",
-      "Memory: Stores up to 500 remote codes"
-    ]
+    specs: ["ESP32/Tuya WiFi-Zigbee", "AC/DC 9-30V & 110-240V", "Stores up to 500 codes"]
   },
   {
     id: 3,
@@ -487,11 +479,7 @@ const products = [
     image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=IP67+Waterproof`,
     tag: "Heavy Duty",
     desc: "Designed for harsh environments. Dustproof, waterproof, and drop-resistant for industrial doors and hoists.",
-    specs: [
-      "Ingress: IP67 sealed enclosure, anti-drop shell",
-      "Battery: CR2032, low-power MCU design",
-      "RF: 868MHz learning code, tuned whip antenna"
-    ]
+    specs: ["IP67 sealed enclosure", "CR2032 low-power MCU", "868MHz learning code"]
   },
   {
     id: 4,
@@ -559,6 +547,7 @@ const caseStudies = [
     id: "cs-1",
     title: "Rolling Code Conflict Resolved",
     market: "Italy | Gate automation distributor",
+    badge: "CE/FCC Report",
     challenge: "LiftMaster remotes caused RF collisions with local brand receivers, creating 12% return rate.",
     solution: "Re-tuned HCS301 PCB + SAW oscillator, added whitelist firmware, and provided CE/FCC test report in one batch.",
     outcome: "Returns dropped to 0.8% and the client launched in Germany within 3 months."
@@ -567,6 +556,7 @@ const caseStudies = [
     id: "cs-2",
     title: "Tuya + RF Hybrid Retrofit",
     market: "USA | Access control OEM",
+    badge: "UL Prep",
     challenge: "Needed app control without replacing legacy 433MHz fobs for 40K installed doors.",
     solution: "Custom Tuya WiFi bridge + rolling-code receiver, SDK handoff, and antenna matching for long garages.",
     outcome: "App adoption hit 72% in 60 days; no on-site rewiring required."
@@ -575,6 +565,7 @@ const caseStudies = [
     id: "cs-3",
     title: "Industrial IP67 Handset",
     market: "Brazil | Smart home integrator",
+    badge: "IP67 Test",
     challenge: "Humid coastal sites killed consumer-grade remotes every rainy season.",
     solution: "Designed IP67 housing, gold-plated PCB fingers, and salt-spray certification with batch aging test.",
     outcome: "Warranty claims down 35%, enabling a premium maintenance plan upsell."
@@ -727,6 +718,7 @@ export default function ChuangjiangWebsite() {
   // Comment System State
   const [comments, setComments] = useState(initialComments);
   const [newComment, setNewComment] = useState({ user: "", text: "" });
+  const langMenuRef = useRef(null);
 
   const t = (path) => {
     const parts = path.split(".");
@@ -772,6 +764,16 @@ export default function ChuangjiangWebsite() {
     setLangMenuOpen(false);
   }, [activePage]);
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(e.target)) {
+        setLangMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   // Handle Comment Submission (Simulated for GitHub Pages)
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -802,7 +804,7 @@ export default function ChuangjiangWebsite() {
         ${
           mobile
             ? "block w-full text-left py-4 text-xl border-b border-slate-100 text-slate-800 normal-case"
-            : `px-3 py-2 ${activePage === page ? "text-[#0B1A39] border-b-2 border-[#F5A524]" : "text-slate-700 hover:text-[#0B1A39] hover:border-b-2 hover:border-[#1C2D5A]"}`
+            : `px-3 pb-3 pt-2 border-b-2 ${activePage === page ? "text-[#0B1A39] border-[#F5A524]" : "border-transparent text-slate-700 hover:text-[#0B1A39] hover:border-[#1C2D5A]"}`
         }
       `}
     >
@@ -1095,6 +1097,7 @@ export default function ChuangjiangWebsite() {
               <div key={item.id} className="bg-slate-50 border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
                 <div className="flex justify-between items-center mb-3">
                   <span className="text-xs font-semibold text-[#1C2D5A] bg-white px-3 py-1 rounded-full border border-slate-200">{item.market}</span>
+                  {item.badge && <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 bg-white px-2 py-1 rounded-full border border-slate-200">{item.badge}</span>}
                   <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500">B2B Only</span>
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug">{item.title}</h3>
@@ -1128,7 +1131,9 @@ export default function ChuangjiangWebsite() {
                 <p className="text-slate-600 mb-6 italic">"{item.content}"</p>
                 <div>
                   <h4 className="font-bold text-slate-900">{item.name}</h4>
-                  <p className="text-sm text-slate-500">{item.role}</p>
+                  <p className="text-sm text-slate-500 flex items-center gap-2">
+                    <span className="px-2 py-1 bg-white rounded-full border border-slate-200 text-xs text-[#1C2D5A]">{item.role}</span>
+                  </p>
                 </div>
                 <div className="absolute -bottom-4 right-8 text-9xl text-slate-200 leading-none opacity-50 pointer-events-none">"</div>
               </div>
@@ -1191,12 +1196,30 @@ export default function ChuangjiangWebsite() {
                     ))}
                   </div>
                 </div>
+                <div>
+                  <h4 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wide">Protocol</h4>
+                  <div className="space-y-3">
+                    {["Rolling Code", "Fixed/Learning", "Tuya/WiFi Bridge"].map((item, i) => (
+                      <label key={i} className="flex items-center gap-3 cursor-pointer group">
+                        <div className="w-5 h-5 rounded border border-slate-300 group-hover:border-[#1C2D5A] flex items-center justify-center"></div>
+                        <span className="text-slate-600 group-hover:text-[#1C2D5A] transition-colors">{item}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </aside>
 
           {/* Grid */}
           <div className="flex-1">
+            <div className="mb-6 flex flex-wrap gap-3">
+              {["All", "433 MHz", "868 MHz", "Rolling Code", "Tuya/WiFi"].map((tag) => (
+                <span key={tag} className="px-3 py-2 rounded-full border border-slate-200 bg-white text-sm text-slate-700 hover:border-[#1C2D5A] hover:text-[#1C2D5A] cursor-pointer">
+                  {tag}
+                </span>
+              ))}
+            </div>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
               {products.map((product) => (
                 <div key={product.id} className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group flex flex-col">
@@ -1213,9 +1236,23 @@ export default function ChuangjiangWebsite() {
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-wider">{product.category}</div>
                     <h3 className="font-bold text-lg text-slate-900 mb-4 leading-snug hover:text-[#1C2D5A] cursor-pointer">{product.name}</h3>
-                    <div className="mt-auto pt-4 border-t border-slate-100">
+                    <div className="text-sm text-slate-600 space-y-1 mb-4">
+                      {(product.specs || []).map((item, i) => (
+                        <div key={i} className="flex items-start gap-2">
+                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#F5A524]"></span>
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-auto pt-4 border-t border-slate-100 grid grid-cols-2 gap-2">
                       <button
-                        className="w-full flex items-center justify-center gap-2 text-[#1C2D5A] font-bold py-2 hover:bg-blue-50 rounded transition-colors"
+                        className="w-full flex items-center justify-center gap-2 text-slate-700 font-semibold py-2 border border-slate-200 rounded hover:bg-slate-50 transition-colors"
+                        onClick={() => setActivePage("contact")}
+                      >
+                        <Download className="w-4 h-4" /> Datasheet
+                      </button>
+                      <button
+                        className="w-full flex items-center justify-center gap-2 text-white font-semibold py-2 bg-[#1C2D5A] rounded hover:bg-[#0f1e4d] transition-colors"
                         onClick={() => setActivePage("contact")}
                       >
                         <Mail className="w-4 h-4" /> {t("nav.request")}
@@ -1514,11 +1551,11 @@ export default function ChuangjiangWebsite() {
               <div className="flex items-center gap-2 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 mb-6">
                 <ShieldCheck className="w-4 h-4 text-[#1C2D5A]" />
                 {contactCopy.b2bNote}
-              </div>
+            </div>
 
-              {/* Note for GitHub Pages User: Replace 'action' with your Formspree endpoint */}
-              <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert("Inquiry Simulated: For GitHub Pages, integrate Formspree or EmailJS here."); }}>
-                <div className="grid md:grid-cols-2 gap-6">
+            {/* Note for GitHub Pages User: Replace 'action' with your Formspree endpoint */}
+            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert("Inquiry Simulated: For GitHub Pages, integrate Formspree or EmailJS here."); }}>
+              <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-slate-700">First Name</label>
                     <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" />
@@ -1534,6 +1571,28 @@ export default function ChuangjiangWebsite() {
                   <input type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" required />
                 </div>
 
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700">Application</label>
+                    <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
+                      <option>Gate/Garage</option>
+                      <option>Access Control</option>
+                      <option>Smart Home</option>
+                      <option>Industrial Hoist</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700">Target Frequency</label>
+                    <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
+                      <option>433 MHz</option>
+                      <option>868 MHz</option>
+                      <option>Multi-frequency</option>
+                      <option>Tuya/WiFi bridge</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Message</label>
                   <textarea
@@ -1543,6 +1602,7 @@ export default function ChuangjiangWebsite() {
                 </div>
 
                 <Button className="w-full text-lg shadow-xl">Send Message</Button>
+                <p className="text-xs text-slate-500 text-center">Response within 2h · NDA available on request</p>
               </form>
             </div>
           </div>
@@ -1594,7 +1654,7 @@ export default function ChuangjiangWebsite() {
             <NavLink page="products" label={t("nav.products")} />
             <NavLink page="blog" label={t("nav.blog")} />
             <NavLink page="contact" label={t("nav.contact")} />
-            <div className="flex items-center gap-3 relative">
+            <div className="flex items-center gap-3 relative" ref={langMenuRef}>
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
                 className="flex items-center gap-2 px-3 py-2 rounded-full border border-slate-200 bg-white text-slate-700 hover:text-[#0B1A39] hover:border-[#1C2D5A] shadow-sm"
@@ -1741,6 +1801,14 @@ export default function ChuangjiangWebsite() {
               <p className="text-xs text-slate-500 mb-2">Email: {CONTACT_INFO.email}</p>
               <p className="text-xs text-slate-500 mb-2">WhatsApp: {CONTACT_INFO.whatsapp}</p>
               <p className="text-xs text-slate-500">Add: {CONTACT_INFO.address}</p>
+            </div>
+            <div>
+              <h4 className="text-white font-bold mb-6">Links</h4>
+              <ul className="space-y-3 text-sm">
+                <li><a className="hover:text-[#F5A524]" href="/robots.txt">Robots</a></li>
+                <li><a className="hover:text-[#F5A524]" href="/sitemap.xml">Sitemap</a></li>
+                <li><span className="hover:text-[#F5A524] cursor-pointer">Privacy</span></li>
+              </ul>
             </div>
           </div>
 
