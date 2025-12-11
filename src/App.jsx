@@ -69,7 +69,7 @@ const LANGUAGE_OPTIONS = [
 
 const translations = {
   en: {
-    nav: { home: "Home", about: "About", products: "Products", blog: "Blog", contact: "Contact", request: "Request Quote" },
+    nav: { home: "Home", about: "About", products: "Products", blog: "Blog", contact: "Contact", request: "Request a Quote" },
     hero: {
       badgeFactory: "B2B Manufacturer | Factory Direct",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
@@ -192,7 +192,7 @@ const translations = {
     blog: { title: "Analyses industrie", subtitle: "Restez à jour sur la RF et nos actualités." }
   },
   pt: {
-    nav: { home: "Início", about: "Sobre", products: "Produtos", blog: "Blog", contact: "Contato", request: "Pedir cotação" },
+    nav: { home: "Início", about: "Sobre", products: "Produtos", blog: "Blog", contact: "Contato", request: "Pedir um orçamento" },
     hero: {
       badgeFactory: "Fabricante B2B | Fábrica direta",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
@@ -252,7 +252,7 @@ const translations = {
     blog: { title: "Insights do setor", subtitle: "Novidades em RF e notícias da empresa." }
   },
   es: {
-    nav: { home: "Inicio", about: "Sobre nosotros", products: "Productos", blog: "Blog", contact: "Contacto", request: "Solicitar cotización" },
+    nav: { home: "Inicio", about: "Sobre nosotros", products: "Productos", blog: "Blog", contact: "Contacto", request: "Solicitar un presupuesto" },
     hero: {
       badgeFactory: "Fabricante B2B | Fábrica directa",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
@@ -312,7 +312,7 @@ const translations = {
     blog: { title: "Ideas de la industria", subtitle: "Actualizaciones RF y noticias de la empresa." }
   },
   it: {
-    nav: { home: "Home", about: "Chi siamo", products: "Prodotti", blog: "Blog", contact: "Contatti", request: "Richiedi preventivo" },
+    nav: { home: "Home", about: "Chi siamo", products: "Prodotti", blog: "Blog", contact: "Contatti", request: "Richiedi un preventivo" },
     hero: {
       badgeFactory: "Produttore B2B | Fabbrica diretta",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
@@ -372,7 +372,7 @@ const translations = {
     blog: { title: "Approfondimenti RF", subtitle: "Aggiornamenti tecnologici e notizie aziendali." }
   },
   ru: {
-    nav: { home: "Главная", about: "О нас", products: "Продукты", blog: "Блог", contact: "Контакты", request: "Запросить цену" },
+    nav: { home: "Главная", about: "О нас", products: "Продукты", blog: "Блог", contact: "Контакты", request: "Запросить предложение" },
     hero: {
       badgeFactory: "B2B производитель | Прямая фабрика",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
@@ -652,12 +652,12 @@ const initialComments = [
 
 const Button = ({ children, variant = "primary", className = "", ...props }) => {
   const baseStyle =
-    "px-8 py-4 rounded-lg font-bold transition-all duration-300 flex items-center justify-center tracking-wide text-sm uppercase";
+    "px-7 py-3 rounded-md font-semibold transition-all duration-300 flex items-center justify-center text-sm";
   const variants = {
-    primary: `bg-[#F5A524] hover:bg-[#d68f12] text-white shadow-lg hover:shadow-amber-500/30 transform hover:-translate-y-1`,
+    primary: `bg-[#1C2D5A] hover:bg-[#0f1e4d] text-white shadow-md hover:shadow-lg`,
     secondary: `bg-white text-slate-800 border border-slate-200 hover:border-[#1C2D5A] hover:text-[#1C2D5A] shadow-sm hover:shadow-md`,
     outline: `bg-transparent border-2 border-[#1C2D5A] text-[#1C2D5A] hover:bg-[#1C2D5A] hover:text-white`,
-    small: `bg-[#F5A524] hover:bg-[#d68f12] text-white text-xs px-4 py-2 rounded`
+    small: `bg-[#F5A524] hover:bg-[#d68f12] text-white text-xs px-4 py-2 rounded-md`
   };
 
   return (
@@ -708,6 +708,7 @@ const FloatingContact = () => (
 
 export default function ChuangjiangWebsite() {
   const [lang, setLang] = useState("en");
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState("home");
   const [viewingPost, setViewingPost] = useState(null); // State for Single Blog Post View
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -758,6 +759,7 @@ export default function ChuangjiangWebsite() {
     if (activePage !== "blog") {
       setViewingPost(null); // Reset blog view when changing pages
     }
+    setLangMenuOpen(false);
   }, [activePage]);
 
   // Handle Comment Submission (Simulated for GitHub Pages)
@@ -786,11 +788,11 @@ export default function ChuangjiangWebsite() {
         setIsMenuOpen(false);
       }}
       className={`
-        font-medium transition-all duration-200 tracking-wide uppercase text-sm
+        font-semibold transition-all duration-200 text-sm
         ${
           mobile
             ? "block w-full text-left py-4 text-xl border-b border-slate-100 text-slate-800 normal-case"
-            : `px-4 py-2 ${activePage === page ? "text-[#1C2D5A] font-bold" : "text-slate-600 hover:text-[#1C2D5A]"}`
+            : `px-3 py-2 ${activePage === page ? "text-[#0B1A39] border-b-2 border-[#F5A524]" : "text-slate-700 hover:text-[#0B1A39] hover:border-b-2 hover:border-[#1C2D5A]"}`
         }
       `}
     >
@@ -1538,41 +1540,52 @@ export default function ChuangjiangWebsite() {
       </div>
 
       {/* Sticky Header */}
-      <header className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-lg py-3" : "bg-white py-5 shadow-sm"}`}>
+      <header className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/85 backdrop-blur-md shadow-md py-3" : "bg-[#f8faff] py-4 shadow-sm"}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setActivePage("home")}>
-            <div className="w-14 h-14 bg-white rounded-full border border-slate-200 shadow-sm p-1 flex items-center justify-center">
+            <div className="w-16 h-16 bg-white rounded-full border border-slate-200 shadow-sm p-1.5 flex items-center justify-center">
               <img src={Logo} alt="CHJ logo" className="w-full h-full object-contain" />
             </div>
 
             <div>
               <h1 className="text-xl font-extrabold text-[#1C2D5A] leading-none tracking-tight">{BRAND_NAME}</h1>
-              <span className="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase">
-                B2B OEM | {COMPANY_NAME}
-              </span>
+              <span className="text-[11px] font-semibold text-slate-500 tracking-wide">B2B OEM | {COMPANY_NAME}</span>
             </div>
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6">
             <NavLink page="home" label={t("nav.home")} />
             <NavLink page="about" label={t("nav.about")} />
             <NavLink page="products" label={t("nav.products")} />
             <NavLink page="blog" label={t("nav.blog")} />
             <NavLink page="contact" label={t("nav.contact")} />
-            <div className="flex items-center gap-3">
-              <select
-                value={lang}
-                onChange={(e) => setLang(e.target.value)}
-                className="bg-white border border-slate-200 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:border-[#1C2D5A] focus:outline-none"
+            <div className="flex items-center gap-3 relative">
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="flex items-center gap-2 px-3 py-2 rounded-full border border-slate-200 bg-white text-slate-700 hover:text-[#0B1A39] hover:border-[#1C2D5A] shadow-sm"
+                aria-label="Change language"
               >
-                {LANGUAGE_OPTIONS.map((option) => (
-                  <option key={option.code} value={option.code}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <Button className="px-6 py-2.5 text-sm" onClick={() => setActivePage("contact")}>
+                <Globe className="w-4 h-4" />
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              {langMenuOpen && (
+                <div className="absolute right-0 top-12 bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden min-w-[160px]">
+                  {LANGUAGE_OPTIONS.map((option) => (
+                    <button
+                      key={option.code}
+                      onClick={() => {
+                        setLang(option.code);
+                        setLangMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 ${lang === option.code ? "font-bold text-[#1C2D5A]" : "text-slate-700"}`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+              <Button className="px-6 py-2.5 text-sm shadow-md hover:shadow-lg rounded-md" onClick={() => setActivePage("contact")}>
                 {t("nav.request")}
               </Button>
             </div>
