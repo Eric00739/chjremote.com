@@ -428,12 +428,12 @@ export default function ChuangjiangWebsite() {
                 </div>
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1]">
-                B2B RF Remote Control OEM/ODM | 433MHz / 868MHz | Tuya Hybrid
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight max-w-3xl">
+                B2B RF Remote & Receiver OEM/ODM | 433MHz / 868MHz | Tuya Hybrid
               </h1>
 
-              <p className="text-xl text-slate-600 leading-relaxed max-w-2xl">
-                We are a B2B-only factory (no retail) in Dongguan, focused on rolling-code transmitters, receivers, and Tuya + RF hybrids. From PCB layout and antenna tuning to molds, we ship MP samples in 7 days.
+              <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
+                B2B-only factory in Dongguan: rolling-code remotes, receivers, and Tuya + RF hybrids. We tune PCB antennas, provide firmware hooks, and deliver MP samples in 7 days.
               </p>
 
               <div className="flex flex-wrap gap-3 text-sm text-slate-600">
@@ -490,6 +490,41 @@ export default function ChuangjiangWebsite() {
         </div>
       </section>
 
+      {/* B2B Highlights */}
+      <section className="py-16 bg-white border-t border-slate-100">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: ShieldCheck,
+                title: "Factory Direct B2B",
+                desc: "No retail or dropshipping; engineering + production in one place with NDA support."
+              },
+              {
+                icon: Clock,
+                title: "7-Day MP Samples",
+                desc: "PCB layout, antenna tuning, and molded enclosure delivered with test report."
+              },
+              {
+                icon: Truck,
+                title: "Compliance & Shipping",
+                desc: "CE/FCC/RoHS documentation, HS codes ready, door-to-door to EU/US/LatAm."
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-slate-50 rounded-2xl border border-slate-200 p-6 shadow-sm flex gap-4">
+                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#1C2D5A] border border-slate-200">
+                  <item.icon className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* OEM Process */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
@@ -510,6 +545,63 @@ export default function ChuangjiangWebsite() {
                 <p className="text-slate-500 leading-relaxed">{step.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industries & Protocols */}
+      <section className="py-20 bg-slate-50 border-t border-slate-100">
+        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <SectionHeader
+              title="Built for Gates, Doors, Smart Home, Industrial"
+              subtitle="Protocols we master: HCS301/HCS361 rolling code, EV1527/PT2262 fixed/learning code, Tuya WiFi/Zigbee bridges, and multi-frequency clones."
+              centered={false}
+            />
+            <div className="grid md:grid-cols-2 gap-4">
+              {[
+                "Garage/gate automation distributors",
+                "Access control OEM / panel builders",
+                "Smart home integrators (Tuya/Alexa/Google)",
+                "Industrial hoists and shutters",
+                "Parking barrier arms & bollards",
+                "Aftermarket car remotes (315/433MHz)"
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <span className="mt-1 inline-block w-2 h-2 rounded-full bg-[#F5A524]"></span>
+                  <p className="text-sm text-slate-700">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+            <h3 className="text-xl font-bold text-slate-900">Technical Delivery</h3>
+            <ul className="space-y-2 text-sm text-slate-700">
+              <li className="flex gap-2">
+                <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
+                <span>RF validation: shielding room sweep, antenna VSWR tuning, and range proof.</span>
+              </li>
+              <li className="flex gap-2">
+                <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
+                <span>Firmware hooks: learning code tables, whitelist/blacklist, and Tuya SDK handoff.</span>
+              </li>
+              <li className="flex gap-2">
+                <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
+                <span>Docs ready: CE/FCC/RoHS, HS code, packing list, and aging test records.</span>
+              </li>
+              <li className="flex gap-2">
+                <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
+                <span>Support: engineer-to-engineer WhatsApp/Teams within GMT+8 business hours.</span>
+              </li>
+            </ul>
+            <div className="pt-2 flex flex-wrap gap-3">
+              <Button variant="primary" className="px-6 py-3" onClick={() => setActivePage("contact")}>
+                Book Engineer Call
+              </Button>
+              <Button variant="secondary" className="px-6 py-3" onClick={() => window.open(CATALOG_URL, "_blank")}>
+                Catalog & Specs PDF
+              </Button>
+            </div>
           </div>
         </div>
       </section>
