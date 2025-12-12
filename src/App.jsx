@@ -67,6 +67,16 @@ const LANGUAGE_OPTIONS = [
   { code: "ru", label: "RU" }
 ];
 
+// --- Simple Path Routing (Static Multi-Page Support) ---
+const KNOWN_PAGES = ["home", "about", "products", "blog", "contact"];
+
+const pageFromPathname = (pathname) => {
+  const cleaned = (pathname || "/").replace(/^\/+|\/+$/g, "");
+  const segment = cleaned.split("/")[0];
+  if (!segment || segment === "home") return "home";
+  return KNOWN_PAGES.includes(segment) ? segment : "home";
+};
+
 const translations = {
   en: {
     nav: { home: "Home", about: "About", products: "Products", blog: "Blog", contact: "Contact", request: "Request a Quote" },
@@ -736,25 +746,87 @@ export default function ChuangjiangWebsite() {
     return value ?? path;
   };
 
+  // Sync active page from URL path (e.g. /about) so deep links work on static hosts.
+  useEffect(() => {
+    const syncFromLocation = () => {
+      const nextPage = pageFromPathname(window.location.pathname);
+      setActivePage((prev) => (prev === nextPage ? prev : nextPage));
+    };
+    syncFromLocation();
+    window.addEventListener("popstate", syncFromLocation);
+    return () => window.removeEventListener("popstate", syncFromLocation);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const getSeoForCurrentView = () => {
+    if (activePage === "blog" && viewingPost) {
+      return {
+        title: `${viewingPost.title} | ${BRAND_NAME} Blog`,
+        description: viewingPost.excerpt || SEO_METADATA.description
+      };
+    }
+
+    switch (activePage) {
+      case "about":
+        return {
+          title: `${t("nav.about")} | ${BRAND_NAME}`,
+          description: t("about.subtitle") || SEO_METADATA.description
+        };
+      case "products":
+        return {
+          title: `${t("nav.products")} | ${BRAND_NAME}`,
+          description: t("catalog.subtitle") || SEO_METADATA.description
+        };
+      case "blog":
+        return {
+          title: `${t("nav.blog")} | ${BRAND_NAME}`,
+          description: t("blog.subtitle") || SEO_METADATA.description
+        };
+      case "contact":
+        return {
+          title: `${t("nav.contact")} | ${BRAND_NAME}`,
+          description: t("contact.heroSubtitle") || SEO_METADATA.description
+        };
+      default:
+        return {
+          title: SEO_METADATA.title,
+          description: SEO_METADATA.description
+        };
+    }
+  };
+
   useEffect(() => {
-    document.title = SEO_METADATA.title;
+    const { title, description } = getSeoForCurrentView();
+    document.title = title;
+
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", SEO_METADATA.description);
+      metaDescription.setAttribute("content", description);
     } else {
       const meta = document.createElement("meta");
       meta.name = "description";
-      meta.content = SEO_METADATA.description;
+      meta.content = description;
       document.head.appendChild(meta);
     }
+
+    const origin = window.location.origin;
+    const canonicalPath = activePage === "home" ? "/" : `/${activePage}`;
+    const canonicalUrl = `${origin}${canonicalPath}`;
+    let canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (!canonicalEl) {
+      canonicalEl = document.createElement("link");
+      canonicalEl.rel = "canonical";
+      document.head.appendChild(canonicalEl);
+    }
+    canonicalEl.setAttribute("href", canonicalUrl);
+
     document.documentElement.lang = lang;
-  }, [lang]);
+  }, [lang, activePage, viewingPost]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -762,6 +834,14 @@ export default function ChuangjiangWebsite() {
       setViewingPost(null); // Reset blog view when changing pages
     }
     setLangMenuOpen(false);
+  }, [activePage]);
+
+  // Push active page changes back to the path for shareable URLs.
+  useEffect(() => {
+    const desiredPath = activePage === "home" ? "/" : `/${activePage}`;
+    if (window.location.pathname !== desiredPath) {
+      window.history.pushState({}, "", desiredPath);
+    }
   }, [activePage]);
 
   useEffect(() => {

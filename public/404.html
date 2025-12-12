@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <script>
+      (function () {
+        var cleaned = window.location.pathname.replace(/^\/+|\/+$/g, "");
+        var segment = cleaned.split("/")[0];
+        var known = ["about", "products", "blog", "contact"];
+        if (known.indexOf(segment) !== -1) {
+          window.location.replace("/" + segment);
+        } else {
+          window.location.replace("/");
+        }
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
