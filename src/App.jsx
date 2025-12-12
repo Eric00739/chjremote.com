@@ -720,10 +720,10 @@ const Button = ({ children, variant = "primary", className = "", ...props }) => 
   const baseStyle =
     "px-7 py-3 rounded-md font-semibold transition-all duration-300 flex items-center justify-center text-sm";
   const variants = {
-    primary: `bg-[#FF8A00] hover:bg-[#E67600] text-white shadow-md hover:shadow-lg`,
+    primary: `bg-[#1C2D5A] hover:bg-[#0f1e4d] text-white shadow-md hover:shadow-lg`,
     secondary: `bg-white text-slate-800 border border-slate-200 hover:border-[#1C2D5A] hover:text-[#1C2D5A] shadow-sm hover:shadow-md`,
     outline: `bg-transparent border-2 border-[#1C2D5A] text-[#1C2D5A] hover:bg-[#1C2D5A] hover:text-white`,
-    small: `bg-[#FF8A00] hover:bg-[#E67600] text-white text-xs px-4 py-2 rounded-md`
+    small: `bg-[#1C2D5A] hover:bg-[#0f1e4d] text-white text-xs px-4 py-2 rounded-md`
   };
 
   return (
@@ -735,7 +735,7 @@ const Button = ({ children, variant = "primary", className = "", ...props }) => 
 
 const SectionHeader = ({ title, subtitle, centered = true }) => (
   <div className={`mb-16 ${centered ? "text-center" : "text-left"}`}>
-    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">{title}</h2>
+    <h2 className="text-3xl md:text-5xl font-bold text-brand mb-6 tracking-tight">{title}</h2>
     <div className={`w-20 h-1.5 bg-[#1C2D5A] mb-6 ${centered ? "mx-auto" : ""}`}></div>
     <p className="text-lg text-slate-500 max-w-3xl leading-relaxed font-light mx-auto">{subtitle}</p>
   </div>
@@ -940,7 +940,7 @@ export default function ChuangjiangWebsite() {
         ${
           mobile
             ? "block w-full text-left py-4 text-xl border-b border-slate-100 text-slate-800 normal-case"
-            : `px-3 pb-3 pt-2 border-b-2 ${activePage === page ? "text-[#0B1A39] border-[#FF8A00]" : "border-transparent text-slate-700 hover:text-[#0B1A39] hover:border-[#1C2D5A]"}`
+            : `px-3 pb-3 pt-2 border-b-2 ${activePage === page ? "text-[#1C2D5A] border-[#FF8A00]" : "border-transparent text-slate-700 hover:text-[#1C2D5A] hover:border-[#1C2D5A]"}`
         }
       `}
     >
@@ -983,7 +983,7 @@ export default function ChuangjiangWebsite() {
               </div>
 
               <div className="space-y-2">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight max-w-3xl">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand leading-tight max-w-3xl">
                   {heroCopy.title}
                 </h1>
                 <p className="text-lg text-slate-600">{heroCopy.subtitle}</p>
@@ -1019,15 +1019,15 @@ export default function ChuangjiangWebsite() {
               {/* Quick Stats inside hero */}
               <div className="pt-4 grid grid-cols-3 gap-6">
                 <div className="bg-white/80 rounded-xl p-4 shadow-sm border border-slate-100">
-                  <div className="text-2xl font-bold text-slate-900">{heroCopy.stats.exp}</div>
+                  <div className="text-2xl font-bold text-brand">{heroCopy.stats.exp}</div>
                   <div className="text-xs text-slate-500 mt-1">{heroCopy.stats.expLabel}</div>
                 </div>
                 <div className="bg-white/80 rounded-xl p-4 shadow-sm border border-slate-100">
-                  <div className="text-2xl font-bold text-slate-900">{heroCopy.stats.qc}</div>
+                  <div className="text-2xl font-bold text-brand">{heroCopy.stats.qc}</div>
                   <div className="text-xs text-slate-500 mt-1">{heroCopy.stats.qcLabel}</div>
                 </div>
                 <div className="bg-white/80 rounded-xl p-4 shadow-sm border border-slate-100">
-                  <div className="text-2xl font-bold text-slate-900">{heroCopy.stats.countries}</div>
+                  <div className="text-2xl font-bold text-brand">{heroCopy.stats.countries}</div>
                   <div className="text-xs text-slate-500 mt-1">{heroCopy.stats.countriesLabel}</div>
                 </div>
               </div>
