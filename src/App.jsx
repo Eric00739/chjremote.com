@@ -1057,16 +1057,7 @@ export default function ChuangjiangWebsite() {
                   <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
                 </video>
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0f1e4d]/50 via-transparent to-[#0f1e4d]/30"></div>
-                <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 text-[#1C2D5A] text-xs font-semibold shadow">
-                  <PlayCircle className="w-4 h-4" />
-                  Factory Tour · 10s
-                </div>
-                <div className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 text-slate-800 text-xs font-semibold shadow">
-                  <Cpu className="w-4 h-4 text-[#1C2D5A]" />
-                  HCS301 Lab
-                </div>
               </div>
-              <div className="mt-3 text-slate-500 text-sm text-right">High-Tech Remote 3D Render / Factory Demo</div>
 
               {/* Desktop-only trust + stats */}
               <div className="bg-white/85 backdrop-blur rounded-2xl border border-slate-100 shadow-lg p-5 space-y-3 hidden lg:block">
