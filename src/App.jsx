@@ -460,7 +460,9 @@ const products = [
     name: "CJ-433 Universal Rolling Code Remote",
     category: "Remote Control",
     frequency: "433.92 MHz",
+    freqKey: "433",
     chip: "HCS301 (Microchip)",
+    protocolKey: "rolling",
     voltage: "12V (27A)",
     image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=CJ-433+Pro+Series`,
     tag: "Best Seller",
@@ -472,7 +474,9 @@ const products = [
     name: "Smart WiFi + RF Hybrid Receiver",
     category: "Receiver",
     frequency: "WiFi 2.4G + 433MHz",
+    freqKey: "wifi",
     chip: "Tuya Smart Module",
+    protocolKey: "tuya",
     voltage: "AC 85-265V",
     image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=WiFi+Smart+Receiver`,
     tag: "Tuya Certified",
@@ -484,7 +488,9 @@ const products = [
     name: "Industrial IP67 Waterproof Remote",
     category: "Industrial",
     frequency: "868.35 MHz",
+    freqKey: "868",
     chip: "EV1527 (Learning)",
+    protocolKey: "fixed",
     voltage: "DC 3V (CR2032)",
     image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=IP67+Waterproof`,
     tag: "Heavy Duty",
@@ -496,7 +502,9 @@ const products = [
     name: "Long Range Active Infrared Beam",
     category: "Security",
     frequency: "Infrared",
+    freqKey: "infrared",
     chip: "Smart AI Detection",
+    protocolKey: "sensor",
     voltage: "DC 12V-24V",
     image: `https://placehold.co/800x800/f8fafc/1C2D5A?text=IR+Beam+Sensor`,
     tag: "100m Range",
@@ -507,7 +515,9 @@ const products = [
     name: "4-Channel Gate Controller Box",
     category: "Controller",
     frequency: "433.92 MHz",
+    freqKey: "433",
     chip: "PT2262 (Fixed Code)",
+    protocolKey: "fixed",
     voltage: "AC 220V",
     image: `https://placehold.co/400x400/e2e8f0/1C2D5A?text=Gate+Controller`,
     tag: "Heavy Duty",
@@ -518,7 +528,9 @@ const products = [
     name: "Universal Car Key Fob Replacement",
     category: "Car Remote",
     frequency: "315/433 MHz",
+    freqKey: "multi",
     chip: "Multi-Frequency Clone",
+    protocolKey: "clone",
     voltage: "DC 3V",
     image: `https://placehold.co/400x400/e2e8f0/1C2D5A?text=Car+Key+Fob`,
     tag: "Universal",
@@ -724,6 +736,7 @@ export default function ChuangjiangWebsite() {
   const [viewingPost, setViewingPost] = useState(null); // State for Single Blog Post View
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [filters, setFilters] = useState({ frequency: null, protocol: null });
 
   // Comment System State
   const [comments, setComments] = useState(initialComments);
