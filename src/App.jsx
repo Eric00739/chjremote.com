@@ -972,7 +972,7 @@ export default function ChuangjiangWebsite() {
 
         <div className="container mx-auto px-6 relative z-10 pt-10 pb-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 animate-fade-in-up">
+            <div className="space-y-6 lg:space-y-5 animate-fade-in-up lg:flex lg:flex-col lg:justify-between">
               <div className="flex flex-wrap gap-3">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/80 text-[#1C2D5A] rounded-full text-xs font-semibold tracking-wide border border-slate-200 shadow-sm">
                   <ShieldCheck className="w-4 h-4" /> {heroCopy.badgeFactory}
@@ -1016,25 +1016,35 @@ export default function ChuangjiangWebsite() {
               <div className="text-sm text-slate-500">{heroCopy.ctaNote}</div>
               <div className="text-xs font-semibold text-[#FF8A00]">{heroCopy.freeNote}</div>
 
-              {/* Quick Stats inside hero */}
-              <div className="pt-4 grid grid-cols-3 gap-6">
-                <div className="bg-white/80 rounded-xl p-4 shadow-sm border border-slate-100">
-                  <div className="text-2xl font-bold text-brand">{heroCopy.stats.exp}</div>
-                  <div className="text-xs text-slate-500 mt-1">{heroCopy.stats.expLabel}</div>
+              {/* Mobile-only tags/stats for better scroll order */}
+              <div className="space-y-3 lg:hidden">
+                <div className="flex flex-wrap gap-2 text-xs">
+                  {(heroCopy.tags || []).map((tag) => (
+                    <span key={tag} className="inline-flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-slate-200 shadow-sm">
+                      <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <div className="bg-white/80 rounded-xl p-4 shadow-sm border border-slate-100">
-                  <div className="text-2xl font-bold text-brand">{heroCopy.stats.qc}</div>
-                  <div className="text-xs text-slate-500 mt-1">{heroCopy.stats.qcLabel}</div>
-                </div>
-                <div className="bg-white/80 rounded-xl p-4 shadow-sm border border-slate-100">
-                  <div className="text-2xl font-bold text-brand">{heroCopy.stats.countries}</div>
-                  <div className="text-xs text-slate-500 mt-1">{heroCopy.stats.countriesLabel}</div>
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="bg-white rounded-xl p-3 shadow-sm border border-slate-100 text-center">
+                    <div className="text-xl font-bold text-brand">{heroCopy.stats.exp}</div>
+                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.expLabel}</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-3 shadow-sm border border-slate-100 text-center">
+                    <div className="text-xl font-bold text-brand">{heroCopy.stats.qc}</div>
+                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.qcLabel}</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-3 shadow-sm border border-slate-100 text-center">
+                    <div className="text-xl font-bold text-brand">{heroCopy.stats.countries}</div>
+                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.countriesLabel}</div>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Hero Video Card */}
-            <div className="relative hidden lg:block h-full">
+            <div className="relative hidden lg:flex flex-col gap-4 h-full">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/70 bg-slate-900">
                 <video
                   className="w-full h-[420px] object-cover opacity-90"
@@ -1057,6 +1067,32 @@ export default function ChuangjiangWebsite() {
                 </div>
               </div>
               <div className="mt-3 text-slate-500 text-sm text-right">High-Tech Remote 3D Render / Factory Demo</div>
+
+              {/* Desktop-only trust + stats */}
+              <div className="bg-white/85 backdrop-blur rounded-2xl border border-slate-100 shadow-lg p-5 space-y-3 hidden lg:block">
+                <div className="flex flex-wrap gap-2 text-xs">
+                  {(heroCopy.tags || []).map((tag) => (
+                    <span key={tag} className="inline-flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-slate-200 shadow-sm">
+                      <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm border border-slate-100 text-center">
+                    <div className="text-xl font-bold text-brand">{heroCopy.stats.exp}</div>
+                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.expLabel}</div>
+                  </div>
+                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm border border-slate-100 text-center">
+                    <div className="text-xl font-bold text-brand">{heroCopy.stats.qc}</div>
+                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.qcLabel}</div>
+                  </div>
+                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm border border-slate-100 text-center">
+                    <div className="text-xl font-bold text-brand">{heroCopy.stats.countries}</div>
+                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.countriesLabel}</div>
+                  </div>
+                </div>
+              </div>
             </div>
             {/* Mobile visual fallback */}
             <div className="lg:hidden">
