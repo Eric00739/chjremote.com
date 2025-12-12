@@ -37,8 +37,9 @@ const BRAND_NAME = "CHJ Remotes";
 
 // --- SEO Helper ---
 const SEO_METADATA = {
-  title: `${COMPANY_NAME} | ${BRAND_NAME} - B2B RF Remote Control Manufacturer`,
-  description: `${COMPANY_NAME} (${BRAND_NAME}): ISO9001-certified, B2B-only factory for RF remotes, rolling code transmitters, Tuya WiFi/433MHz receivers, and OEM PCB layouts.`
+  title: "CHJ Remotes | China Source Factory for RF Remotes & Controllers",
+  description:
+    "China source OEM factory for RF remote controls & controllers, car remotes, Tuya WiFi switches and infrared beam sensors. Free product design & prototyping."
 };
 
 // --- Contact Info Constants ---
@@ -81,15 +82,15 @@ const translations = {
   en: {
     nav: { home: "Home", about: "About", products: "Products", blog: "Blog", contact: "Contact", request: "Request a Quote" },
     hero: {
-      badgeFactory: "B2B Manufacturer | Factory Direct",
+      badgeFactory: "China Source Factory | B2B OEM/ODM",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
       badgeFree: "Free Product Design & Prototyping",
-      title: "B2B RF Remote & Receiver OEM Manufacturer",
-      subtitle: "433MHz / 868MHz · Tuya Hybrid · Rolling-Code Remotes",
+      title: "China OEM RF Remote & Controller Factory",
+      subtitle: "RF Remotes & Receivers · Car Remotes · Tuya WiFi Switches · Infrared Beam Sensors",
       bullets: [
         "Free industrial design + PCB/firmware prototyping for OEM projects",
-        "In-house RF chamber & PCB/antenna tuning",
-        "MP samples delivered in 7 days"
+        "433/868/315MHz RF remotes & controllers, multi-protocol compatible",
+        "MP samples delivered in 7 days with RF test report"
       ],
       tags: [
         "ISO9001 · CE/FCC/ROHS",
@@ -156,13 +157,21 @@ const translations = {
   fr: {
     nav: { home: "Accueil", about: "À propos", products: "Produits", blog: "Blog", contact: "Contact", request: "Demander un devis" },
     hero: {
-      badgeFactory: "Fabricant B2B | Usine directe",
+      badgeFactory: "Usine en Chine | OEM/ODM B2B",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      title: "Télécommandes RF & récepteurs OEM/ODM | 433/868 MHz | Hybride Tuya",
-      subtitle: "Usine B2B à Dongguan : rolling-code, récepteurs et hybrides Tuya + RF. Antennes accordées, firmware custom, échantillons MP en 7 jours.",
+      badgeFree: "Conception & prototypage gratuits",
+      title: "Usine OEM de télécommandes RF et contrôleurs",
+      subtitle: "Télécommandes & récepteurs RF · Télécommandes auto · Interrupteurs WiFi Tuya · Faisceaux infrarouge",
+      bullets: [
+        "Conception industrielle + prototypage PCB/firmware offerts pour projets OEM",
+        "Télécommandes/contrôleurs RF 433/868/315MHz, multi-protocole",
+        "Échantillons MP en 7 jours avec rapport RF"
+      ],
       tags: ["ISO9001 | CE/FCC/ROHS", "Chambre RF interne & réglage antenne", "Clients B2B uniquement (pas de retail)"],
       primaryCta: "Lancer un projet OEM",
       secondaryCta: "Télécharger le catalogue (PDF)",
+      ctaNote: "Prix direct usine · Pas d'intermédiaire",
+      freeNote: "Offerts pour projets B2B qualifiés · NDA disponible",
       stats: { exp: "20+", expLabel: "Années d'expérience", qc: "100%", qcLabel: "Tests QC", countries: "50+", countriesLabel: "Pays desservis" }
     },
     highlights: [
@@ -216,13 +225,21 @@ const translations = {
   pt: {
     nav: { home: "Início", about: "Sobre", products: "Produtos", blog: "Blog", contact: "Contato", request: "Pedir um orçamento" },
     hero: {
-      badgeFactory: "Fabricante B2B | Fábrica direta",
+      badgeFactory: "China Source Factory | B2B OEM/ODM",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      title: "Controles RF e receptores OEM/ODM | 433/868 MHz | Híbrido Tuya",
-      subtitle: "Fábrica B2B em Dongguan: rolling-code, receptores e híbridos Tuya + RF. Ajuste de antena, firmware custom e amostras MP em 7 dias.",
+      badgeFree: "Free Product Design & Prototyping",
+      title: "China OEM RF Remote & Controller Factory",
+      subtitle: "RF Remotes & Receivers · Car Remotes · Tuya WiFi Switches · Infrared Beam Sensors",
+      bullets: [
+        "Free industrial design + PCB/firmware prototyping for OEM projects",
+        "433/868/315MHz RF remotes & controllers, multi-protocol compatible",
+        "MP samples delivered in 7 days with RF test report"
+      ],
       tags: ["ISO9001 | CE/FCC/ROHS", "Câmara RF interna e ajuste de antena", "Somente clientes B2B (sem varejo)"],
       primaryCta: "Iniciar projeto OEM",
       secondaryCta: "Baixar catálogo (PDF)",
+      ctaNote: "Preço direto de fábrica",
+      freeNote: "Free for qualified B2B OEM/ODM projects · NDA supported",
       stats: { exp: "20+", expLabel: "Anos de experiência", qc: "100%", qcLabel: "Testado em QC", countries: "50+", countriesLabel: "Países atendidos" }
     },
     highlights: [
@@ -276,13 +293,21 @@ const translations = {
   es: {
     nav: { home: "Inicio", about: "Sobre nosotros", products: "Productos", blog: "Blog", contact: "Contacto", request: "Solicitar un presupuesto" },
     hero: {
-      badgeFactory: "Fabricante B2B | Fábrica directa",
+      badgeFactory: "Fábrica en China | OEM/ODM B2B",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      title: "Mandos RF y receptores OEM/ODM | 433/868 MHz | Híbrido Tuya",
-      subtitle: "Fábrica B2B en Dongguan: rolling-code, receptores e híbridos Tuya + RF. Ajuste de antena, firmware a medida y muestras MP en 7 días.",
+      badgeFree: "Diseño y prototipos gratis",
+      title: "Fábrica OEM en China de mandos y controladores RF",
+      subtitle: "Mandos y receptores RF · Mandos de coche · Interruptores WiFi Tuya · Barreras infrarrojas",
+      bullets: [
+        "Diseño industrial + prototipado PCB/firmware gratis para proyectos OEM",
+        "Mandos/controladores RF 433/868/315MHz, multi-protocolo",
+        "Muestras MP en 7 días con informe RF"
+      ],
       tags: ["ISO9001 | CE/FCC/ROHS", "Cámara RF interna y ajuste de antena", "Solo clientes B2B (sin retail)"],
       primaryCta: "Iniciar proyecto OEM",
       secondaryCta: "Descargar catálogo (PDF)",
+      ctaNote: "Precio directo de fábrica",
+      freeNote: "Gratis para proyectos B2B cualificados · NDA disponible",
       stats: { exp: "20+", expLabel: "Años de experiencia", qc: "100%", qcLabel: "QC probado", countries: "50+", countriesLabel: "Países servidos" }
     },
     highlights: [
@@ -336,13 +361,21 @@ const translations = {
   it: {
     nav: { home: "Home", about: "Chi siamo", products: "Prodotti", blog: "Blog", contact: "Contatti", request: "Richiedi un preventivo" },
     hero: {
-      badgeFactory: "Produttore B2B | Fabbrica diretta",
+      badgeFactory: "Fabbrica in Cina | OEM/ODM B2B",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      title: "Radiocomandi RF e ricevitori OEM/ODM | 433/868 MHz | Ibrido Tuya",
-      subtitle: "Fabbrica B2B a Dongguan: rolling-code, ricevitori e ibridi Tuya + RF. Tuning antenna, firmware custom e campioni MP in 7 giorni.",
+      badgeFree: "Design e prototipi gratuiti",
+      title: "Fabbrica OEM in Cina di radiocomandi e controller RF",
+      subtitle: "Radiocomandi e ricevitori RF · Telecomandi auto · Interruttori WiFi Tuya · Barriere a infrarossi",
+      bullets: [
+        "Design industriale + prototipazione PCB/firmware gratuiti per progetti OEM",
+        "Radiocomandi/controller RF 433/868/315MHz, multi-protocollo",
+        "Campioni MP in 7 giorni con report RF"
+      ],
       tags: ["ISO9001 | CE/FCC/ROHS", "Camera RF interna e tuning antenna", "Solo clienti B2B (no retail)"],
       primaryCta: "Avvia progetto OEM",
       secondaryCta: "Scarica catalogo (PDF)",
+      ctaNote: "Prezzo diretto di fabbrica",
+      freeNote: "Gratis per progetti B2B qualificati · NDA disponibile",
       stats: { exp: "20+", expLabel: "Anni di esperienza", qc: "100%", qcLabel: "Test QC", countries: "50+", countriesLabel: "Paesi serviti" }
     },
     highlights: [
@@ -396,13 +429,21 @@ const translations = {
   ru: {
     nav: { home: "Главная", about: "О нас", products: "Продукты", blog: "Блог", contact: "Контакты", request: "Запросить предложение" },
     hero: {
-      badgeFactory: "B2B производитель | Прямая фабрика",
+      badgeFactory: "Китайская фабрика | B2B OEM/ODM",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      title: "RF пульты и приёмники OEM/ODM | 433/868 МГц | Гибрид Tuya",
-      subtitle: "B2B-фабрика в Дунгуане: rolling-code, приёмники и гибриды Tuya + RF. Настройка антенны, прошивка на заказ, MP-образцы за 7 дней.",
+      badgeFree: "Бесплатный дизайн и прототипы",
+      title: "Китайская OEM-фабрика пультов и контроллеров RF",
+      subtitle: "RF пульты и приёмники · Автопульты · WiFi-выключатели Tuya · ИК-барьеры",
+      bullets: [
+        "Бесплатный дизайн и прототипирование PCB/firmware для OEM-проектов",
+        "RF пульты/контроллеры 433/868/315MHz, мультипротокольные",
+        "MP-образцы за 7 дней с RF-отчётом"
+      ],
       tags: ["ISO9001 | CE/FCC/ROHS", "Собственная RF-камера и настройка антенны", "Только B2B (без розницы)"],
       primaryCta: "Начать OEM-проект",
       secondaryCta: "Скачать каталог (PDF)",
+      ctaNote: "Прямые цены фабрики",
+      freeNote: "Бесплатно для квалифицированных B2B OEM/ODM-проектов · NDA доступно",
       stats: { exp: "20+", expLabel: "Лет опыта", qc: "100%", qcLabel: "QC тест", countries: "50+", countriesLabel: "Стран" }
     },
     highlights: [
@@ -1846,7 +1887,7 @@ export default function ChuangjiangWebsite() {
       <header className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/85 backdrop-blur-md shadow-md py-3" : "bg-[#f8faff] py-4 shadow-sm"}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setActivePage("home")}>
-            <div className="w-16 h-16 bg-white rounded-full border border-slate-200 shadow-sm p-1.5 flex items-center justify-center">
+            <div className="w-16 h-16 p-1.5 flex items-center justify-center">
               <img src={Logo} alt="CHJ logo" className="w-full h-full object-contain" />
             </div>
 
@@ -1953,7 +1994,7 @@ export default function ChuangjiangWebsite() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-slate-800 pb-16">
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="text-white font-bold text-2xl mb-6 flex items-center gap-3">
-                <div className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center text-xs bg-white p-1">
+                <div className="w-12 h-12 flex items-center justify-center text-xs p-1">
                   <img src={Logo} alt="CHJ footer logo" className="w-full h-full object-contain" />
                 </div>
                 CHJ Remotes
