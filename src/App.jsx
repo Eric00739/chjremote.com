@@ -1821,8 +1821,8 @@ export default function ChuangjiangWebsite() {
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-300 pt-24 pb-12">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 border-b border-slate-800 pb-16">
-            <div className="col-span-1 md:col-span-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-slate-800 pb-16">
+            <div className="sm:col-span-2 lg:col-span-1">
               <div className="text-white font-bold text-2xl mb-6 flex items-center gap-3">
                 <div className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center text-xs bg-white p-1">
                   <img src={Logo} alt="CHJ footer logo" className="w-full h-full object-contain" />
