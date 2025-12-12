@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         brand: "#1C2D5A",
-        accent: "#F5A524"
+        accent: "#FF8A00"
       },
       animation: {
         "bounce-slow": "bounce 2s infinite",

@@ -54,7 +54,7 @@ const CATALOG_URL = "/catalog.pdf";
 // --- Brand Colors ---
 const COLORS = {
   primary: "#1C2D5A", // Logo Text Blue
-  accent: "#F5A524" // Logo Dot Orange
+  accent: "#FF8A00" // Logo Dot Orange
 };
 
 // --- Language Support ---
@@ -83,10 +83,11 @@ const translations = {
     hero: {
       badgeFactory: "B2B Manufacturer | Factory Direct",
       badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
+      badgeFree: "Free Product Design & Prototyping",
       title: "B2B RF Remote & Receiver OEM Manufacturer",
       subtitle: "433MHz / 868MHz · Tuya Hybrid · Rolling-Code Remotes",
       bullets: [
-        "B2B-only factory in Dongguan for rolling-code remotes & receivers",
+        "Free industrial design + PCB/firmware prototyping for OEM projects",
         "In-house RF chamber & PCB/antenna tuning",
         "MP samples delivered in 7 days"
       ],
@@ -98,6 +99,7 @@ const translations = {
       primaryCta: "Start OEM Project",
       secondaryCta: "Download Catalog (PDF)",
       ctaNote: "No middlemen · Factory direct pricing",
+      freeNote: "Free for qualified B2B OEM/ODM projects · NDA supported",
       stats: { exp: "20+", expLabel: "Years Experience", qc: "100%", qcLabel: "QC Tested", countries: "50+", countriesLabel: "Countries Served" }
     },
     highlights: [
@@ -437,7 +439,7 @@ const translations = {
     catalog: { title: "Каталог продукции", subtitle: "Только OEM/ODM. Скачайте PDF или запросите PCB под ваш протокол." },
     about: {
       title: `О ${COMPANY_NAME}`,
-      subtitle: `${BRAND_NAME} — фабрика RF 100% B2B в Дунгуане. Без розницы и дропшиппинга — только OEM/ODM.`,
+      subtitle: `${BRAND_NAME} �?фабрика RF 100% B2B в Дунгуане. Без розницы и дропшиппинга �?только OEM/ODM.`,
       cards: [
         { title: "Только B2B / фабрика", desc: "Инженерия + производство, без B2C-магазина." },
         { title: "Чистота бренда", desc: `Используйте ${BRAND_NAME}, чтобы исключить путаницу с другими компаниями \"Chuanghui\".` },
@@ -677,10 +679,10 @@ const Button = ({ children, variant = "primary", className = "", ...props }) => 
   const baseStyle =
     "px-7 py-3 rounded-md font-semibold transition-all duration-300 flex items-center justify-center text-sm";
   const variants = {
-    primary: `bg-[#F5A524] hover:bg-[#d68f12] text-white shadow-md hover:shadow-lg`,
+    primary: `bg-[#FF8A00] hover:bg-[#E67600] text-white shadow-md hover:shadow-lg`,
     secondary: `bg-white text-slate-800 border border-slate-200 hover:border-[#1C2D5A] hover:text-[#1C2D5A] shadow-sm hover:shadow-md`,
     outline: `bg-transparent border-2 border-[#1C2D5A] text-[#1C2D5A] hover:bg-[#1C2D5A] hover:text-white`,
-    small: `bg-[#F5A524] hover:bg-[#d68f12] text-white text-xs px-4 py-2 rounded-md`
+    small: `bg-[#FF8A00] hover:bg-[#E67600] text-white text-xs px-4 py-2 rounded-md`
   };
 
   return (
@@ -707,7 +709,7 @@ const AccordionItem = ({ question, answer }) => {
         {isOpen ? <ChevronUp className="text-[#1C2D5A]" /> : <ChevronDown className="text-slate-400" />}
       </button>
       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-48 opacity-100 pb-6" : "max-h-0 opacity-0"}`}>
-        <p className="text-slate-600 leading-relaxed pl-4 border-l-2 border-[#F5A524]">{answer}</p>
+        <p className="text-slate-600 leading-relaxed pl-4 border-l-2 border-[#FF8A00]">{answer}</p>
       </div>
     </div>
   );
@@ -897,7 +899,7 @@ export default function ChuangjiangWebsite() {
         ${
           mobile
             ? "block w-full text-left py-4 text-xl border-b border-slate-100 text-slate-800 normal-case"
-            : `px-3 pb-3 pt-2 border-b-2 ${activePage === page ? "text-[#0B1A39] border-[#F5A524]" : "border-transparent text-slate-700 hover:text-[#0B1A39] hover:border-[#1C2D5A]"}`
+            : `px-3 pb-3 pt-2 border-b-2 ${activePage === page ? "text-[#0B1A39] border-[#FF8A00]" : "border-transparent text-slate-700 hover:text-[#0B1A39] hover:border-[#1C2D5A]"}`
         }
       `}
     >
@@ -908,7 +910,7 @@ export default function ChuangjiangWebsite() {
   // --- Render Functions ---
 
   const renderHome = () => {
-    const heroCopy = translations[lang]?.hero || translations.en.hero;
+    const heroCopy = { ...translations.en.hero, ...(translations[lang]?.hero || {}) };
     const highlightsCopy = translations[lang]?.highlights || translations.en.highlights;
     const industriesCopy = translations[lang]?.industries || translations.en.industries;
     const processCopy = translations[lang]?.process || translations.en.process;
@@ -922,7 +924,7 @@ export default function ChuangjiangWebsite() {
       <section className="relative min-h-[82vh] flex items-center bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-[-10%] right-[-10%] w-[380px] h-[380px] bg-white/60 backdrop-blur-3xl rounded-full blur-3xl"></div>
-          <div className="absolute bottom-[-15%] left-[-5%] w-[460px] h-[460px] bg-[#F5A524]/16 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-[-15%] left-[-5%] w-[460px] h-[460px] bg-[#FF8A00]/16 rounded-full blur-3xl"></div>
           <div className="absolute inset-6 bg-white/60 rounded-[28px] shadow-[0_25px_80px_-40px_rgba(0,0,0,0.35)] backdrop-blur-xl border border-white/70"></div>
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-white"></div>
         </div>
@@ -930,8 +932,13 @@ export default function ChuangjiangWebsite() {
         <div className="container mx-auto px-6 relative z-10 pt-10 pb-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in-up">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/80 text-[#1C2D5A] rounded-full text-xs font-semibold tracking-wide border border-slate-200 shadow-sm">
-                <ShieldCheck className="w-4 h-4" /> {heroCopy.badgeFactory}
+              <div className="flex flex-wrap gap-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/80 text-[#1C2D5A] rounded-full text-xs font-semibold tracking-wide border border-slate-200 shadow-sm">
+                  <ShieldCheck className="w-4 h-4" /> {heroCopy.badgeFactory}
+                </div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FFF3E0] text-[#FF8A00] rounded-full text-xs font-semibold tracking-wide border border-[#FF8A00]/30 shadow-sm">
+                  <Zap className="w-4 h-4" /> {heroCopy.badgeFree}
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -944,7 +951,7 @@ export default function ChuangjiangWebsite() {
               <ul className="space-y-2 text-slate-700">
                 {(heroCopy.bullets || []).map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1 inline-block w-2 h-2 rounded-full bg-[#F5A524]"></span>
+                    <span className="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
                     <span className="text-sm">{item}</span>
                   </li>
                 ))}
@@ -966,6 +973,7 @@ export default function ChuangjiangWebsite() {
                 </Button>
               </div>
               <div className="text-sm text-slate-500">{heroCopy.ctaNote}</div>
+              <div className="text-xs font-semibold text-[#FF8A00]">{heroCopy.freeNote}</div>
 
               {/* Quick Stats inside hero */}
               <div className="pt-4 grid grid-cols-3 gap-6">
@@ -1020,6 +1028,28 @@ export default function ChuangjiangWebsite() {
               </div>
               <div className="mt-2 text-slate-500 text-xs text-left">Factory preview · Tap contact to request live demo</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Belt */}
+      <section className="bg-white border-y border-slate-100">
+        <div className="container mx-auto px-6 py-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: "ISO9001 Factory", desc: "Audited QA system with full aging tests" },
+              { label: "CE / FCC / RoHS", desc: "Compliance docs + HS codes ready" },
+              { label: "50+ Countries", desc: "EU / US / LatAm distributors served" },
+              { label: "Engineer Support", desc: "RF tuning, firmware hooks, NDA ready" }
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 flex flex-col gap-1 shadow-[0_6px_20px_-12px_rgba(0,0,0,0.2)]"
+              >
+                <div className="text-[#1C2D5A] font-bold text-sm">{item.label}</div>
+                <div className="text-xs text-slate-600">{item.desc}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -1095,7 +1125,7 @@ export default function ChuangjiangWebsite() {
             <div className="grid md:grid-cols-2 gap-4">
               {(industriesCopy.bullets || []).map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <span className="mt-1 inline-block w-2 h-2 rounded-full bg-[#F5A524]"></span>
+                  <span className="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
                   <p className="text-sm text-slate-700">{item}</p>
                 </div>
               ))}
@@ -1160,7 +1190,7 @@ export default function ChuangjiangWebsite() {
                     <ul className="text-sm text-slate-600 space-y-1 mb-6">
                       {product.specs.map((item, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#F5A524]"></span>
+                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#FF8A00]"></span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -1200,7 +1230,7 @@ export default function ChuangjiangWebsite() {
                   <p className="text-sm text-slate-700 leading-relaxed">{item.solution}</p>
                 </div>
                 <div className="mt-auto flex items-center justify-between pt-2">
-                  <div className="text-sm font-semibold text-[#F5A524] leading-snug max-w-[80%]">Outcome: {item.outcome}</div>
+                  <div className="text-sm font-semibold text-[#FF8A00] leading-snug max-w-[80%]">Outcome: {item.outcome}</div>
                   <ArrowRight className="w-4 h-4 text-slate-300" />
                 </div>
               </div>
@@ -1216,7 +1246,7 @@ export default function ChuangjiangWebsite() {
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((item) => (
               <div key={item.id} className="bg-slate-50 p-8 rounded-xl border border-slate-100 relative">
-                <div className="flex gap-1 text-[#F5A524] mb-4">
+                <div className="flex gap-1 text-[#FF8A00] mb-4">
                   {[...Array(item.stars)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 fill-current" />
                   ))}
@@ -1251,6 +1281,31 @@ export default function ChuangjiangWebsite() {
   };
   const renderProducts = () => {
     const catalogCopy = translations[lang]?.catalog || translations.en.catalog;
+    const frequencyFilters = [
+      { key: "433", label: "433 MHz" },
+      { key: "868", label: "868 MHz" },
+      { key: "multi", label: "Multi / Dual" },
+      { key: "wifi", label: "WiFi / Smart" },
+      { key: "infrared", label: "Infrared" }
+    ];
+    const protocolFilters = [
+      { key: "rolling", label: "Rolling Code" },
+      { key: "fixed", label: "Fixed / Learning" },
+      { key: "tuya", label: "Tuya / WiFi" },
+      { key: "clone", label: "Clone" },
+      { key: "sensor", label: "Sensors" }
+    ];
+
+    const toggleFilter = (type, key) => {
+      setFilters((prev) => (prev[type] === key ? { ...prev, [type]: null } : { ...prev, [type]: key }));
+    };
+
+    const filteredProducts = products.filter((product) => {
+      const matchFrequency = filters.frequency ? product.freqKey === filters.frequency : true;
+      const matchProtocol = filters.protocol ? product.protocolKey === filters.protocol : true;
+      return matchFrequency && matchProtocol;
+    });
+
     return (
     <section className="py-12 bg-slate-50 min-h-screen">
       <div className="container mx-auto px-6">
@@ -1277,44 +1332,78 @@ export default function ChuangjiangWebsite() {
                 <Filter className="w-5 h-5 text-[#1C2D5A]" />
                 <span className="font-bold text-lg text-slate-900">Filters</span>
               </div>
-              <div className="space-y-8">
+              <div className="space-y-6">
                 <div>
-                  <h4 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wide">Frequency</h4>
-                  <div className="space-y-3">
-                    {["315 MHz", "433.92 MHz", "868.35 MHz", "Multi-Freq"].map((freq, i) => (
-                      <label key={i} className="flex items-center gap-3 cursor-pointer group">
-                        <div className="w-5 h-5 rounded border border-slate-300 group-hover:border-[#1C2D5A] flex items-center justify-center"></div>
-                        <span className="text-slate-600 group-hover:text-[#1C2D5A] transition-colors">{freq}</span>
-                      </label>
-                    ))}
+                  <h4 className="font-bold text-slate-800 mb-3 text-xs uppercase tracking-[0.2em]">Frequency</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {frequencyFilters.map((item) => {
+                      const active = filters.frequency === item.key;
+                      return (
+                        <button
+                          key={item.key}
+                          onClick={() => toggleFilter("frequency", item.key)}
+                          className={`px-3 py-2 rounded-full border text-sm transition-all ${
+                            active
+                              ? "bg-[#1C2D5A] text-white border-[#1C2D5A] shadow-sm"
+                              : "bg-white text-slate-700 border-slate-200 hover:border-[#1C2D5A] hover:text-[#1C2D5A]"
+                          }`}
+                        >
+                          {item.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wide">Protocol</h4>
-                  <div className="space-y-3">
-                    {["Rolling Code", "Fixed/Learning", "Tuya/WiFi Bridge"].map((item, i) => (
-                      <label key={i} className="flex items-center gap-3 cursor-pointer group">
-                        <div className="w-5 h-5 rounded border border-slate-300 group-hover:border-[#1C2D5A] flex items-center justify-center"></div>
-                        <span className="text-slate-600 group-hover:text-[#1C2D5A] transition-colors">{item}</span>
-                      </label>
-                    ))}
+                  <h4 className="font-bold text-slate-800 mb-3 text-xs uppercase tracking-[0.2em]">Protocol</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {protocolFilters.map((item) => {
+                      const active = filters.protocol === item.key;
+                      return (
+                        <button
+                          key={item.key}
+                          onClick={() => toggleFilter("protocol", item.key)}
+                          className={`px-3 py-2 rounded-full border text-sm transition-all ${
+                            active
+                              ? "bg-[#FF8A00] text-[#0B1A39] border-[#FF8A00] shadow-sm"
+                              : "bg-white text-slate-700 border-slate-200 hover:border-[#FF8A00] hover:text-[#0B1A39]"
+                          }`}
+                        >
+                          {item.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
+                {(filters.frequency || filters.protocol) && (
+                  <button
+                    onClick={() => setFilters({ frequency: null, protocol: null })}
+                    className="w-full mt-4 text-sm font-semibold text-[#1C2D5A] bg-slate-50 border border-slate-200 rounded-lg py-2 hover:border-[#1C2D5A] hover:bg-white transition"
+                  >
+                    Clear filters
+                  </button>
+                )}
               </div>
             </div>
           </aside>
 
           {/* Grid */}
           <div className="flex-1">
-            <div className="mb-6 flex flex-wrap gap-3">
-              {["All", "433 MHz", "868 MHz", "Rolling Code", "Tuya/WiFi"].map((tag) => (
-                <span key={tag} className="px-3 py-2 rounded-full border border-slate-200 bg-white text-sm text-slate-700 hover:border-[#1C2D5A] hover:text-[#1C2D5A] cursor-pointer">
-                  {tag}
+            <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-slate-600">
+              <span className="px-3 py-1 rounded-full bg-white border border-slate-200">Showing {filteredProducts.length} items</span>
+              {filters.frequency && (
+                <span className="px-3 py-1 rounded-full bg-[#E9EDFB] text-[#0B1A39] border border-[#1C2D5A]/20">
+                  Freq: {frequencyFilters.find((f) => f.key === filters.frequency)?.label}
                 </span>
-              ))}
+              )}
+              {filters.protocol && (
+                <span className="px-3 py-1 rounded-full bg-[#FFF3E0] text-[#8b5b00] border border-[#FF8A00]/30">
+                  Protocol: {protocolFilters.find((f) => f.key === filters.protocol)?.label}
+                </span>
+              )}
             </div>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <div key={product.id} className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group flex flex-col">
                   <div className="relative pt-[100%] bg-slate-50 overflow-hidden rounded-t-xl">
                     <img
@@ -1323,16 +1412,20 @@ export default function ChuangjiangWebsite() {
                       className="absolute top-0 left-0 w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className="bg-[#F5A524] text-white text-xs font-bold px-3 py-1 rounded shadow-sm">{product.tag}</span>
+                      <span className="bg-[#FF8A00] text-white text-xs font-bold px-3 py-1 rounded shadow-sm">{product.tag}</span>
                     </div>
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-wider">{product.category}</div>
                     <h3 className="font-bold text-lg text-slate-900 mb-4 leading-snug hover:text-[#1C2D5A] cursor-pointer">{product.name}</h3>
+                    <div className="flex flex-wrap gap-2 text-xs mb-4">
+                      <span className="px-2 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">{product.frequency}</span>
+                      <span className="px-2 py-1 rounded-full bg-white text-slate-700 border border-slate-200">{product.chip}</span>
+                    </div>
                     <div className="text-sm text-slate-600 space-y-1 mb-4">
                       {(product.specs || []).map((item, i) => (
                         <div key={i} className="flex items-start gap-2">
-                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#F5A524]"></span>
+                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#FF8A00]"></span>
                           <span>{item}</span>
                         </div>
                       ))}
@@ -1442,7 +1535,7 @@ export default function ChuangjiangWebsite() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {["ISO 9001:2015", "CE Certified", "FCC Approved", "RoHS Compliant"].map((cert, i) => (
               <div key={i} className="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center gap-4 hover:shadow-md transition-shadow">
-                <Award className="w-12 h-12 text-[#F5A524]" />
+                <Award className="w-12 h-12 text-[#FF8A00]" />
                 <span className="font-bold text-slate-800">{cert}</span>
               </div>
             ))}
@@ -1485,7 +1578,7 @@ export default function ChuangjiangWebsite() {
             {/* Comment Section (Marketing Master Feature) */}
             <div className="bg-white rounded-2xl shadow-sm p-8 md:p-12">
               <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-2">
-                <MessageSquare className="w-6 h-6 text-[#F5A524]" />
+                <MessageSquare className="w-6 h-6 text-[#FF8A00]" />
                 Discussion ({postComments.length})
               </h3>
 
@@ -1649,54 +1742,77 @@ export default function ChuangjiangWebsite() {
             {/* Note for GitHub Pages User: Replace 'action' with your Formspree endpoint */}
             <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert("Inquiry Simulated: For GitHub Pages, integrate Formspree or EmailJS here."); }}>
               <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700">First Name</label>
-                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700">Last Name</label>
-                    <input type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" />
-                  </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">Company *</label>
+                  <input type="text" required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" placeholder="Distributor / OEM Name" />
                 </div>
-
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Business Email *</label>
-                  <input type="email" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" required />
+                  <input type="email" required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" placeholder="name@company.com" />
                 </div>
+              </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700">Application</label>
-                    <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
-                      <option>Gate/Garage</option>
-                      <option>Access Control</option>
-                      <option>Smart Home</option>
-                      <option>Industrial Hoist</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700">Target Frequency</label>
-                    <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
-                      <option>433 MHz</option>
-                      <option>868 MHz</option>
-                      <option>Multi-frequency</option>
-                      <option>Tuya/WiFi bridge</option>
-                    </select>
-                  </div>
-                </div>
-
+              <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Message</label>
-                  <textarea
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition h-32"
-                    placeholder="I need 433MHz remotes with rolling code..."
-                  ></textarea>
+                  <label className="text-sm font-bold text-slate-700">Application</label>
+                  <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
+                    <option>Gate / Garage</option>
+                    <option>Access Control</option>
+                    <option>Smart Home</option>
+                    <option>Industrial Hoist</option>
+                    <option>Parking Barrier</option>
+                  </select>
                 </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">Protocol</label>
+                  <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
+                    <option>Rolling Code (HCS301)</option>
+                    <option>Fixed / Learning (EV1527/PT2262)</option>
+                    <option>Clone / Multi-frequency</option>
+                    <option>Tuya WiFi / Zigbee Bridge</option>
+                    <option>Not sure (need guidance)</option>
+                  </select>
+                </div>
+              </div>
 
-                <Button className="w-full text-lg shadow-xl">Send Message</Button>
-                <p className="text-xs text-slate-500 text-center">Response within 2h · NDA available on request</p>
-              </form>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">Annual Volume</label>
+                  <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
+                    <option>500 - 2,000 pcs</option>
+                    <option>2,000 - 10,000 pcs</option>
+                    <option>10,000 - 50,000 pcs</option>
+                    <option>50,000+ pcs</option>
+                    <option>Sample run first</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">Timeline</label>
+                  <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
+                    <option>Need samples in 7-10 days</option>
+                    <option>Production in 4-6 weeks</option>
+                    <option>Just collecting quotations</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700">Project Details *</label>
+                <textarea
+                  required
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition h-32"
+                  placeholder="Example: Need rolling code remote compatible with HCS301 receivers, 433.92MHz, 2-button, IP54 enclosure. Target market: EU."
+                ></textarea>
+              </div>
+
+              <div className="flex items-center gap-3 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2">
+                <input type="checkbox" className="w-4 h-4 accent-[#1C2D5A]" id="nda" />
+                <label htmlFor="nda" className="cursor-pointer">Request NDA before sharing CAD/BOM</label>
+              </div>
+
+              <Button className="w-full text-lg shadow-xl">Send Message</Button>
+              <p className="text-xs text-slate-500 text-center">Response within 2h · Engineers answer protocol/antenna questions</p>
+            </form>
             </div>
           </div>
         </div>
@@ -1851,17 +1967,17 @@ export default function ChuangjiangWebsite() {
               <h4 className="text-white font-bold mb-6">Products</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("products")}>
+                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("products")}>
                     Universal Gate Remotes
                   </span>
                 </li>
                 <li>
-                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("products")}>
+                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("products")}>
                     Rolling Code (HCS301)
                   </span>
                 </li>
                 <li>
-                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("products")}>
+                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("products")}>
                     Tuya WiFi Receivers
                   </span>
                 </li>
@@ -1872,17 +1988,17 @@ export default function ChuangjiangWebsite() {
               <h4 className="text-white font-bold mb-6">Company</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("about")}>
+                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("about")}>
                     About Factory
                   </span>
                 </li>
                 <li>
-                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("about")}>
+                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("about")}>
                     Certificates
                   </span>
                 </li>
                 <li>
-                  <span className="hover:text-[#F5A524] transition cursor-pointer" onClick={() => setActivePage("contact")}>
+                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("contact")}>
                     Contact Us
                   </span>
                 </li>
@@ -1898,9 +2014,9 @@ export default function ChuangjiangWebsite() {
             <div>
               <h4 className="text-white font-bold mb-6">Links</h4>
               <ul className="space-y-3 text-sm">
-                <li><a className="hover:text-[#F5A524]" href="/robots.txt">Robots</a></li>
-                <li><a className="hover:text-[#F5A524]" href="/sitemap.xml">Sitemap</a></li>
-                <li><span className="hover:text-[#F5A524] cursor-pointer">Privacy</span></li>
+                <li><a className="hover:text-[#FF8A00]" href="/robots.txt">Robots</a></li>
+                <li><a className="hover:text-[#FF8A00]" href="/sitemap.xml">Sitemap</a></li>
+                <li><span className="hover:text-[#FF8A00] cursor-pointer">Privacy</span></li>
               </ul>
             </div>
           </div>
