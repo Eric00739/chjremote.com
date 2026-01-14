@@ -957,6 +957,122 @@ const blogPosts = [
       </div>
     `,
     image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=433MHz+Troubleshooting+Guide`
+  },
+  {
+    id: 7,
+    title: "\"The Code Won't Match\": Why Your 433MHz Remotes Aren't Talking to Receiver",
+    date: "Jan 14, 2025",
+    author: "Engineer Li",
+    excerpt: "Your 433MHz remotes won't pair? Frequency is only 10% of the equation. Learn about encoding schemes, baud rate, and protocol compatibility.",
+    content: `
+      <p class="mb-4">"We bought 100 replacement remotes for a parking garage project. They are all 433MHz. The chips look the same. But no matter how many times we press the 'learn' button, the receiver just won't blink."</p>
+      
+      <p class="mb-4">I get this frantic call from installers at least once a month. The hard truth in the RF world is that <strong>frequency is only 10% of the equation</strong>. Just because two remotes "speak" at 433.92MHz doesn't mean they speak the same language.</p>
+      
+      <div class="bg-blue-50 border-l-4 border-[#1C2D5A] p-4 my-6">
+        <p class="font-bold text-[#1C2D5A] mb-2">The short answer:</p>
+        <p class="text-slate-700">If your pairing is failing, you likely have a mismatch in <strong>Encoding Schemes</strong> (Fixed, Learning, or Rolling Code), <strong>Baud Rate/Oscillation Resistance</strong>, or <strong>Protocol Brands</strong>. You cannot pair a Rolling Code remote to a Fixed Code receiver, even if the frequency is identical.</p>
+      </div>
+      
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">1. The "Big Three" Encoding Types: Are You Mixing Languages?</h4>
+      <p class="mb-4">This is the most common roadblock. In the <strong>433MHz remote control</strong> world, there are three distinct "languages."</p>
+      
+      <div class="bg-slate-50 p-4 rounded-lg my-6">
+        <ul class="space-y-3">
+          <li><strong>Fixed Code (PT2262 / SC2262):</strong> Old school. You set physical jumpers or solder pads inside the remote. If the receiver's jumpers match the remote's, it works.</li>
+          <li><strong>Learning Code (EV1527 / PT2240):</strong> The most popular for smart homes. Each remote has a unique ID burnt in at the factory. The receiver "memorizes" this ID.</li>
+          <li><strong>Rolling Code (HCS301 / Keeloq):</strong> High security. The code changes every time you press the button.</li>
+        </ul>
+      </div>
+      
+      <div class="bg-slate-50 p-4 rounded-lg my-6">
+        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
+        <ul class="list-disc ml-6 space-y-2">
+          <li><strong>Check the Chip:</strong> Pop the cover of your remote. Look at the 8-pin or 16-pin chip. If it says <strong>EV1527</strong>, it's Learning Code. If it says <strong>HCS</strong>, it's Rolling Code.</li>
+          <li><strong>The Compatibility Rule:</strong> A Learning Code receiver will <em>never</em> understand a Rolling Code transmitter. When buying stock, always verify the chip model, not just the frequency.</li>
+        </ul>
+      </div>
+      
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">2. The Hidden Culprit: Oscillation Resistance (The "Speed" of Signal)</h4>
+      <p class="mb-4">I've seen engineers get the chip right and the frequency right, and it still fails. Why? <strong>Oscillation Resistance (MHz/KHz timing).</strong> For Fixed Code chips like PT2262, a resistor (e.g., 1.2M, 2.2M, 3.3M, 4.7M) determines the clock speed of the transmitted data. If the transmitter is screaming data at 4.7M "speed" but the receiver is listening at a 1.2M "speed," the data will be gibberish.</p>
+      
+      <div class="bg-slate-50 p-4 rounded-lg my-6">
+        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
+        <ul class="list-disc ml-6 space-y-2">
+          <li><strong>Match the Resistor:</strong> On older systems, check the SMD resistor near the IC. For modern "Auto-scan" learning receivers, this is less of an issue, but for older industrial <strong>wireless controllers</strong>, it's a dealbreaker.</li>
+          <li><strong>Consult the Table:</strong> We generally suggest using a <strong>2.2M or 3.3M</strong> resistor for 2262 chips to ensure the widest compatibility with standard receivers.</li>
+        </ul>
+      </div>
+      
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">3. "Rolling Code" Brand Locking: The Encryption Wall</h4>
+      <p class="mb-4">If you are working with gate openers like LiftMaster, BFT, or Nice, they use <strong>Rolling Code</strong> with a proprietary encryption key. Even if you buy a "Universal 433MHz Rolling Code" remote, it won't work unless it has that specific brand's software key inside.</p>
+      
+      <div class="bg-slate-50 p-4 rounded-lg my-6">
+        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
+        <ul class="list-disc ml-6 space-y-2">
+          <li><strong>Avoid "Universal" Traps:</strong> For high-security gates, stop looking for generic remotes. You need a "Face-to-Face Copy Remote" that is specifically designed to clone that brand, or the original manufacturer's part.</li>
+          <li><strong>The Seed Code:</strong> Some rolling code systems require a "seed code" or a "secret button" press to open the learning window. Check the manual for "Remote Programming Mode."</li>
+        </ul>
+      </div>
+      
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">4. ASK vs. FSK: The Modulation Mismatch</h4>
+      <p class="mb-4">While 90% of simple remotes use <strong>ASK (Amplitude Shift Keying)</strong>, some higher-end industrial controllers use <strong>FSK (Frequency Shift Keying)</strong>.</p>
+      <p class="mb-4">ASK turns the carrier wave on and off (like Morse code). FSK shifts the frequency slightly to represent 1s and 0s. An ASK receiver is physically incapable of "hearing" an FSK signal.</p>
+      
+      <div class="bg-slate-50 p-4 rounded-lg my-6">
+        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
+        <ul class="list-disc ml-6 space-y-2">
+          <li><strong>Check the Label:</strong> Look for "FSK" or "LoRa" on the module. If one device is ASK and the other is FSK, no amount of "pairing" will ever work.</li>
+          <li><strong>Standardize:</strong> We almost always recommend staying with ASK for simple ON/OFF hobbyist or consumer applications due to lower costs and easier replacement parts.</li>
+        </ul>
+      </div>
+      
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">5. Clear the Memory: The "Full Buffer" Problem</h4>
+      <p class="mb-4">Sometimes hardware is perfect, but the receiver is "full." Most <strong>Learning Code receivers</strong> can only store 16, 32, or 50 individual remote IDs. If you've been testing multiple units, you might have hit the limit.</p>
+      
+      <div class="bg-slate-50 p-4 rounded-lg my-6">
+        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
+        <ul class="list-disc ml-6 space-y-2">
+          <li><strong>The Master Reset:</strong> Hold the "Learn" button on the receiver for about 10 seconds until the LED flashes rapidly or goes out. This wipes the memory.</li>
+          <li><strong>Try Again:</strong> Now try pairing a single remote. If it works, you simply had a full memory buffer.</li>
+        </ul>
+      </div>
+      
+      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">The "Pairing Failed" Troubleshooting List</h4>
+      <p class="mb-4">Before you send the shipment back, run this 60-second check:</p>
+      
+      <div class="bg-white border-2 border-slate-200 rounded-lg p-6 my-6">
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
+            <span><strong>Frequency:</strong> Use a frequency meter. Is it actually 433.92? (Some "433" remotes are actually 433.00 or 434.50).</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
+            <span><strong>Chipset:</strong> Open the shell. Is it EV1527, PT2262, or HCS301? Does the receiver support that chip?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
+            <span><strong>Modulation:</strong> Are both units ASK/OOK?</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
+            <span><strong>Battery:</strong> Is the remote's LED bright? (Low voltage = distorted signal timing).</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
+            <span><strong>Distance:</strong> Are you too close? Sometimes being 10cm away "overwhelms" the receiver. Stand 2 meters back.</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="bg-gradient-to-r from-[#1C2D5A] to-[#0f1e4d] text-white p-6 rounded-lg my-8">
+        <p class="font-bold text-xl mb-2">Struggling with a specific batch of remotes?</p>
+        <p class="text-blue-100">If you're stuck, tell me what's written on the chip of your remote and the model number of your receiver. If you can provide <strong>chip model, frequency, and whether it's a copy-type or a direct-learn type</strong>, I can usually tell you exactly why they aren't talking.</p>
+        <p class="mt-4 text-[#FF8A00] font-semibold">Would you like me to find specific compatibility data for your receiver model?</p>
+      </div>
+    `,
+    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=433MHz+Code+Matching+Guide`
   }
 ];
 
