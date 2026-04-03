@@ -1,11 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Menu,
   X,
-  Search,
-  ChevronRight,
-  ChevronDown,
-  ChevronUp,
   Mail,
   Phone,
   MapPin,
@@ -15,34 +11,20 @@ import {
   Globe,
   Download,
   ArrowRight,
-  ArrowLeft,
-  Filter,
   CheckCircle,
   Settings,
   Truck,
   Clock,
   Users,
-  PlayCircle,
-  Star,
-  Award,
-  MessageSquare,
-  Send,
-  User
+  Star
 } from "lucide-react";
 import Logo from "../logo/LOGO.png";
 
-// --- Brand Constants ---
 const COMPANY_NAME = "Dongguan Chuangjiang Electronics Co., Ltd.";
 const BRAND_NAME = "CHJ Remotes";
+const CATALOG_URL = "/catalog.pdf";
+const KNOWN_PAGES = ["home", "about", "products", "blog", "contact"];
 
-// --- SEO Helper ---
-const SEO_METADATA = {
-  title: "CHJ Remotes | China Source Factory for RF Remotes & Controllers",
-  description:
-    "China source OEM factory for RF remote controls & controllers, car remotes, Tuya WiFi switches and infrared beam sensors. Free product design & prototyping."
-};
-
-// --- Contact Info Constants ---
 const CONTACT_INFO = {
   address: "8th Floor, Building 1, Huawei Kegu Industrial Park, Dalingshan, Dongguan, Guangdong, China",
   phone: "+86 18028993261",
@@ -50,26 +32,92 @@ const CONTACT_INFO = {
   email: "sales@chjremote.com"
 };
 
-const CATALOG_URL = "/catalog.pdf";
-
-// --- Brand Colors ---
-const COLORS = {
-  primary: "#1C2D5A", // Logo Text Blue
-  accent: "#FF8A00" // Logo Dot Orange
-};
-
-// --- Language Support ---
-const LANGUAGE_OPTIONS = [
-  { code: "en", label: "EN" },
-  { code: "fr", label: "FR" },
-  { code: "pt", label: "PT" },
-  { code: "es", label: "ES" },
-  { code: "it", label: "IT" },
-  { code: "ru", label: "RU" }
+const PRODUCT_FAMILIES = [
+  {
+    title: "Rolling-code remotes",
+    summary: "Branded handheld programs for gate automation, access control, and premium replacement ranges.",
+    chips: ["315 MHz", "433.92 MHz", "868.35 MHz"]
+  },
+  {
+    title: "Receivers and retrofit kits",
+    summary: "Receiver boards and controller boxes for upgrades, multi-channel logic, and installed-base extension.",
+    chips: ["433 MHz", "AC/DC", "Relay control"]
+  },
+  {
+    title: "Smart access modules",
+    summary: "Hybrid WiFi + RF paths that add mobile control without breaking existing remote behavior.",
+    chips: ["Tuya", "WiFi 2.4G", "Bridge modules"]
+  }
 ];
 
-// --- Simple Path Routing (Static Multi-Page Support) ---
-const KNOWN_PAGES = ["home", "about", "products", "blog", "contact"];
+const CASE_STUDIES = [
+  {
+    market: "Italy · Gate distributor",
+    title: "Rolling-code replacement program",
+    copy: "A cleaner pilot program reduced compatibility friction and gave the distributor a more premium replacement offer."
+  },
+  {
+    market: "United States · Access OEM",
+    title: "Hybrid smart retrofit package",
+    copy: "A receiver bridge preserved legacy RF use while adding smartphone access for the next product tier."
+  }
+];
+
+const BLOG_POSTS = [
+  {
+    tag: "RF Architecture",
+    title: "What buyers actually need from an RF remote supplier",
+    copy: "Protocol behavior, range stability, and export readiness matter more than a long generic catalog."
+  },
+  {
+    tag: "Smart Retrofit",
+    title: "Why hybrid Tuya + RF projects reduce retrofit friction",
+    copy: "The best retrofit path keeps the installed base useful while opening a modern control layer."
+  },
+  {
+    tag: "Program Planning",
+    title: "The OEM brief that gets a serious quotation faster",
+    copy: "Application, target region, protocol direction, timing, and annual volume are the minimum useful inputs."
+  }
+];
+
+const FAQS = [
+  {
+    q: "Do you support both rolling-code and learning-code projects?",
+    a: "Yes. The exact direction depends on the installed system, market expectations, and security requirement."
+  },
+  {
+    q: "Can you support custom branding and enclosure direction?",
+    a: "Yes. OEM programs can include shell direction, finish, logo treatment, and packaging alignment."
+  },
+  {
+    q: "Can you prepare projects for overseas distribution?",
+    a: "Yes. Export-oriented documentation support and shipment planning are part of the manufacturing conversation."
+  }
+];
+
+const PAGE_META = {
+  home: {
+    title: "CHJ Remotes | RF Control Manufacturing for Global Access Brands",
+    description: "International OEM and ODM manufacturer for RF remotes, receivers, and smart retrofit modules."
+  },
+  about: {
+    title: "About CHJ Remotes | Factory Capability",
+    description: "Factory capability, RF tuning workflow, and export-ready OEM manufacturing."
+  },
+  products: {
+    title: "Products | CHJ Remotes",
+    description: "Rolling-code remotes, receivers, retrofit kits, and smart access module programs."
+  },
+  blog: {
+    title: "Insights | CHJ Remotes",
+    description: "Technical and commercial notes for RF access and control programs."
+  },
+  contact: {
+    title: "Contact CHJ Remotes | Start an OEM Conversation",
+    description: "Start an OEM conversation with CHJ Remotes about RF control programs."
+  }
+};
 
 const pageFromPathname = (pathname) => {
   const cleaned = (pathname || "/").replace(/^\/+|\/+$/g, "");
@@ -78,2073 +126,200 @@ const pageFromPathname = (pathname) => {
   return KNOWN_PAGES.includes(segment) ? segment : "home";
 };
 
-const translations = {
-  en: {
-    nav: { home: "Home", about: "About", products: "Products", blog: "Blog", contact: "Contact", request: "Request a Quote" },
-    hero: {
-      badgeFactory: "China Source Factory | B2B OEM/ODM",
-      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      badgeFree: "Free Product Design & Prototyping",
-      title: "China OEM RF Remote & Controller Factory",
-      subtitle: "RF Remotes & Receivers · Car Remotes · Tuya WiFi Switches · Infrared Beam Sensors",
-      bullets: [
-        "Free industrial design + PCB/firmware prototyping for OEM projects",
-        "433/868/315MHz RF remotes & controllers, multi-protocol compatible",
-        "MP samples delivered in 7 days with RF test report"
-      ],
-      tags: [
-        "ISO9001 · CE/FCC/ROHS",
-        "In-house RF chamber & antenna tuning",
-        "B2B only (no retail)"
-      ],
-      primaryCta: "Start OEM Project",
-      secondaryCta: "Download Catalog (PDF)",
-      ctaNote: "No middlemen · Factory direct pricing",
-      freeNote: "Free for qualified B2B OEM/ODM projects · NDA supported",
-      stats: { exp: "20+", expLabel: "Years Experience", qc: "100%", qcLabel: "QC Tested", countries: "50+", countriesLabel: "Countries Served" }
-    },
-    highlights: [
-      { title: "Factory Direct B2B", desc: "No retail or dropshipping; engineering + production with NDA support." },
-      { title: "7-Day MP Samples", desc: "PCB layout, antenna tuning, and molded enclosure delivered with test report." },
-      { title: "Compliance & Shipping", desc: "CE/FCC/RoHS documents, HS codes ready, door-to-door to EU/US/LatAm." }
-    ],
-    industries: {
-      title: "Built for Gates, Doors, Smart Home, Industrial",
-      subtitle: "Protocols: HCS301/HCS361 rolling code, EV1527/PT2262 fixed/learning code, Tuya WiFi/Zigbee bridges, and multi-frequency clones.",
-      bullets: [
-        "Garage/gate automation distributors",
-        "Access control OEM / panel builders",
-        "Smart home integrators (Tuya/Alexa/Google)",
-        "Industrial hoists and shutters",
-        "Parking barrier arms & bollards",
-        "Aftermarket car remotes (315/433MHz)"
-      ],
-      techTitle: "Technical Delivery",
-      techList: [
-        "RF validation: shielding room sweep, antenna VSWR tuning, and range proof.",
-        "Firmware hooks: learning code tables, whitelist/blacklist, and Tuya SDK handoff.",
-        "Docs ready: CE/FCC/RoHS, HS code, packing list, and aging test records.",
-        "Support: engineer-to-engineer WhatsApp/Teams within GMT+8 business hours."
-      ],
-      ctaEngineer: "Book Engineer Call",
-      ctaCatalog: "Catalog & Specs PDF"
-    },
-    process: {
-      title: "From Concept to Delivery",
-      subtitle: "Our streamlined OEM/ODM workflow ensures your custom remotes are market-ready in record time."
-    },
-    trending: { title: "Trending Solutions" },
-    cases: { title: "Case Studies", subtitle: "Real projects: challenge -> solution -> outcome for distributors and OEM partners." },
-    testimonials: { title: "What Our Clients Say", subtitle: "Trusted by distributors and system integrators worldwide." },
-    faq: { title: "FAQ", subtitle: "Common queries regarding OEM, shipping, and compatibility." },
-    catalog: { title: "Product Catalog", subtitle: "OEM/ODM only - ready for distributors and system integrators. Download the PDF catalog or request a tuned PCB layout for your protocol." },
-    about: {
-      title: `About ${COMPANY_NAME}`,
-      subtitle: `Operating the brand ${BRAND_NAME}, we are a B2B-only RF remote manufacturer in Dongguan. No retail or dropshipping - only OEM/ODM for distributors and system integrators.`,
-      cards: [
-        { title: "B2B Only / Factory Direct", desc: "Direct engineering + production. We do not run consumer webshops." },
-        { title: "Brand Clarity", desc: `Use ${BRAND_NAME} to avoid confusion with other 'Chuanghui' companies in the market.` },
-        { title: "Export-Ready", desc: "ISO9001 plant with CE/FCC/RoHS capability and internal aging test lab." }
-      ]
-    },
-    contact: {
-      heroTitle: "Contact Our Factory",
-      heroSubtitle: "Direct Manufacturer Pricing. Professional Technical Support.",
-      b2bNote: "B2B projects only (distributors / OEM / system integrators). Please include application & volume."
-    },
-    blog: { title: "Industry Insights", subtitle: "Stay updated with the latest RF technology and company news." }
-  },
-  fr: {
-    nav: { home: "Accueil", about: "À propos", products: "Produits", blog: "Blog", contact: "Contact", request: "Demander un devis" },
-    hero: {
-      badgeFactory: "Usine en Chine | OEM/ODM B2B",
-      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      badgeFree: "Conception & prototypage gratuits",
-      title: "Usine OEM de télécommandes RF et contrôleurs",
-      subtitle: "Télécommandes & récepteurs RF · Télécommandes auto · Interrupteurs WiFi Tuya · Faisceaux infrarouge",
-      bullets: [
-        "Conception industrielle + prototypage PCB/firmware offerts pour projets OEM",
-        "Télécommandes/contrôleurs RF 433/868/315MHz, multi-protocole",
-        "Échantillons MP en 7 jours avec rapport RF"
-      ],
-      tags: ["ISO9001 | CE/FCC/ROHS", "Chambre RF interne & réglage antenne", "Clients B2B uniquement (pas de retail)"],
-      primaryCta: "Lancer un projet OEM",
-      secondaryCta: "Télécharger le catalogue (PDF)",
-      ctaNote: "Prix direct usine · Pas d'intermédiaire",
-      freeNote: "Offerts pour projets B2B qualifiés · NDA disponible",
-      stats: { exp: "20+", expLabel: "Années d'expérience", qc: "100%", qcLabel: "Tests QC", countries: "50+", countriesLabel: "Pays desservis" }
-    },
-    highlights: [
-      { title: "B2B usine directe", desc: "Pas de retail ni dropshipping ; ingénierie + production sous NDA." },
-      { title: "Échantillons en 7 jours", desc: "PCB, antenne et boîtier livrés avec rapport de test." },
-      { title: "Conformité & logistique", desc: "Docs CE/FCC/RoHS, codes SH prêts, livraison UE/US/LatAm." }
-    ],
-    industries: {
-      title: "Portails, portes, smart home, industriel",
-      subtitle: "Protocoles : HCS301/HCS361, EV1527/PT2262, passerelles Tuya WiFi/Zigbee, clones multi-fréquences.",
-      bullets: [
-        "Distributeurs d'automatisme de portails",
-        "Constructeurs OEM d'accès / tableaux",
-        "Intégrateurs smart home (Tuya/Alexa/Google)",
-        "Treuils et volets industriels",
-        "Barrières et bornes de parking",
-        "Télécommandes auto 315/433MHz"
-      ],
-      techTitle: "Livraison technique",
-      techList: [
-        "Validation RF : chambre blindée, accord VSWR, portée vérifiée.",
-        "Firmware : tables d'apprentissage, listes blanche/noire, SDK Tuya.",
-        "Docs : CE/FCC/RoHS, code SH, packing list, vieillissement.",
-        "Support : ingénieur à ingénieur (WhatsApp/Teams, GMT+8)."
-      ],
-      ctaEngineer: "Appel avec ingénieur",
-      ctaCatalog: "Catalogue & fiches PDF"
-    },
-    process: { title: "Du concept à la livraison", subtitle: "Workflow OEM/ODM pour lancer vos télécommandes rapidement." },
-    trending: { title: "Solutions en vogue" },
-    cases: { title: "Études de cas", subtitle: "Projets réels : défi -> solution -> résultat pour distributeurs/OEM." },
-    testimonials: { title: "Ce que disent nos clients", subtitle: "Approuvé par distributeurs et intégrateurs." },
-    faq: { title: "FAQ", subtitle: "Questions fréquentes sur l'OEM, l'expédition et la compatibilité." },
-    catalog: { title: "Catalogue produit", subtitle: "OEM/ODM uniquement. Téléchargez le PDF ou demandez un PCB accordé à votre protocole." },
-    about: {
-      title: `À propos de ${COMPANY_NAME}`,
-      subtitle: `${BRAND_NAME} est une usine RF 100% B2B à Dongguan. Pas de retail ni dropshipping - seulement OEM/ODM.`,
-      cards: [
-        { title: "B2B uniquement / usine", desc: "Ingénierie + production directe, pas de site e-commerce grand public." },
-        { title: "Clarté de marque", desc: `Utilisez ${BRAND_NAME} pour éviter la confusion avec d'autres sociétés "Chuanghui".` },
-        { title: "Prêt export", desc: "ISO9001, CE/FCC/RoHS, labo de vieillissement intégré." }
-      ]
-    },
-    contact: {
-      heroTitle: "Contacter l'usine",
-      heroSubtitle: "Prix fabricant direct. Support technique pro.",
-      b2bNote: "Projets B2B uniquement (distributeurs / OEM / intégrateurs). Merci d'indiquer l'usage et le volume."
-    },
-    blog: { title: "Analyses industrie", subtitle: "Restez à jour sur la RF et nos actualités." }
-  },
-  pt: {
-    nav: { home: "Início", about: "Sobre", products: "Produtos", blog: "Blog", contact: "Contato", request: "Pedir um orçamento" },
-    hero: {
-      badgeFactory: "China Source Factory | B2B OEM/ODM",
-      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      badgeFree: "Free Product Design & Prototyping",
-      title: "China OEM RF Remote & Controller Factory",
-      subtitle: "RF Remotes & Receivers · Car Remotes · Tuya WiFi Switches · Infrared Beam Sensors",
-      bullets: [
-        "Free industrial design + PCB/firmware prototyping for OEM projects",
-        "433/868/315MHz RF remotes & controllers, multi-protocol compatible",
-        "MP samples delivered in 7 days with RF test report"
-      ],
-      tags: ["ISO9001 | CE/FCC/ROHS", "Câmara RF interna e ajuste de antena", "Somente clientes B2B (sem varejo)"],
-      primaryCta: "Iniciar projeto OEM",
-      secondaryCta: "Baixar catálogo (PDF)",
-      ctaNote: "Preço direto de fábrica",
-      freeNote: "Free for qualified B2B OEM/ODM projects · NDA supported",
-      stats: { exp: "20+", expLabel: "Anos de experiência", qc: "100%", qcLabel: "Testado em QC", countries: "50+", countriesLabel: "Países atendidos" }
-    },
-    highlights: [
-      { title: "B2B direto da fábrica", desc: "Sem varejo ou dropshipping; engenharia + produção com NDA." },
-      { title: "Amostras em 7 dias", desc: "PCB, antena e carcaça com relatório de testes." },
-      { title: "Conformidade e frete", desc: "Docs CE/FCC/RoHS, HS codes prontos, envio porta a porta UE/EUA/LatAm." }
-    ],
-    industries: {
-      title: "Portões, portas, smart home, industrial",
-      subtitle: "Protocolos: HCS301/HCS361, EV1527/PT2262, pontes Tuya WiFi/Zigbee e clones multifrequência.",
-      bullets: [
-        "Distribuidores de automação de portões",
-        "OEM de controle de acesso / painéis",
-        "Integradores smart home (Tuya/Alexa/Google)",
-        "Guinchos e persianas industriais",
-        "Cancelas e barreiras de estacionamento",
-        "Chaves automotivas 315/433MHz"
-      ],
-      techTitle: "Entrega técnica",
-      techList: [
-        "Validação RF: câmara blindada, ajuste VSWR e prova de alcance.",
-        "Firmware: tabelas de aprendizado, whitelist/blacklist, SDK Tuya.",
-        "Documentos: CE/FCC/RoHS, HS code, packing list, teste de envelhecimento.",
-        "Suporte: engenheiro para engenheiro (WhatsApp/Teams, GMT+8)."
-      ],
-      ctaEngineer: "Agendar com engenheiro",
-      ctaCatalog: "Catálogo e fichas PDF"
-    },
-    process: { title: "Do conceito à entrega", subtitle: "Fluxo OEM/ODM para lançar rápido." },
-    trending: { title: "Soluções em destaque" },
-    cases: { title: "Casos de sucesso", subtitle: "Projetos reais: desafio -> solução -> resultado para distribuidores/OEM." },
-    testimonials: { title: "O que dizem os clientes", subtitle: "Confiado por distribuidores e integradores." },
-    faq: { title: "FAQ", subtitle: "Dúvidas sobre OEM, frete e compatibilidade." },
-    catalog: { title: "Catálogo de produtos", subtitle: "Somente OEM/ODM. Baixe o PDF ou peça PCB ajustado ao seu protocolo." },
-    about: {
-      title: `Sobre ${COMPANY_NAME}`,
-      subtitle: `${BRAND_NAME} é uma fábrica RF 100% B2B em Dongguan. Sem varejo ou dropshipping - apenas OEM/ODM.`,
-      cards: [
-        { title: "Somente B2B / fábrica", desc: "Engenharia + produção direta, sem loja B2C." },
-        { title: "Clareza de marca", desc: `Use ${BRAND_NAME} para evitar confusão com outras empresas \"Chuanghui\".` },
-        { title: "Pronto para exportação", desc: "ISO9001, CE/FCC/RoHS, laboratório de envelhecimento interno." }
-      ]
-    },
-    contact: {
-      heroTitle: "Fale com a fábrica",
-      heroSubtitle: "Preço direto de fabricante. Suporte técnico profissional.",
-      b2bNote: "Projetos B2B apenas (distribuidores / OEM / integradores). Informe aplicação e volume."
-    },
-    blog: { title: "Insights do setor", subtitle: "Novidades em RF e notícias da empresa." }
-  },
-  es: {
-    nav: { home: "Inicio", about: "Sobre nosotros", products: "Productos", blog: "Blog", contact: "Contacto", request: "Solicitar un presupuesto" },
-    hero: {
-      badgeFactory: "Fábrica en China | OEM/ODM B2B",
-      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      badgeFree: "Diseño y prototipos gratis",
-      title: "Fábrica OEM en China de mandos y controladores RF",
-      subtitle: "Mandos y receptores RF · Mandos de coche · Interruptores WiFi Tuya · Barreras infrarrojas",
-      bullets: [
-        "Diseño industrial + prototipado PCB/firmware gratis para proyectos OEM",
-        "Mandos/controladores RF 433/868/315MHz, multi-protocolo",
-        "Muestras MP en 7 días con informe RF"
-      ],
-      tags: ["ISO9001 | CE/FCC/ROHS", "Cámara RF interna y ajuste de antena", "Solo clientes B2B (sin retail)"],
-      primaryCta: "Iniciar proyecto OEM",
-      secondaryCta: "Descargar catálogo (PDF)",
-      ctaNote: "Precio directo de fábrica",
-      freeNote: "Gratis para proyectos B2B cualificados · NDA disponible",
-      stats: { exp: "20+", expLabel: "Años de experiencia", qc: "100%", qcLabel: "QC probado", countries: "50+", countriesLabel: "Países servidos" }
-    },
-    highlights: [
-      { title: "B2B directo de fábrica", desc: "Sin retail ni dropshipping; ingeniería + producción con NDA." },
-      { title: "Muestras en 7 días", desc: "PCB, antena y carcasa con informe de pruebas." },
-      { title: "Cumplimiento y logística", desc: "Docs CE/FCC/RoHS, códigos HS listos, envío puerta a puerta UE/EEUU/LatAm." }
-    ],
-    industries: {
-      title: "Puertas, smart home, industrial",
-      subtitle: "Protocolos: HCS301/HCS361, EV1527/PT2262, bridges Tuya WiFi/Zigbee y clones multifrecuencia.",
-      bullets: [
-        "Distribuidores de automatización de portones",
-        "OEM de control de acceso / tableros",
-        "Integradores smart home (Tuya/Alexa/Google)",
-        "Polipastos y persianas industriales",
-        "Barras y bolardos de parking",
-        "Llaves de auto 315/433MHz"
-      ],
-      techTitle: "Entrega técnica",
-      techList: [
-        "Validación RF: cámara blindada, VSWR y prueba de alcance.",
-        "Firmware: tablas de aprendizaje, listas blanca/negra, SDK Tuya.",
-        "Documentos: CE/FCC/RoHS, código HS, packing list, pruebas de envejecimiento.",
-        "Soporte: ingeniero a ingeniero (WhatsApp/Teams, GMT+8)."
-      ],
-      ctaEngineer: "Agendar con ingeniero",
-      ctaCatalog: "Catálogo y fichas PDF"
-    },
-    process: { title: "Del concepto a la entrega", subtitle: "Flujo OEM/ODM para lanzar rápido tus mandos." },
-    trending: { title: "Soluciones destacadas" },
-    cases: { title: "Casos de éxito", subtitle: "Proyectos reales: reto -> solución -> resultado para distribuidores/OEM." },
-    testimonials: { title: "Lo que opinan", subtitle: "Confiado por distribuidores e integradores." },
-    faq: { title: "FAQ", subtitle: "Dudas sobre OEM, envío y compatibilidad." },
-    catalog: { title: "Catálogo de producto", subtitle: "Solo OEM/ODM. Descarga el PDF o pide PCB afinado a tu protocolo." },
-    about: {
-      title: `Sobre ${COMPANY_NAME}`,
-      subtitle: `${BRAND_NAME} es una fábrica RF 100% B2B en Dongguan. Sin retail ni dropshipping - solo OEM/ODM.`,
-      cards: [
-        { title: "Solo B2B / fábrica", desc: "Ingeniería + producción directa, sin tienda B2C." },
-        { title: "Claridad de marca", desc: `Usa ${BRAND_NAME} para evitar confusión con otras empresas \"Chuanghui\".` },
-        { title: "Listo para exportar", desc: "ISO9001, CE/FCC/RoHS, laboratorio de envejecimiento propio." }
-      ]
-    },
-    contact: {
-      heroTitle: "Contacta la fábrica",
-      heroSubtitle: "Precio directo de fabricante. Soporte técnico profesional.",
-      b2bNote: "Solo proyectos B2B (distribuidores / OEM / integradores). Indica uso y volumen."
-    },
-    blog: { title: "Ideas de la industria", subtitle: "Actualizaciones RF y noticias de la empresa." }
-  },
-  it: {
-    nav: { home: "Home", about: "Chi siamo", products: "Prodotti", blog: "Blog", contact: "Contatti", request: "Richiedi un preventivo" },
-    hero: {
-      badgeFactory: "Fabbrica in Cina | OEM/ODM B2B",
-      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      badgeFree: "Design e prototipi gratuiti",
-      title: "Fabbrica OEM in Cina di radiocomandi e controller RF",
-      subtitle: "Radiocomandi e ricevitori RF · Telecomandi auto · Interruttori WiFi Tuya · Barriere a infrarossi",
-      bullets: [
-        "Design industriale + prototipazione PCB/firmware gratuiti per progetti OEM",
-        "Radiocomandi/controller RF 433/868/315MHz, multi-protocollo",
-        "Campioni MP in 7 giorni con report RF"
-      ],
-      tags: ["ISO9001 | CE/FCC/ROHS", "Camera RF interna e tuning antenna", "Solo clienti B2B (no retail)"],
-      primaryCta: "Avvia progetto OEM",
-      secondaryCta: "Scarica catalogo (PDF)",
-      ctaNote: "Prezzo diretto di fabbrica",
-      freeNote: "Gratis per progetti B2B qualificati · NDA disponibile",
-      stats: { exp: "20+", expLabel: "Anni di esperienza", qc: "100%", qcLabel: "Test QC", countries: "50+", countriesLabel: "Paesi serviti" }
-    },
-    highlights: [
-      { title: "B2B diretto da fabbrica", desc: "Nessun retail o dropshipping; ingegneria + produzione con NDA." },
-      { title: "Campioni in 7 giorni", desc: "PCB, antenna e case con report di test." },
-      { title: "Conformità e logistica", desc: "Documenti CE/FCC/RoHS, codici HS pronti, consegna porta a porta UE/USA/LatAm." }
-    ],
-    industries: {
-      title: "Cancelli, porte, smart home, industriale",
-      subtitle: "Protocolli: HCS301/HCS361, EV1527/PT2262, bridge Tuya WiFi/Zigbee e cloni multi-frequenza.",
-      bullets: [
-        "Distributori di automazione cancelli",
-        "OEM controllo accessi / quadri",
-        "Integratori smart home (Tuya/Alexa/Google)",
-        "Argani e serrande industriali",
-        "Barriere parcheggio",
-        "Chiavi auto 315/433MHz"
-      ],
-      techTitle: "Consegna tecnica",
-      techList: [
-        "Validazione RF: camera schermata, VSWR, test di raggio.",
-        "Firmware: tabelle learning, whitelist/blacklist, SDK Tuya.",
-        "Documenti: CE/FCC/RoHS, codice HS, packing list, aging test.",
-        "Supporto: ingegnere a ingegnere (WhatsApp/Teams, GMT+8)."
-      ],
-      ctaEngineer: "Parla con ingegnere",
-      ctaCatalog: "Catalogo e schede PDF"
-    },
-    process: { title: "Dal concept alla consegna", subtitle: "Flusso OEM/ODM per lanciare rapidamente." },
-    trending: { title: "Soluzioni in evidenza" },
-    cases: { title: "Casi di studio", subtitle: "Progetti reali: sfida -> soluzione -> risultato per distributori/OEM." },
-    testimonials: { title: "Dicono di noi", subtitle: "Scelto da distributori e integratori." },
-    faq: { title: "FAQ", subtitle: "Domande su OEM, spedizione e compatibilità." },
-    catalog: { title: "Catalogo prodotti", subtitle: "Solo OEM/ODM. Scarica il PDF o chiedi PCB accordato." },
-    about: {
-      title: `Chi è ${COMPANY_NAME}`,
-      subtitle: `${BRAND_NAME} è una fabbrica RF 100% B2B a Dongguan. Niente retail o dropshipping - solo OEM/ODM.`,
-      cards: [
-        { title: "Solo B2B / fabbrica", desc: "Ingegneria + produzione diretta, nessun e-commerce B2C." },
-        { title: "Chiarezza di brand", desc: `Usa ${BRAND_NAME} per evitare confusione con altre aziende \"Chuanghui\".` },
-        { title: "Pronto export", desc: "ISO9001, CE/FCC/RoHS, laboratorio aging interno." }
-      ]
-    },
-    contact: {
-      heroTitle: "Contatta la fabbrica",
-      heroSubtitle: "Prezzo diretto e supporto tecnico professionale.",
-      b2bNote: "Solo progetti B2B (distributori / OEM / integratori). Indica applicazione e volume."
-    },
-    blog: { title: "Approfondimenti RF", subtitle: "Aggiornamenti tecnologici e notizie aziendali." }
-  },
-  ru: {
-    nav: { home: "Главная", about: "О нас", products: "Продукты", blog: "Блог", contact: "Контакты", request: "Запросить предложение" },
-    hero: {
-      badgeFactory: "Китайская фабрика | B2B OEM/ODM",
-      badgeBrand: `${COMPANY_NAME} | ${BRAND_NAME}`,
-      badgeFree: "Бесплатный дизайн и прототипы",
-      title: "Китайская OEM-фабрика пультов и контроллеров RF",
-      subtitle: "RF пульты и приёмники · Автопульты · WiFi-выключатели Tuya · ИК-барьеры",
-      bullets: [
-        "Бесплатный дизайн и прототипирование PCB/firmware для OEM-проектов",
-        "RF пульты/контроллеры 433/868/315MHz, мультипротокольные",
-        "MP-образцы за 7 дней с RF-отчётом"
-      ],
-      tags: ["ISO9001 | CE/FCC/ROHS", "Собственная RF-камера и настройка антенны", "Только B2B (без розницы)"],
-      primaryCta: "Начать OEM-проект",
-      secondaryCta: "Скачать каталог (PDF)",
-      ctaNote: "Прямые цены фабрики",
-      freeNote: "Бесплатно для квалифицированных B2B OEM/ODM-проектов · NDA доступно",
-      stats: { exp: "20+", expLabel: "Лет опыта", qc: "100%", qcLabel: "QC тест", countries: "50+", countriesLabel: "Стран" }
-    },
-    highlights: [
-      { title: "B2B напрямую с фабрики", desc: "Без розницы и дропшиппинга; инженерия + производство под NDA." },
-      { title: "Образцы за 7 дней", desc: "PCB, антенна и корпус с протоколом испытаний." },
-      { title: "Сертификация и логистика", desc: "CE/FCC/RoHS, коды HS, доставка до двери ЕС/США/ЛатАм." }
-    ],
-    industries: {
-      title: "Ворота, двери, умный дом, индустрия",
-      subtitle: "Протоколы: HCS301/HCS361, EV1527/PT2262, мосты Tuya WiFi/Zigbee, мультичастотные клоны.",
-      bullets: [
-        "Дистрибьюторы автоматики ворот",
-        "OEM систем контроля доступа / щитов",
-        "Интеграторы умного дома (Tuya/Alexa/Google)",
-        "Промышленные лебёдки и рольставни",
-        "Парковочные шлагбаумы и болларды",
-        "Авто ключи 315/433МГц"
-      ],
-      techTitle: "Техническая поставка",
-      techList: [
-        "RF-валидация: экранированная камера, VSWR, тест дальности.",
-        "Прошивка: таблицы обучения, whitelist/blacklist, SDK Tuya.",
-        "Документы: CE/FCC/RoHS, HS code, packing list, aging-тест.",
-        "Поддержка: инженер-инженеру (WhatsApp/Teams, GMT+8)."
-      ],
-      ctaEngineer: "Встреча с инженером",
-      ctaCatalog: "Каталог и спецификации PDF"
-    },
-    process: { title: "От концепта до поставки", subtitle: "OEM/ODM процесс для быстрого вывода продукта." },
-    trending: { title: "Популярные решения" },
-    cases: { title: "Кейсы", subtitle: "Реальные проекты: задача -> решение -> результат для дистрибьюторов/OEM." },
-    testimonials: { title: "Отзывы клиентов", subtitle: "Нас выбирают дистрибьюторы и интеграторы." },
-    faq: { title: "FAQ", subtitle: "Частые вопросы по OEM, доставке и совместимости." },
-    catalog: { title: "Каталог продукции", subtitle: "Только OEM/ODM. Скачайте PDF или запросите PCB под ваш протокол." },
-    about: {
-      title: `О ${COMPANY_NAME}`,
-      subtitle: `${BRAND_NAME} �?фабрика RF 100% B2B в Дунгуане. Без розницы и дропшиппинга �?только OEM/ODM.`,
-      cards: [
-        { title: "Только B2B / фабрика", desc: "Инженерия + производство, без B2C-магазина." },
-        { title: "Чистота бренда", desc: `Используйте ${BRAND_NAME}, чтобы исключить путаницу с другими компаниями \"Chuanghui\".` },
-        { title: "Готовность к экспорту", desc: "ISO9001, CE/FCC/RoHS, собственный aging-лаборатория." }
-      ]
-    },
-    contact: {
-      heroTitle: "Связаться с фабрикой",
-      heroSubtitle: "Цена производителя. Профессиональная поддержка.",
-      b2bNote: "Только B2B проекты (дистрибьюторы / OEM / интеграторы). Укажите применение и объём."
-    },
-    blog: { title: "Отраслевые обзоры", subtitle: "Новости RF и компании." }
-  }
-};
-// --- Mock Data ---
+function safeScrollTop() {
+  if (typeof window === "undefined") return;
+  if (window.navigator?.userAgent?.includes("jsdom")) return;
+  try {
+    window.scrollTo(0, 0);
+  } catch {}
+}
 
-const products = [
-  {
-    id: 1,
-    name: "CJ-433 Universal Rolling Code Remote",
-    category: "Remote Control",
-    frequency: "433.92 MHz",
-    freqKey: "433",
-    chip: "HCS301 (Microchip)",
-    protocolKey: "rolling",
-    voltage: "12V (27A)",
-    image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=CJ-433+Pro+Series`,
-    tag: "Best Seller",
-    desc: "High-security rolling code transmitter with 100m range and universal 433MHz receiver replacement for garage door openers.",
-    specs: ["Chipset: HCS301 / Rolling code", "Range: >100m tuned PCB antenna", "Enclosure: Zinc alloy, 12V 27A"]
-  },
-  {
-    id: 2,
-    name: "Smart WiFi + RF Hybrid Receiver",
-    category: "Receiver",
-    frequency: "WiFi 2.4G + 433MHz",
-    freqKey: "wifi",
-    chip: "Tuya Smart Module",
-    protocolKey: "tuya",
-    voltage: "AC 85-265V",
-    image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=WiFi+Smart+Receiver`,
-    tag: "Tuya Certified",
-    desc: "Upgrade old garage doors to smart control. Works with App, Alexa, and Google Home; Tuya Zigbee switch module OEM ready.",
-    specs: ["ESP32/Tuya WiFi-Zigbee", "AC/DC 9-30V & 110-240V", "Stores up to 500 codes"]
-  },
-  {
-    id: 3,
-    name: "Industrial IP67 Waterproof Remote",
-    category: "Industrial",
-    frequency: "868.35 MHz",
-    freqKey: "868",
-    chip: "EV1527 (Learning)",
-    protocolKey: "fixed",
-    voltage: "DC 3V (CR2032)",
-    image: `https://placehold.co/600x600/f8fafc/1C2D5A?text=IP67+Waterproof`,
-    tag: "Heavy Duty",
-    desc: "Designed for harsh environments. Dustproof, waterproof, and drop-resistant for industrial doors and hoists.",
-    specs: ["IP67 sealed enclosure", "CR2032 low-power MCU", "868MHz learning code"]
-  },
-  {
-    id: 4,
-    name: "Long Range Active Infrared Beam",
-    category: "Security",
-    frequency: "Infrared",
-    freqKey: "infrared",
-    chip: "Smart AI Detection",
-    protocolKey: "sensor",
-    voltage: "DC 12V-24V",
-    image: `https://placehold.co/800x800/f8fafc/1C2D5A?text=IR+Beam+Sensor`,
-    tag: "100m Range",
-    desc: "Anti-glare active infrared detector for perimeter security and automatic gates."
-  },
-  {
-    id: 5,
-    name: "4-Channel Gate Controller Box",
-    category: "Controller",
-    frequency: "433.92 MHz",
-    freqKey: "433",
-    chip: "PT2262 (Fixed Code)",
-    protocolKey: "fixed",
-    voltage: "AC 220V",
-    image: `https://placehold.co/400x400/e2e8f0/1C2D5A?text=Gate+Controller`,
-    tag: "Heavy Duty",
-    desc: "External receiver box for tubular motors and sliding gates."
-  },
-  {
-    id: 6,
-    name: "Universal Car Key Fob Replacement",
-    category: "Car Remote",
-    frequency: "315/433 MHz",
-    freqKey: "multi",
-    chip: "Multi-Frequency Clone",
-    protocolKey: "clone",
-    voltage: "DC 3V",
-    image: `https://placehold.co/400x400/e2e8f0/1C2D5A?text=Car+Key+Fob`,
-    tag: "Universal",
-    desc: "Face-to-face copy remote for aftermarket car key replacement."
-  }
-];
-
-const testimonials = [
-  {
-    id: 1,
-    name: "Purchasing Director",
-    role: "Top 3 Gate Automation Distributor (Italy)",
-    content:
-      "CHJ solved our rolling code encryption conflict with LiftMaster systems. Their SDK support helped us launch in Germany within 3 months.",
-    stars: 5
-  },
-  {
-    id: 2,
-    name: "Hardware Lead",
-    role: "Access Control OEM Partner (USA)",
-    content: "They tuned 433/868MHz antenna to pass FCC/CE on first round and shared full RF test reports. Zero returns so far.",
-    stars: 5
-  },
-  {
-    id: 3,
-    name: "R&D Manager",
-    role: "Smart Home Integrator (Brazil)",
-    content: "Tuya + RF hybrid receivers shipped with custom firmware hooks. Their engineers answered MCU coding questions overnight.",
-    stars: 5
-  }
-];
-
-// Case Studies (Problem > Solution > Outcome)
-const caseStudies = [
-  {
-    id: "cs-1",
-    title: "Rolling Code Conflict Resolved",
-    market: "Italy | Gate automation distributor",
-    badge: "CE/FCC Report",
-    challenge: "LiftMaster remotes caused RF collisions with local brand receivers, creating 12% return rate.",
-    solution: "Re-tuned HCS301 PCB + SAW oscillator, added whitelist firmware, and provided CE/FCC test report in one batch.",
-    outcome: "Returns dropped to 0.8% and the client launched in Germany within 3 months."
-  },
-  {
-    id: "cs-2",
-    title: "Tuya + RF Hybrid Retrofit",
-    market: "USA | Access control OEM",
-    badge: "UL Prep",
-    challenge: "Needed app control without replacing legacy 433MHz fobs for 40K installed doors.",
-    solution: "Custom Tuya WiFi bridge + rolling-code receiver, SDK handoff, and antenna matching for long garages.",
-    outcome: "App adoption hit 72% in 60 days; no on-site rewiring required."
-  },
-  {
-    id: "cs-3",
-    title: "Industrial IP67 Handset",
-    market: "Brazil | Smart home integrator",
-    badge: "IP67 Test",
-    challenge: "Humid coastal sites killed consumer-grade remotes every rainy season.",
-    solution: "Designed IP67 housing, gold-plated PCB fingers, and salt-spray certification with batch aging test.",
-    outcome: "Warranty claims down 35%, enabling a premium maintenance plan upsell."
-  }
-];
-
-// Expanded Blog Data with Content
-const blogPosts = [
-  {
-    id: 1,
-    title: "Rolling Code vs. Fixed Code: Which is Secure?",
-    date: "Oct 12, 2023",
-    author: "Engineer Li",
-    excerpt: "Understanding the security differences between HCS301 and PT2262 for garage door openers.",
-    content: `
-      <p class="mb-4">When choosing a remote control system for garage doors or gate openers, security is the top priority. The two main encoding technologies in the market are <strong>Fixed Code (e.g., PT2262)</strong> and <strong>Rolling Code (e.g., HCS301)</strong>.</p>
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">The Vulnerability of Fixed Code</h4>
-      <p class="mb-4">Fixed code remotes send the exact same binary signal every time you press the button. While these are cheap and easy to clone, they are vulnerable to "Replay Attacks" where a thief can record your signal and play it back later to open your door.</p>
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Why Rolling Code is Superior</h4>
-      <p class="mb-4">Rolling code technology, developed by Microchip (HCS series), changes the code every time the button is pressed. An algorithm inside the transmitter and receiver calculates a new code based on a synchronized counter. Even if a thief intercepts the signal, that specific code is now invalid.</p>
-      <p>For high-security applications, CHJ Remotes strongly recommends using our HCS301 based remotes.</p>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=Security+Tech`
-  },
-  {
-    id: 2,
-    title: "How to Program a Universal RF Remote",
-    date: "Nov 05, 2023",
-    author: "Support Team",
-    excerpt: "A step-by-step guide for cloning 433MHz remotes using our face-to-face copy series.",
-    content: `
-      <p class="mb-4">Our "Face-to-Face" copy remotes are designed to clone existing fixed code and learning code remotes without needing tools.</p>
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Step 1: Clear History Code</h4>
-      <p class="mb-4">Press and hold buttons A and B simultaneously until the LED flashes 3 times. Release button B (keep holding A) and press B 3 times slowly. The LED will flash continuously.</p>
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Step 2: Copy Code</h4>
-      <p class="mb-4">Place the original remote and the copy remote back-to-back. Press and hold the corresponding buttons on both remotes. The LED on the copy remote will flash quickly, indicating success.</p>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=Programming+Guide`
-  },
-  {
-    id: 3,
-    title: "The Future of Smart Home: Tuya + RF Integration",
-    date: "Dec 20, 2023",
-    author: "R&D Dept",
-    excerpt: "Why hybrid solutions are dominating the European market in 2024.",
-    content: `
-      <p class="mb-4">Traditional RF remotes are reliable but lack remote access. WiFi modules are smart but depend on the internet. The solution? <strong>Hybrid Modules.</strong></p>
-      <p>Our new Tuya-compatible receivers allow users to open their gates via:</p>
-      <ul class="list-disc ml-6 mb-4">
-        <li>Traditional RF Remote (for quick access from the car)</li>
-        <li>Smartphone App (from anywhere in the world)</li>
-        <li>Voice Control (Alexa / Google Home)</li>
-      </ul>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=Smart+Home`
-  },
-  {
-    id: 4,
-    title: "Understanding RF Remote Controls: Technology, Protocols, and Applications",
-    date: "Jan 15, 2025",
-    author: "Engineer Zhang",
-    excerpt: "A comprehensive guide to RF remote control technology, covering frequencies, encoding protocols, security features, and industrial applications in modern automation systems.",
-    content: `
-      <p class="mb-4">Radio Frequency (RF) remote controls have become an integral part of modern automation systems, from garage door openers and gate access controls to smart home devices and industrial equipment. Understanding the underlying technology, protocols, and applications is essential for distributors, OEM manufacturers, and system integrators looking to implement reliable and secure wireless control solutions.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">The Fundamentals of RF Technology</h4>
-      <p class="mb-4">RF remote controls operate by transmitting radio waves at specific frequencies to communicate with receivers. Unlike infrared (IR) remotes that require a direct line of sight, RF signals can penetrate walls and obstacles, making them ideal for outdoor applications and situations where the transmitter and receiver are not within visual range. The basic components of an RF remote system include a transmitter (the remote control), a receiver, and the communication protocol that governs how data is encoded and transmitted.</p>
-      
-      <p class="mb-4">The transmitter contains an encoder chip that converts button presses into digital signals, a radio frequency oscillator that generates the carrier wave, and an antenna that broadcasts the signal. The receiver decodes these signals and triggers the corresponding action, such as opening a gate or activating a device. Modern RF systems typically operate in the ISM (Industrial, Scientific, and Medical) frequency bands, which are license-free and designated for unlicensed use in most countries.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Frequency Bands and Regional Regulations</h4>
-      <p class="mb-4">Different regions of the world utilize different frequency bands for RF remote controls, primarily due to regulatory requirements and spectrum allocation. The most common frequencies are 315 MHz, 433.92 MHz, and 868 MHz, each serving specific markets and applications.</p>
-      
-      <p class="mb-4">The 433.92 MHz frequency is widely used across Europe, Asia, and many other parts of the world. It offers a good balance between range, antenna size, and regulatory compliance. This frequency is particularly popular for gate and garage automation, access control systems, and general-purpose remote control applications. The 868 MHz band is primarily used in Europe for applications requiring longer range and lower power consumption, often found in professional gate automation and security systems.</p>
-      
-      <p class="mb-4">In North America, the 315 MHz frequency is the standard for automotive key fobs, garage door openers, and many consumer RF devices. This lower frequency provides better building penetration but requires larger antennas compared to higher frequency bands. Manufacturers must ensure compliance with regional regulations such as FCC (Federal Communications Commission) in the United States, CE (Conformité Européenne) in Europe, and other local standards that govern power output, frequency tolerance, and emission limits.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Encoding Protocols: Fixed Code vs. Rolling Code</h4>
-      <p class="mb-4">The security and reliability of RF remote systems depend heavily on the encoding protocol used. Fixed code protocols, such as those based on PT2262 and EV1527 chips, transmit the same binary code each time a button is pressed. While these systems are simple to implement and cost-effective, they are vulnerable to code grabbing and replay attacks. A malicious actor with a simple RF receiver can capture and replay the transmitted signal to gain unauthorized access.</p>
-      
-      <p class="mb-4">Rolling code technology, exemplified by the Microchip HCS301 and HCS361 chips, addresses this security vulnerability by changing the transmitted code with each button press. Both the transmitter and receiver share a secret key and a synchronized counter. Each transmission includes an encrypted code based on the current counter value, and the receiver verifies that the code is valid and within an acceptable counter range before executing the command. Even if an attacker captures a transmission, the code becomes invalid after the next legitimate use, making replay attacks ineffective.</p>
-      
-      <p class="mb-4">Learning code protocols offer a middle ground between fixed and rolling code systems. These remotes can learn and store codes from existing transmitters, allowing users to replace lost remotes without reprogramming the receiver. While more convenient than fixed code systems, learning code remotes still transmit the same code repeatedly and share the same security vulnerabilities unless combined with additional encryption measures.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Multi-Frequency and Universal Remotes</h4>
-      <p class="mb-4">The proliferation of different frequencies and protocols has created demand for universal and multi-frequency remote controls. These devices can operate across multiple frequency bands and support various encoding schemes, reducing inventory complexity for distributors and providing flexibility for end users. Advanced universal remotes feature face-to-face cloning capabilities, allowing them to copy codes from existing remotes without requiring programming tools or technical expertise.</p>
-      
-      <p class="mb-4">Multi-frequency remotes are particularly valuable in markets with mixed equipment from different manufacturers, such as property management companies overseeing multiple buildings with various access control systems. A single universal remote can replace dozens of specific remotes, simplifying key management and reducing the likelihood of lost or misplaced devices. The latest generation of universal remotes supports both fixed and rolling code protocols, with some models capable of storing up to 500 different codes across multiple frequency bands.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Antenna Design and Range Optimization</h4>
-      <p class="mb-4">The performance of an RF remote system depends significantly on antenna design and tuning. The antenna must be carefully matched to the operating frequency and the physical constraints of the device enclosure. Common antenna types include wire antennas, PCB trace antennas, and chip antennas, each offering different trade-offs in terms of size, efficiency, and cost.</p>
-      
-      <p class="mb-4">PCB trace antennas are popular in compact remote controls as they can be integrated directly into the circuit board layout, eliminating the need for external antenna components. However, these antennas require careful design and tuning to achieve optimal performance. Factors such as trace length, width, spacing, and the surrounding materials all affect the antenna's impedance and radiation pattern. Professional RF testing equipment, including spectrum analyzers and vector network analyzers, is used to measure and optimize antenna performance.</p>
-      
-      <p class="mb-4">Range optimization involves balancing transmit power, receiver sensitivity, and antenna efficiency. While increasing transmit power can extend range, it must remain within regulatory limits and can impact battery life in portable devices. Receiver sensitivity, measured in dBm, determines the minimum signal strength the receiver can detect. High-quality receivers with excellent sensitivity can achieve reliable communication at distances exceeding 100 meters with properly tuned antennas.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Integration with Smart Home Systems</h4>
-      <p class="mb-4">The rise of smart home technology has created new opportunities for RF remote controls. Hybrid receivers that combine traditional RF reception with WiFi, Zigbee, or Bluetooth connectivity enable users to control their gates, doors, and devices through smartphone apps, voice assistants, and cloud-based automation platforms. These smart receivers bridge the gap between legacy RF systems and modern IoT (Internet of Things) ecosystems.</p>
-      
-      <p class="mb-4">Tuya-compatible receivers represent a significant advancement in this space, offering seamless integration with the Tuya smart home platform and its ecosystem of compatible devices. Users can open their gates remotely from anywhere in the world, grant temporary access to visitors through the app, and create automation scenarios that link gate operation with other smart home devices. For example, a gate opening can trigger lights to turn on, cameras to start recording, or security systems to arm or disarm.</p>
-      
-      <p class="mb-4">For system integrators and OEM manufacturers, these hybrid solutions provide a competitive advantage by offering customers both the reliability of traditional RF controls and the convenience of smart home integration. The ability to provide firmware customization, SDK access, and API documentation enables developers to create tailored solutions that integrate seamlessly with existing systems and workflows.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Industrial Applications and Environmental Considerations</h4>
-      <p class="mb-4">Beyond residential applications, RF remote controls play crucial roles in industrial environments where reliability and durability are paramount. Industrial hoists, cranes, shutters, and parking barriers rely on RF controls for safe and efficient operation. These applications often require specialized remotes designed to withstand harsh environmental conditions.</p>
-      
-      <p class="mb-4">IP67-rated waterproof remotes are designed for outdoor and industrial use, providing complete protection against dust ingress and temporary immersion in water. These devices feature sealed enclosures, waterproof buttons, and conformal-coated circuit boards to prevent moisture damage. Gold-plated contacts and corrosion-resistant materials ensure reliable operation in coastal environments where salt spray can rapidly degrade standard electronics.</p>
-      
-      <p class="mb-4">Industrial applications also demand extended battery life and robust communication protocols. Low-power MCU designs combined with efficient RF transmission schemes can provide years of operation from a single battery. Critical systems may implement bidirectional communication, allowing the receiver to acknowledge commands and report status back to the transmitter, providing operators with confirmation that their commands have been executed.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Quality Assurance and Testing</h4>
-      <p class="mb-4">Manufacturing high-quality RF remote controls requires rigorous quality assurance processes throughout production. Automated Optical Inspection (AOI) systems verify component placement and solder quality during PCB assembly. Functional testing ensures that each device operates correctly before packaging, including verification of button functions, signal transmission, and range performance.</p>
-      
-      <p class="mb-4">Aging tests subject devices to extended operation at elevated temperatures to identify early-life failures and ensure long-term reliability. RF testing chambers shield devices from external interference while measuring transmission power, frequency accuracy, and modulation characteristics. These tests ensure compliance with regulatory requirements and consistent performance across production batches.</p>
-      
-      <p class="mb-4">For export markets, manufacturers must provide comprehensive documentation including CE, FCC, and RoHS certifications. These documents demonstrate compliance with safety, electromagnetic compatibility, and environmental regulations, enabling smooth customs clearance and market entry. Professional manufacturers maintain detailed records of test results and can provide technical documentation to support customer projects and regulatory audits.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Future Trends in RF Remote Technology</h4>
-      <p class="mb-4">The future of RF remote control technology continues to evolve with advancements in wireless communication and semiconductor technology. The integration of more powerful microcontrollers enables advanced features such as encryption, bidirectional communication, and over-the-air firmware updates. Low-power wide-area network (LPWAN) technologies may enable longer range communication with minimal power consumption.</p>
-      
-      <p class="mb-4">Security remains a critical focus area, with increasing adoption of advanced encryption algorithms and authentication protocols to protect against sophisticated attacks. The development of standardized security frameworks will help ensure interoperability between devices from different manufacturers while maintaining high security standards.</p>
-      
-      <p class="mb-4">As the Internet of Things continues to expand, RF remote controls will increasingly become part of larger connected ecosystems. The ability to seamlessly integrate with cloud platforms, voice assistants, and automation systems will become standard features rather than premium options. Manufacturers who can provide reliable, secure, and easily integrated RF solutions will be well-positioned to serve the growing demand for wireless control across residential, commercial, and industrial markets.</p>
-      
-      <p>For distributors and OEM partners seeking reliable RF remote control solutions, working with an experienced manufacturer who understands the technical nuances of RF technology, regional regulatory requirements, and quality assurance processes is essential. CHJ Remotes combines decades of experience with state-of-the-art manufacturing capabilities to deliver high-quality RF remote controls tailored to specific market requirements and applications.</p>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=RF+Remote+Technology`
-  },
-  {
-    id: 5,
-    title: "Why Your 433MHz Remote Has Short Range - 5 Common Causes & Solutions",
-    date: "Jan 06, 2025",
-    author: "Engineer Li",
-    excerpt: "Struggling with short range on your 433MHz remote? Discover the top 5 causes and practical solutions to restore your signal distance.",
-    content: `
-      <p class="mb-4">"Hey, why is this 433MHz remote barely reaching 5 meters behind a wall? It says 200 meters on the box!"</p>
-      
-      <p class="mb-4">I hear this at least three times a week on technical support calls. In the RF (Radio Frequency) world, signal range isn't a fixed number; it's a variable. If your distance is shrinking, it's usually not a "bad product"—it's usually a physics problem.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">The Quick Answer</h4>
-      <p class="mb-4">Short range is almost always caused by three things: <strong>low battery voltage at the transmitter, metal shielding around the receiver, or heavy signal interference.</strong> Check your power and antenna orientation first; that solves 90% of cases.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">1. Don't just check if the battery "works"—check the Transmit Power</h4>
-      <p class="mb-4">We often see cases where the battery has enough juice to light up the LED, but not enough to push the signal across the room.</p>
-      
-      <p class="mb-4">In 433MHz modules, the range is directly tied to the voltage. As the battery drains, the <strong>transmit power</strong> drops off a cliff.</p>
-      
-      <p class="mb-4"><strong>Our advice:</strong></p>
-      <ul class="list-disc ml-6 mb-4">
-        <li>Use a multimeter to check the "transient voltage" while pressing the button.</li>
-        <li>If a 12V 27A battery measures below 10V, replace it immediately.</li>
-        <li>For industrial applications, we always recommend using a stable DC power supply for the transmitter if possible.</li>
-      </ul>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">2. The Antenna: Your signal's "megaphone" and most common failure</h4>
-      <p class="mb-4">Many engineers coil the antenna into a tiny spiral to fit it inside a sleek plastic case. This is essentially putting a gag on your signal.</p>
-      
-      <p class="mb-4">The <strong>antenna</strong> length and orientation are the biggest factors for <strong>receiver sensitivity</strong>. For 433MHz, a standard 1/4 wave antenna should be roughly 17cm long.</p>
-      
-      <p class="mb-4"><strong>Our advice:</strong></p>
-      <ul class="list-disc ml-6 mb-4">
-        <li>Keep the antenna straight. Never coil it or tape it flat against the PCB.</li>
-        <li>The receiver antenna should ideally be perpendicular to the ground.</li>
-        <li>If your receiver is inside a metal cabinet, you must use an external high-gain antenna with an extension cable.</li>
-      </ul>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">3. Metal Shielding: The invisible wall</h4>
-      <p class="mb-4">We see this constantly: a customer installs a receiver inside a stainless steel control box and wonders why it won't trigger.</p>
-      
-      <p class="mb-4">Whether you use <strong>fixed code</strong>, <strong>learning code</strong>, or even high-security <strong>rolling code</strong>, radio waves cannot pass through thick metal.</p>
-      
-      <p class="mb-4"><strong>Our advice:</strong></p>
-      <ul class="list-disc ml-6 mb-4">
-        <li>Check if there are large metal plates, aluminum window frames, or reinforced concrete between the devices.</li>
-        <li>If you must use a metal enclosure, <strong>it is not that the signal is weak, but rather that the laws of physics are being ignored</strong>.</li>
-        <li>The only fix is to move the antenna outside the metal "cage."</li>
-      </ul>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">4. EMI: The "noise" you can't see</h4>
-      <p class="mb-4">The 433MHz band is an open frequency, which means it's crowded. LED drivers, large motors, and power inverters all generate heavy <strong>EMI</strong> (Electromagnetic Interference).</p>
-      
-      <p class="mb-4">This noise raises the "noise floor," making it impossible for the receiver to "hear" the remote's command.</p>
-      
-      <p class="mb-4"><strong>Our advice:</strong></p>
-      <ul class="list-disc ml-6 mb-4">
-        <li>Try turning off nearby LED lights or machinery to see if the range improves.</li>
-        <li>Keep the receiver at least 1 meter away from switching power supplies or motors.</li>
-        <li>In high-noise environments, we suggest choosing a receiver module with a built-in SAW filter.</li>
-      </ul>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">5. Choosing the right protocol for the environment</h4>
-      <p class="mb-4">While <strong>315MHz</strong> and 433MHz have similar range characteristics, the way they handle data matters.</p>
-      
-      <p class="mb-4">In noisy industrial sites, <strong>rolling code</strong> protocols often perform better than traditional fixed codes. It's not just about distance; it's about the "success rate" of the data packet being decoded correctly.</p>
-      
-      <p class="mb-4"><strong>Our advice:</strong></p>
-      <ul class="list-disc ml-6 mb-4">
-        <li>Use learning code for simple, residential DIY projects.</li>
-        <li>Switch to rolling code for industrial environments where reliability is non-negotiable.</li>
-        <li>Ensure your device meets local <strong>regulatory certifications</strong> (like FCC or CE) regarding maximum transmit power.</li>
-      </ul>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-2">Troubleshooting Checklist</h4>
-      <p class="mb-4">If your remote range is disappointing, run through this list:</p>
-      <ol class="list-decimal ml-6 mb-4">
-        <li><strong>Power:</strong> Is the transmitter battery fresh? Is the receiver voltage stable?</li>
-        <li><strong>Antenna:</strong> Is it 17cm? Is it straight? Is it away from the PCB?</li>
-        <li><strong>Height:</strong> Is the receiver mounted too low? (Try at least 2 meters high).</li>
-        <li><strong>Metal:</strong> Is there any metal blocking the line of sight?</li>
-        <li><strong>Interference:</strong> Are there motors or LED drivers nearby?</li>
-      </ol>
-      
-      <div class="bg-blue-50 border-l-4 border-[#1C2D5A] p-4 my-6">
-        <p class="font-bold text-[#1C2D5A] mb-2">Still not getting the distance you need?</p>
-        <p class="text-slate-700">Feel free to send me your <strong>application parameters</strong> (intended distance, environment, frequency, receiver model, antenna type, and power supply). I can help you determine if you need a higher-gain antenna or a different module altogether.</p>
-      </div>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=433MHz+Range+Issues`
-  },
-  {
-    id: 6,
-    title: "\"My 433MHz Remote Range Just Dropped\": A Real-World Troubleshooting Guide",
-    date: "Jan 14, 2025",
-    author: "Engineer Li",
-    excerpt: "Your 433MHz range dropped? It's rarely a burnt module. Learn the real causes: EMI, antenna detuning, physical shielding, and practical solutions.",
-    content: `
-      <p class="mb-4">"Hey, we installed these 433MHz gate controllers last month and they worked fine. Now, the drivers have to be three feet from the receiver just to get a signal. Did the modules burn out?" I hear this exact story at least twice a week. It is rarely a "burnt" module and almost always a physics problem in the field.</p>
-      
-      <div class="bg-blue-50 border-l-4 border-[#1C2D5A] p-4 my-6">
-        <p class="font-bold text-[#1C2D5A] mb-2">The short answer:</p>
-        <p class="text-slate-700">Your 433MHz range is likely suffering from <strong>EMI (Electromagnetic Interference)</strong>, <strong>Antenna Detuning</strong>, or <strong>Physical Shielding</strong>. To fix it, you need to elevate your receiver, clear the Fresnel zone, and check for local "noise" from LED drivers or power supplies.</p>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">1. Check for EMI: The Silent "Noise" Killing Your 433MHz Signal</h4>
-      <p class="mb-4">In our experience, the number one killer of range isn't a weak transmitter; it's a "loud" environment. 433.92MHz is a crowded, unlicensed ISM band. If you have cheap LED floodlights, switching power supplies, or industrial motors nearby, they leak broadband noise.</p>
-      <p class="mb-4">This noise raises the "noise floor." If your <strong>Receiver Sensitivity</strong> is -110dBm but the ambient noise is at -90dBm, your remote has to be incredibly loud (close) to be heard over the static.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>The Power-Down Test:</strong> Turn off everything in the building except the receiver. If the range jumps back to 50 meters, you have an interference source.</li>
-          <li><strong>Isolate the Power:</strong> If you're using a cheap DC adapter to power your receiver, swap it for a linear power supply or a battery. Dirty power ripples can cripple a superheterodyne receiver.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">2. Antenna Orientation and the "Metal Shielding" Trap</h4>
-      <p class="mb-4">We often see engineers tuck a 433MHz receiver inside a heavy-duty steel control box for "protection." Metal is a Faraday cage. It stops RF dead. Even placing the antenna parallel to a metal wall will "detune" it, shifting its resonant frequency away from 433MHz.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Get Outside the Box:</strong> If your controller is in a metal box, you must use an external SMA antenna.</li>
-          <li><strong>Vertical is King:</strong> Most <strong>433MHz remote control</strong> transmitters use vertically polarized antennas (pointing up). If your receiver antenna is lying flat or coiled up inside the case, you're losing 10dB to 20dB of signal immediately.</li>
-          <li><strong>The 17cm Rule:</strong> For 433MHz, a standard 1/4 wave whip antenna should be exactly <strong>17.2cm</strong>. Don't cut it shorter "to make it fit," and don't leave it coiled like a spring.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">3. Fixed Code vs. Rolling Code: More Than Just Security</h4>
-      <p class="mb-4">While most people choose <strong>Rolling Code (HCS301)</strong> for security and <strong>Fixed Code or Learning Code</strong> for simplicity, the coding protocol affects how a receiver "decides" a signal is valid.</p>
-      <p class="mb-4">In high-interference areas, a simple fixed-code signal might get "mangled" by noise. A rolling code system has stricter timing requirements. If the signal is choppy due to distance, the receiver might reject the packet even if it "sees" it.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Check the Timing:</strong> If you're a developer, increase the number of times the transmitter sends the packet (the "retransmit count").</li>
-          <li><strong>Consistency Check:</strong> If the remote works 100% of the time at 5 meters but 0% at 15 meters, it's a hardware/link budget issue. If it works "sometimes" at all distances, it's likely a code-matching or timing issue.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">4. Fresnel Zone and Ground Absorption</h4>
-      <p class="mb-4">I've seen many installers mount the receiver 30cm off the ground because it's convenient for wiring. This is a mistake. The ground absorbs RF energy. Furthermore, the "Fresnel Zone" is an elliptical area between the transmitter and receiver that needs to be clear of obstructions.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>The 2-Meter Rule:</strong> Try to mount your receiver at least 2 meters above the ground. This gets the signal above most cars, bushes, and fences.</li>
-          <li><strong>Line of Sight (LOS):</strong> 433MHz can penetrate one or two brick walls, but it hates wet trees and reinforced concrete. If you can't see the antenna, don't expect "max range" specs.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">5. Battery Sag and Transmitter ERP</h4>
-      <p class="mb-4">Most <strong>433MHz/315MHz</strong> hand-held remotes use small 12V (27A) or 3V (CR2032) batteries. As the battery voltage drops, the <strong>Effective Radiated Power (ERP)</strong> drops off a cliff. A battery might have enough juice to light the LED, but not enough to drive the SAW resonator at full power.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Voltage Load Test:</strong> Test the battery while holding the button down. If a 12V battery drops to 9V under load, throw it away.</li>
-          <li><strong>Legality vs. Power:</strong> In the US (FCC) and Europe (CE), there are strict limits on <strong>Transmit Power</strong>. If you are using a "high power" 1W transmitter to solve a range problem, you might be drifting into non-compliance. It is almost always better to improve the receiver's antenna than to blast more power from the remote.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">The "Why is my range short?" Checklist</h4>
-      <p class="mb-4">Before you call your supplier or swap out the hardware, run through this list in the field:</p>
-      
-      <div class="bg-white border-2 border-slate-200 rounded-lg p-6 my-6">
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Battery:</strong> Is it fresh? (Don't trust the LED).</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Antenna:</strong> Is it 17.2cm? Is it outside the metal enclosure? Is it vertical?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Height:</strong> Is the receiver at least 2 meters high?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Local Noise:</strong> Are there LED lights or cheap USB chargers nearby?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Frequency:</strong> Are you sure it's 433.92MHz and not a 315MHz remote trying to talk to a 433 receiver? (It happens more than you'd think).</span>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="bg-gradient-to-r from-[#1C2D5A] to-[#0f1e4d] text-white p-6 rounded-lg my-8">
-        <p class="font-bold text-xl mb-2">Still not hitting the distance you need?</p>
-        <p class="text-blue-100">Every environment is different. If you're struggling with a specific install, tell me a bit about your setup. If you can provide the <strong>intended distance, the environment (open field or warehouse), the frequency, the receiver model, and what kind of load (motor, light, etc.) you're switching</strong>, I can usually pinpoint the bottleneck for you.</p>
-        <p class="mt-4 text-[#FF8A00] font-semibold">Would you like me to review your current antenna specs or help you calculate the link budget for your next project?</p>
-      </div>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=433MHz+Troubleshooting+Guide`
-  },
-  {
-    id: 7,
-    title: "\"The Code Won't Match\": Why Your 433MHz Remotes Aren't Talking to Receiver",
-    date: "Jan 14, 2025",
-    author: "Engineer Li",
-    excerpt: "Your 433MHz remotes won't pair? Frequency is only 10% of the equation. Learn about encoding schemes, baud rate, and protocol compatibility.",
-    content: `
-      <p class="mb-4">"We bought 100 replacement remotes for a parking garage project. They are all 433MHz. The chips look the same. But no matter how many times we press the 'learn' button, the receiver just won't blink."</p>
-      
-      <p class="mb-4">I get this frantic call from installers at least once a month. The hard truth in the RF world is that <strong>frequency is only 10% of the equation</strong>. Just because two remotes "speak" at 433.92MHz doesn't mean they speak the same language.</p>
-      
-      <div class="bg-blue-50 border-l-4 border-[#1C2D5A] p-4 my-6">
-        <p class="font-bold text-[#1C2D5A] mb-2">The short answer:</p>
-        <p class="text-slate-700">If your pairing is failing, you likely have a mismatch in <strong>Encoding Schemes</strong> (Fixed, Learning, or Rolling Code), <strong>Baud Rate/Oscillation Resistance</strong>, or <strong>Protocol Brands</strong>. You cannot pair a Rolling Code remote to a Fixed Code receiver, even if the frequency is identical.</p>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">1. The "Big Three" Encoding Types: Are You Mixing Languages?</h4>
-      <p class="mb-4">This is the most common roadblock. In the <strong>433MHz remote control</strong> world, there are three distinct "languages."</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <ul class="space-y-3">
-          <li><strong>Fixed Code (PT2262 / SC2262):</strong> Old school. You set physical jumpers or solder pads inside the remote. If the receiver's jumpers match the remote's, it works.</li>
-          <li><strong>Learning Code (EV1527 / PT2240):</strong> The most popular for smart homes. Each remote has a unique ID burnt in at the factory. The receiver "memorizes" this ID.</li>
-          <li><strong>Rolling Code (HCS301 / Keeloq):</strong> High security. The code changes every time you press the button.</li>
-        </ul>
-      </div>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Check the Chip:</strong> Pop the cover of your remote. Look at the 8-pin or 16-pin chip. If it says <strong>EV1527</strong>, it's Learning Code. If it says <strong>HCS</strong>, it's Rolling Code.</li>
-          <li><strong>The Compatibility Rule:</strong> A Learning Code receiver will <em>never</em> understand a Rolling Code transmitter. When buying stock, always verify the chip model, not just the frequency.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">2. The Hidden Culprit: Oscillation Resistance (The "Speed" of Signal)</h4>
-      <p class="mb-4">I've seen engineers get the chip right and the frequency right, and it still fails. Why? <strong>Oscillation Resistance (MHz/KHz timing).</strong> For Fixed Code chips like PT2262, a resistor (e.g., 1.2M, 2.2M, 3.3M, 4.7M) determines the clock speed of the transmitted data. If the transmitter is screaming data at 4.7M "speed" but the receiver is listening at a 1.2M "speed," the data will be gibberish.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Match the Resistor:</strong> On older systems, check the SMD resistor near the IC. For modern "Auto-scan" learning receivers, this is less of an issue, but for older industrial <strong>wireless controllers</strong>, it's a dealbreaker.</li>
-          <li><strong>Consult the Table:</strong> We generally suggest using a <strong>2.2M or 3.3M</strong> resistor for 2262 chips to ensure the widest compatibility with standard receivers.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">3. "Rolling Code" Brand Locking: The Encryption Wall</h4>
-      <p class="mb-4">If you are working with gate openers like LiftMaster, BFT, or Nice, they use <strong>Rolling Code</strong> with a proprietary encryption key. Even if you buy a "Universal 433MHz Rolling Code" remote, it won't work unless it has that specific brand's software key inside.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Avoid "Universal" Traps:</strong> For high-security gates, stop looking for generic remotes. You need a "Face-to-Face Copy Remote" that is specifically designed to clone that brand, or the original manufacturer's part.</li>
-          <li><strong>The Seed Code:</strong> Some rolling code systems require a "seed code" or a "secret button" press to open the learning window. Check the manual for "Remote Programming Mode."</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">4. ASK vs. FSK: The Modulation Mismatch</h4>
-      <p class="mb-4">While 90% of simple remotes use <strong>ASK (Amplitude Shift Keying)</strong>, some higher-end industrial controllers use <strong>FSK (Frequency Shift Keying)</strong>.</p>
-      <p class="mb-4">ASK turns the carrier wave on and off (like Morse code). FSK shifts the frequency slightly to represent 1s and 0s. An ASK receiver is physically incapable of "hearing" an FSK signal.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Check the Label:</strong> Look for "FSK" or "LoRa" on the module. If one device is ASK and the other is FSK, no amount of "pairing" will ever work.</li>
-          <li><strong>Standardize:</strong> We almost always recommend staying with ASK for simple ON/OFF hobbyist or consumer applications due to lower costs and easier replacement parts.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">5. Clear the Memory: The "Full Buffer" Problem</h4>
-      <p class="mb-4">Sometimes hardware is perfect, but the receiver is "full." Most <strong>Learning Code receivers</strong> can only store 16, 32, or 50 individual remote IDs. If you've been testing multiple units, you might have hit the limit.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Actionable Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>The Master Reset:</strong> Hold the "Learn" button on the receiver for about 10 seconds until the LED flashes rapidly or goes out. This wipes the memory.</li>
-          <li><strong>Try Again:</strong> Now try pairing a single remote. If it works, you simply had a full memory buffer.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">The "Pairing Failed" Troubleshooting List</h4>
-      <p class="mb-4">Before you send the shipment back, run this 60-second check:</p>
-      
-      <div class="bg-white border-2 border-slate-200 rounded-lg p-6 my-6">
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Frequency:</strong> Use a frequency meter. Is it actually 433.92? (Some "433" remotes are actually 433.00 or 434.50).</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Chipset:</strong> Open the shell. Is it EV1527, PT2262, or HCS301? Does the receiver support that chip?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Modulation:</strong> Are both units ASK/OOK?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Battery:</strong> Is the remote's LED bright? (Low voltage = distorted signal timing).</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <input type="checkbox" class="mt-1 w-5 h-5 accent-[#1C2D5A]" />
-            <span><strong>Distance:</strong> Are you too close? Sometimes being 10cm away "overwhelms" the receiver. Stand 2 meters back.</span>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="bg-gradient-to-r from-[#1C2D5A] to-[#0f1e4d] text-white p-6 rounded-lg my-8">
-        <p class="font-bold text-xl mb-2">Struggling with a specific batch of remotes?</p>
-        <p class="text-blue-100">If you're stuck, tell me what's written on the chip of your remote and the model number of your receiver. If you can provide <strong>chip model, frequency, and whether it's a copy-type or a direct-learn type</strong>, I can usually tell you exactly why they aren't talking.</p>
-        <p class="mt-4 text-[#FF8A00] font-semibold">Would you like me to find specific compatibility data for your receiver model?</p>
-      </div>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=433MHz+Code+Matching+Guide`
-  },
-  {
-    id: 8,
-    title: "Why is my 433MHz Remote Range So Short? Real Fixes from the Field",
-    date: "Jan 19, 2025",
-    author: "Eric Huang",
-    excerpt: "Range issues are rarely about a 'broken' remote. Learn the real causes: metal shielding, antenna placement, EMI interference, and practical solutions.",
-    content: `
-      <p class="mb-4">"Eric, we tested the sample in our open parking lot and it hit 100 meters. Now that it's installed in the metal gate controller box, I can't even trigger it from 5 meters away. Is the remote broken?" I get calls like this at least twice a week. It's frustrating when hardware doesn't perform as promised.</p>
-      
-      <div class="bg-blue-50 border-l-4 border-[#1C2D5A] p-4 my-6">
-        <p class="font-bold text-[#1C2D5A] mb-2">The quick answer:</p>
-        <p class="text-slate-700">Range issues are rarely about a "broken" remote. It is almost always a mismatch between <strong>antenna placement, local EMI (Electromagnetic Interference), or physical shielding.</strong> To fix it, you need to move the antenna outside the metal enclosure and check for 433MHz frequency "noise" in the area.</p>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">1. The "Metal Cage" Effect and 433MHz Signal Shielding</h4>
-      <p class="mb-4">The most common mistake I see in gate automation and industrial control is placing the receiver inside a thick metal junction box. Metal is the natural enemy of radio waves.</p>
-      <p class="mb-4">When you enclose a <strong>433MHz receiver</strong> in a metal box, you create a Faraday cage. The signal hits the metal and reflects or dissipates instead of reaching the receiver's pin.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">How to troubleshoot:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Open the box. If the range jumps back to normal immediately, you've found the culprit.</li>
-          <li>If you must use a metal enclosure, use an <strong>external SMA antenna</strong>.</li>
-          <li>Drill a hole, mount the antenna on the outside, and use a shielded cable to connect it to the PCB.</li>
-        </ul>
-      </div>
-      
-      <p class="mb-4"><strong>Pro advice for engineers:</strong> This simple change can often triple your effective distance.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">2. Antenna Tuning: Length and Orientation Matter</h4>
-      <p class="mb-4">I often see technicians tucking the little "pig-tail" wire antenna inside the casing to make it look "neat." Don't do that. For <strong>433.92MHz</strong>, the ideal length for a 1/4 wave whip antenna is roughly 17cm. If you snip it short or coil it up like a spring, you change the impedance and kill the <strong>receiving sensitivity</strong>.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">How to troubleshoot:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Ensure the antenna is straight.</li>
-          <li>For the best performance, the transmitting remote and the receiving antenna should be parallel (both vertical).</li>
-          <li>If you are using a 315MHz system by mistake, the antenna length should be different (about 23cm).</li>
-        </ul>
-      </div>
-      
-      <p class="mb-4"><strong>Pro advice for installers:</strong> Using a 433MHz antenna on a 315MHz receiver is a recipe for poor range. Always match the "physical" to the "frequency."</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">3. Fighting EMI: The "Silent Killers" of Signal</h4>
-      <p class="mb-4">Sometimes the hardware is perfect, but the environment is "loud." We call this <strong>EMI (Electromagnetic Interference)</strong>. In modern homes and factories, LED driver power supplies, cheap switching adapters, and even large motor controllers scream out electronic noise.</p>
-      <p class="mb-4">Since 433MHz is an unlicensed ISM band, it's crowded. If a nearby device is leaking noise, your receiver's <strong>receiving sensitivity</strong> drops because it can't "hear" the remote over the background static.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">How to troubleshoot:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Turn off nearby LED lights or machinery and test the remote again.</li>
-          <li>If the range improves, you need a receiver with better <strong>SAW filter</strong> integration to block out that out-of-band noise.</li>
-        </ul>
-      </div>
-      
-      <p class="mb-4"><strong>Pro advice for procurement:</strong> When sourcing, don't just look at "Transmit Power." Ask for the "Sensitivity" spec of the receiver. A -112dBm superheterodyne receiver will always outperform a cheap -103dBm super-regenerative module in a noisy environment.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">4. Battery Voltage and Transmit Power Logic</h4>
-      <p class="mb-4">This sounds basic, but it's the most overlooked fix. A <strong>fixed code (fixed code)</strong> or <strong>learning code (learning code)</strong> remote might still light up its LED even when the battery is at 2.2V (for a 3V cell). However, the <strong>transmit power (发射功率)</strong> drops exponentially as voltage dips.</p>
-      <p class="mb-4">A "weak" signal might not have the "punch" to penetrate a single brick wall, even if the remote looks like it's working.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">How to troubleshoot:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Swap the CR2032 or 12V 27A battery with a fresh, brand-name one.</li>
-          <li>Test it immediately after replacement.</li>
-        </ul>
-      </div>
-      
-      <p class="mb-4"><strong>Pro advice for distributors:</strong> If your stock has been sitting in a cold warehouse for over 12 months, the batteries are likely degraded. We always suggest our clients test voltage under load before shipping to the end-user.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">5. Coding Protocols: Rolling Code vs. Fixed Code</h4>
-      <p class="mb-4">In some rare cases, the "range" issue is actually a "packet loss" issue. <strong>Rolling code (Hopping code)</strong> systems like HCS301 are much more secure, but because the data packet is longer and more complex, a tiny bit of interference can corrupt the signal. <strong>Fixed code</strong> signals are shorter and "repeat" faster, which can sometimes make them feel more responsive in high-interference zones.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">How to troubleshoot:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>If you are in a high-security environment, stay with rolling code but upgrade to a high-gain external antenna.</li>
-        </ul>
-      </div>
-      
-      <p class="mb-4"><strong>Pro advice for developers:</strong> Check your software's "decoding window." If the timing is too tight, the receiver might ignore a perfectly good signal just because the oscillator on the remote is slightly off due to temperature changes.</p>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">The "Quick Fix" Checklist for the Field</h4>
-      <p class="mb-4">If you're on-site right now and the remote isn't reaching, run through this list:</p>
-      
-      <div class="bg-white border-2 border-slate-200 rounded-lg p-6 my-6">
-        <ol class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">1</span>
-            <span><strong>Fresh Battery:</strong> Is the remote outputting full voltage?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">2</span>
-            <span><strong>Antenna Position:</strong> Is it outside the metal box? Is it straight (not coiled)?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">3</span>
-            <span><strong>Frequency Check:</strong> Are you sure both are 433.92MHz and not 315MHz?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">4</span>
-            <span><strong>Height:</strong> Can you move the receiver higher? (Height = Distance).</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">5</span>
-            <span><strong>Power Supply:</strong> Is the receiver getting "clean" DC power, or is it a noisy AC/DC adapter?</span>
-          </li>
-        </ol>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">Let's get your project dialed in</h4>
-      <p class="mb-4">There is no "one size fits all" in RF. A solution for a 2000-unit apartment complex won't work for a single backyard garage.</p>
-      <p class="mb-4">Tell me about your current setup, and I'll help you spot the bottleneck. Just shoot me a message with these details:</p>
-      
-      <div class="bg-slate-50 p-6 rounded-lg my-6">
-        <ul class="space-y-2">
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Required Distance:</strong></span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Environment:</strong> (Open field? Industrial? Residential?)</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Frequency/Protocol:</strong> (433MHz? Rolling/Fixed code?)</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Antenna Type:</strong> (Internal wire? External SMA?)</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Power Source:</strong> (12V DC? 220V AC?)</span>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="bg-gradient-to-r from-[#1C2D5A] to-[#0f1e4d] text-white p-6 rounded-lg my-8">
-        <p class="font-bold text-xl mb-2">Best regards,</p>
-        <p class="text-blue-100"><strong>Eric Huang</strong> <span class="text-sm">Technical Content Specialist | RF Control Systems</span></p>
-      </div>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=433MHz+Remote+Range+Guide`
-  },
-  {
-    id: 9,
-    title: "Is Your Remote Control \"Cloneable\" or Just Unreliable? The Truth About Fixed vs. Rolling Code",
-    date: "Jan 21, 2025",
-    author: "Eric Huang",
-    excerpt: "Understanding the critical difference between Fixed Code, Learning Code, and Rolling Code for secure access control systems. Learn why rolling code is essential for security-sensitive applications.",
-    content: `
-      <p class="mb-4">"Eric, we just installed 500 remotes for a new gated community, and the property manager is furious. Someone bought a $5 'universal duplicator' online and opened the main gate in seconds. Why didn't you warn us about the security risk?" This was a tough conversation I had last month with a long-time distributor.</p>
-      
-      <div class="bg-blue-50 border-l-4 border-[#1C2D5A] p-4 my-6">
-        <p class="font-bold text-[#1C2D5A] mb-2">The quick answer:</p>
-        <p class="text-slate-700">If you are using <strong>Fixed Code (固定码)</strong> or <strong>Learning Code (学习码)</strong> for security-sensitive applications, you are leaving the door wide open. For any project involving property access or high-value assets, you must switch to <strong>Rolling Code (滚动码)</strong> technology to prevent unauthorized cloning and code-grabbing.</p>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">1. The Vulnerability of Fixed Code in 433MHz Systems</h4>
-      <p class="mb-4">Most entry-level <strong>433MHz remotes</strong> use a fixed code (like the PT2262 chipset). These remotes send the exact same digital "password" every time you press the button. It's like having a physical key that anyone can photograph and 3D print in seconds.</p>
-      <p class="mb-4">A "cloning remote" simply listens to that frequency, records the pulse width, and mimics it.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">How to troubleshoot:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Check the chip inside your remote. If you see "PT2262," "SC2260," or "EV1527" (Learning Code), be aware that these are not secure.</li>
-        </ul>
-      </div>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Pro advice for distributors:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Fixed code is perfect for simple tasks like turning on a garden light or a fountain where security doesn't matter.</li>
-          <li>But for garage doors or alarm systems? We always suggest moving your customers to a hopping code solution.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">2. Why Rolling Code (Hopping Code) is the Professional Choice</h4>
-      <p class="mb-4">When we talk about <strong>Rolling Code</strong>, we are usually talking about Microchip's <strong>HCS301</strong> or similar encryption logic. Every time you press the button, the remote sends a completely different code. The receiver and the transmitter share an "encryption key." Even if a hacker records the signal, that specific code is "used up" and won't work a second time.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">The "Desync" Issue:</p>
-        <p class="text-slate-600 mb-2">Sometimes a customer thinks a rolling code remote is broken because it takes 2-3 clicks to work. This usually happens if the button was pressed many times out of range of the receiver.</p>
-      </div>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Pro advice for engineers:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>When designing your system, ensure your software supports a "resynchronization window."</li>
-          <li>We typically recommend a window of 256 codes to balance security with user convenience.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">3. Decoding the "Learning Code" Marketing Trap</h4>
-      <p class="mb-4">A lot of people get confused by <strong>Learning Code (学习码)</strong> like the EV1527. Salespeople often pitch it as "more secure" than fixed code. To be honest, it's only "half-secure."</p>
-      <p class="mb-4">While each remote has a unique ID (meaning you don't have to manually flip tiny DIP switches), the code it sends is still static. Once a "cloner" learns that ID, the security is gone.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">How to choose:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>If your client asks for "easy setup," Learning Code is great.</li>
-          <li>If they ask for "anti-theft," it's Rolling Code or nothing.</li>
-        </ul>
-      </div>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Pro advice for procurement:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Don't let a low price point dictate your choice for a security project.</li>
-          <li>The cost of replacing 500 compromised remotes far outweighs the 20% premium for rolling code hardware.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">4. Improving Receiver Selectivity and Interference Rejection</h4>
-      <p class="mb-4">I've seen perfect rolling code systems fail because the <strong>receiving sensitivity</strong> was killed by local "noise." If your receiver is a cheap super-regenerative type (the ones with the little adjustable copper coil), it will drift as the temperature changes.</p>
-      <p class="mb-4">If the receiver drifts, it starts missing the complex data packets of a rolling code signal, making the remote feel "unresponsive."</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">How to troubleshoot:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Look at your receiver board. If you see a crystal oscillator (a small silver oval component marked 433 or 6.745), it's a <strong>Superheterodyne</strong> receiver. These are much more stable.</li>
-        </ul>
-      </div>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Pro advice for installers:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Always spec superheterodyne receivers for outdoor installations.</li>
-          <li>They handle temperature swings from -20°C to +80°C without losing the "tune" on the frequency.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">5. Managing Large-Scale Deployments and "Master" Remotes</h4>
-      <p class="mb-4">A common headache for maintenance personnel is managing 1,000 remotes for an apartment complex. If you use standard learning code, you have to physically press the "learn" button on the controller for every single new tenant.</p>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">The better way:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Use a system that supports "Remote Data Entry" or "Master Remotes."</li>
-          <li>Some high-end rolling code systems allow you to "seed" a new remote into the system using an existing authorized remote, saving hours of ladder-climbing.</li>
-        </ul>
-      </div>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Pro advice for developers:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li>Consider the <strong>EEPROM capacity</strong> of your receiver.</li>
-          <li>Most standard modules only store 20 to 50 remotes. If you're doing a large parking lot, you'll need an external memory chip to store up to 1,000+ unique IDs.</li>
-        </ul>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">Security & Reliability Checklist</h4>
-      <p class="mb-4">Before you sign off on your next wireless control project, run through this list to see if your hardware matches the job:</p>
-      
-      <div class="bg-white border-2 border-slate-200 rounded-lg p-6 my-6">
-        <ol class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">1</span>
-            <span><strong>Risk Level:</strong> Is this for a light (Fixed) or a locked door (Rolling)?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">2</span>
-            <span><strong>Chipset:</strong> Does the remote use HCS301/300 (Secure) or EV1527 (Standard)?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">3</span>
-            <span><strong>Receiver Type:</strong> Is it Superheterodyne (Stable) or Super-regenerative (Basic)?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">4</span>
-            <span><strong>Local Environment:</strong> Are there many other 433MHz devices nearby causing EMI?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">5</span>
-            <span><strong>User Capacity:</strong> Does the receiver have enough memory for all your users?</span>
-          </li>
-        </ol>
-      </div>
-      
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">Let's find the right protocol for your project</h4>
-      <p class="mb-4">Using the wrong coding format is the #1 reason for "project callbacks." I can help you verify if your current hardware is actually fit for purpose.</p>
-      <p class="mb-4">Send me a quick summary of what you're building, and I'll give you a technical breakdown of the best chip and receiver combo. Tell me:</p>
-      
-      <div class="bg-slate-50 p-6 rounded-lg my-6">
-        <ul class="space-y-2">
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Application:</strong> (e.g., Industrial hoist, Residential gate, Home automation)</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Total Users:</strong> (How many remotes per receiver?)</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Security Requirement:</strong> (Low, Medium, or High-security "No-Clone")</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span><strong>Operating Environment:</strong> (Indoor vs. Outdoor)</span>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="bg-gradient-to-r from-[#1C2D5A] to-[#0f1e4d] text-white p-6 rounded-lg my-8">
-        <p class="font-bold text-xl mb-2">Best regards,</p>
-        <p class="text-blue-100"><strong>Eric Huang</strong> <span class="text-sm">Technical Content Specialist | RF Control Systems</span></p>
-      </div>
-      
-      <div class="bg-slate-50 p-4 rounded-lg my-6 text-center">
-        <p class="text-slate-600 italic">Would you like me to write another article focusing on a different technical aspect, such as antenna design or frequency regulations (CE/FCC)?</p>
-      </div>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=Fixed+vs+Rolling+Code`
-  },
-  {
-    id: 10,
-    title: "Why Won't Your Universal Remote Work? The Frequency & Protocol Mismatch Guide",
-    date: "Jan 22, 2025",
-    author: "Eric Huang",
-    excerpt: "Your universal remote won't pair? It's rarely about the brand—it's about frequency (MHz) and encryption (Fixed vs. Rolling Code). Learn the invisible compatibility rules.",
-    content: `
-      <p class="mb-4">Last week, a contractor called me, sounding like he'd just about had it. He was trying to pair a brand-new 433MHz universal remote to an older LiftMaster opener for a client, and no matter how many times he hit the "Learn" button, the motor just blinked at him.</p>
-
-      <p class="mb-4">"Is the remote dead, or is the motor junk?" he asked.</p>
-
-      <p class="mb-4">Honestly, neither. It was a classic case of a <strong>frequency and protocol mismatch</strong>—the invisible wall that keeps the global garage door remote industry divided.</p>
-
-      <div class="bg-blue-50 border-l-4 border-[#1C2D5A] p-4 my-6">
-        <p class="font-bold text-[#1C2D5A] mb-2">The Short Answer: Why Won't Your Remote Work?</p>
-        <p class="text-slate-700">If you're looking for the "magic bullet," here it is: <strong>Compatibility isn't about the brand name on the plastic; it's about the frequency (MHz) and the encryption (Fixed vs. Rolling Code).</strong> If your remote and receiver aren't speaking the same language at the same speed, you're just shouting into a void.</p>
-      </div>
-
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">1. The North American Giants: Chamberlain & LiftMaster</h4>
-      <p class="mb-4">If you're working in the US or Canada, you're mostly dealing with the Chamberlain Group. They own <strong>LiftMaster</strong>, <strong>Chamberlain</strong>, and <strong>Sears Craftsman</strong>.</p>
-
-      <p class="mb-4">For years, they used <strong>390MHz</strong>, but then the US Department of Defense stepped in (they use 390MHz for land mobile radios), which forced a shift to <strong>315MHz</strong> around 2005.</p>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Key Technical Insight: Security+ 2.0</p>
-        <p class="text-slate-600 mb-2">In 2011, they introduced <strong>Security+ 2.0</strong>. This was a game-changer because it uses <strong>Narrow Band</strong> technology and jumps between three frequencies (<strong>310MHz, 315MHz, and 390MHz</strong>) to avoid interference.</p>
-      </div>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Our Field Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Check the Learn Button Color:</strong> This is the industry "secret code." A yellow button means Security+ 2.0 (310/315/390 MHz). Purple means 315MHz. Orange/Red means 390MHz Rolling Code. Green means 390MHz Billion Code (the old stuff).</li>
-          <li><strong>Don't Mix Generations:</strong> If you have a yellow-button motor, a standard 315MHz "Universal" remote likely won't work unless it specifically supports the Security+ 2.0 protocol.</li>
-        </ul>
-      </div>
-
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">2. The Innovation Leader: Genie & Overhead Door</h4>
-      <p class="mb-4">Genie is the other big player in the Western market. Their secret sauce is <strong>Intellicode</strong>. It's their version of a <strong>Rolling Code</strong> system where the code changes every single time you press the button.</p>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Technical Analysis: Auto-Seek Dual Frequency</p>
-        <p class="text-slate-600 mb-2">Most modern Genie remotes use <strong>Auto-Seek Dual Frequency</strong>, switching between <strong>315MHz and 390MHz</strong>. This is genius because it helps bypass local <strong>EMI (Electromagnetic Interference)</strong> from things like LED bulbs or neighboring security systems.</p>
-      </div>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Our Field Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>LED Bulb Interference:</strong> We've seen Genie openers lose 50% of their range because the homeowner put a cheap LED bulb in the motor. Those bulbs leak RF noise. Use "Garage Door Rated" LEDs or old-school incandescents if the range drops suddenly.</li>
-          <li><strong>Pairing Tip:</strong> Unlike LiftMaster, Genie often requires you to press the remote button multiple times to "synchronize" the rolling code sequence after the motor enters learn mode.</li>
-        </ul>
-      </div>
-
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">3. European Precision: Hörmann & Sommer</h4>
-      <p class="mb-4">Europe is a different beast entirely. While the US loves 315/390MHz, Europe is the land of <strong>433.92MHz</strong> and <strong>868MHz</strong>.</p>
-
-      <p class="mb-4"><strong>Hörmann</strong> is the Mercedes-Benz of this world. They use a proprietary system called <strong>BiSecur</strong>. It's a 128-bit encryption protocol that is basically unhackable. <strong>Sommer</strong>, on the other hand, is known for their unique <strong>Direct Drive</strong> systems where the motor moves along a stationary chain.</p>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Technical Analysis: 868MHz vs 433MHz</p>
-        <p class="text-slate-600 mb-2">868MHz is generally "cleaner" in Europe because it's a dedicated band for short-range devices. 433MHz is a "junk drawer" frequency—everything from meat thermometers to car alarms lives there.</p>
-      </div>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Our Field Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>The BiSecur Trap:</strong> You cannot use a generic 868MHz remote with a Hörmann BiSecur receiver. It's highly secure, which means it's highly exclusive. You must buy original or a very high-quality "Hand-to-Hand" duplicator.</li>
-          <li><strong>Range Issues:</strong> If you're using a Sommer system and the range is poor, check the <strong>Antenna</strong> placement. Their receivers are often tucked into metal rails, which act as <strong>Metal Shielding</strong> and kill the signal.</li>
-        </ul>
-      </div>
-
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">4. The International "Wild West": 433MHz Universal Remotes</h4>
-      <p class="mb-4">Outside of the big proprietary brands, the world runs on <strong>433.92MHz</strong>. This is where you find thousands of Chinese manufacturers and "Universal" replacements.</p>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Key Technical Insight: Fixed vs. Learning vs. Rolling Code</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Fixed Code:</strong> The "DIP Switch" era. The code is hardcoded. Easy to copy, low security.</li>
-          <li><strong>Learning Code (EV1527):</strong> A step up. Each remote has a unique ID, but it doesn't change.</li>
-          <li><strong>Rolling Code (HCS301):</strong> The standard for security. The code hops using a mathematical algorithm.</li>
-        </ul>
-      </div>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Our Field Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Selecting the Right Remote:</strong> If you're a distributor, don't just buy "433MHz remotes." You need to know if your customers have <strong>Fixed Code</strong> or <strong>Rolling Code</strong> receivers. A Fixed Code duplicator will never talk to a Rolling Code motor.</li>
-          <li><strong>Check the Chipset:</strong> Look for the chip inside. If it says "HCS301," it's rolling code. If it says "PT2262" or "EV1527," it's fixed/learning code.</li>
-        </ul>
-      </div>
-
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">5. Why the Range Sucks: The Technical Killers</h4>
-      <p class="mb-4">I get this question every day: "My remote worked from the street yesterday, now I have to be 2 feet away. Why?"</p>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Receiver Sensitivity and EMI</p>
-        <p class="text-slate-600 mb-2">Most garage receivers have a <strong>Receiver Sensitivity</strong> of around -100dBm to -110dBm. It doesn't take much noise to "drown out" the remote.</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>The culprit:</strong> Power supplies, Wi-Fi routers, or even a neighbor's malfunctioning baby monitor.</li>
-          <li><strong>Metal Shielding:</strong> Is your garage door made of thick steel? That's a giant Faraday cage. You might need an external antenna mounted outside the garage.</li>
-        </ul>
-      </div>
-
-      <div class="bg-slate-50 p-4 rounded-lg my-6">
-        <p class="font-bold text-[#1C2D5A] mb-3">Our Field Advice:</p>
-        <ul class="list-disc ml-6 space-y-2">
-          <li><strong>Antenna Extension:</strong> If the motor is buried behind a steel beam, we generally suggest stripping the shield off a piece of coax cable and extending the internal wire antenna to the outside. It's a 5-minute fix that doubles the distance.</li>
-        </ul>
-      </div>
-
-      <h4 class="text-xl font-bold text-[#1C2D5A] mb-4 mt-8">How to Diagnose Your System (The Pro Checklist)</h4>
-      <p class="mb-4">Before you buy a new remote or replace a motor, run through this list. I've seen these solve 90% of "broken" systems:</p>
-
-      <div class="bg-white border-2 border-slate-200 rounded-lg p-6 my-6">
-        <ol class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">1</span>
-            <span><strong>The Battery Test:</strong> Don't just check if the LED lights up. A weak battery can power the LED but fail to provide enough <strong>Transmission Power</strong> to reach the receiver.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">2</span>
-            <span><strong>The LED Bulb Check:</strong> Turn off the garage lights. Does the range improve? If yes, change your bulbs.</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">3</span>
-            <span><strong>Frequency Match:</strong> Check the back of the motor or the manual. Is it 315, 390, 433, or 868MHz?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">4</span>
-            <span><strong>Code Type:</strong> Is it a "DIP Switch" (Fixed) or a "Learn Button" (Rolling) system?</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[#1C2D5A] text-white flex items-center justify-center text-sm font-bold">5</span>
-            <span><strong>Antenna Check:</strong> Is the little purple or grey wire hanging down from the motor, or is it shoved up inside the casing? (Let it hang!).</span>
-          </li>
-        </ol>
-      </div>
-
-      <div class="bg-gradient-to-r from-[#1C2D5A] to-[#0f1e4d] text-white p-6 rounded-lg my-8">
-        <p class="font-bold text-xl mb-2">Still can't get it to sync?</p>
-        <p class="text-blue-100">Drop me a message with your specific setup. To help you out, I'll need a few details:</p>
-        <ul class="mt-4 space-y-2">
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span>What's the <strong>brand and model</strong> of your opener?</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span>What's the <strong>frequency</strong> (usually printed on the back of the remote)?</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span>What color is the <strong>Learn Button</strong>?</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-            <span>What kind of <strong>Antenna</strong> are you using (internal wire or external)?</span>
-          </li>
-        </ul>
-        <p class="mt-4">I've probably seen your exact scenario before—let's figure it out. Would you like me to help you identify a specific replacement remote model based on your motor's photo?</p>
-      </div>
-
-      <div class="bg-gradient-to-r from-[#1C2D5A] to-[#0f1e4d] text-white p-6 rounded-lg my-8">
-        <p class="font-bold text-xl mb-2">Best regards,</p>
-        <p class="text-blue-100"><strong>Eric Huang</strong> <span class="text-sm">Technical Content Specialist | RF Control Systems</span></p>
-      </div>
-    `,
-    image: `https://placehold.co/800x400/f1f5f9/1C2D5A?text=Universal+Remote+Compatibility+Guide`
-  }
-];
-
-const faqs = [
-  {
-    q: "Do your universal remotes support both Rolling Code (HCS301) and Fixed Code (EV1527)?",
-    a: "Yes. Our Smart-Clone series uses a self-learning MCU covering ~95% of global brands (LiftMaster, Nice, Came). It supports mixed-frequency cloning (433MHz + 868MHz) on one device to cut distributor inventory."
-  },
-  {
-    q: "Can you customize RF frequency (315/433/868MHz) and button functions for OEM orders?",
-    a: "Absolutely. From PCB layout to mold tooling, we tune frequencies (e.g., 433.92MHz ±75kHz) with SAW or crystal oscillators to meet local regulations and map buttons per your protocol."
-  },
-  {
-    q: "Do you provide SDK/API for Tuya WiFi modules and smart home integration?",
-    a: "Yes. We supply SDK/API plus full docs for WiFi-to-RF bridges and Tuya-compatible modules, enabling secondary development into your app, CRM, or cloud workflows."
-  },
-  {
-    q: "What certifications (FCC, CE, RoHS) do your remote controls hold for export?",
-    a: "Our remotes are export-ready with CE-RED (EU), FCC ID (USA), and RoHS. In-house aging and RF tests ensure every batch meets ISO9001 standards before shipment."
-  }
-];
-
-// --- Mock Comments Data (Simulating a Database) ---
-const initialComments = [
-  { id: 101, postId: 1, user: "Alex Miller", date: "2023-10-15", text: "Great explanation! Can you provide the datasheet for the HCS301 chip used?" },
-  { id: 102, postId: 1, user: "Chuangjiang Admin", date: "2023-10-16", text: "Hi Alex, sure. We have sent the datasheet to your email. You can also download it from our products page.", isAdmin: true },
-  { id: 103, postId: 2, user: "Pedro Gomez", date: "2023-11-10", text: "Does this work with 315MHz remotes as well?" }
-];
-// --- Components ---
-
-const Button = ({ children, variant = "primary", className = "", ...props }) => {
-  const baseStyle =
-    "px-7 py-3 rounded-md font-semibold transition-all duration-300 flex items-center justify-center text-sm";
-  const variants = {
-    primary: `bg-[#1C2D5A] hover:bg-[#0f1e4d] text-white shadow-md hover:shadow-lg`,
-    secondary: `bg-white text-slate-800 border border-slate-200 hover:border-[#1C2D5A] hover:text-[#1C2D5A] shadow-sm hover:shadow-md`,
-    outline: `bg-transparent border-2 border-[#1C2D5A] text-[#1C2D5A] hover:bg-[#1C2D5A] hover:text-white`,
-    small: `bg-[#1C2D5A] hover:bg-[#0f1e4d] text-white text-xs px-4 py-2 rounded-md`
+function Button({ children, variant = "primary", className = "", ...props }) {
+  const styles = {
+    primary: "bg-[var(--brand-navy)] text-white hover:bg-[#0c2140]",
+    secondary: "border border-white/20 bg-white/8 text-white hover:bg-white/12",
+    outline: "border border-[var(--brand-line)] bg-white text-[var(--brand-ink)] hover:border-[var(--brand-navy)]"
   };
 
   return (
-    <button className={`${baseStyle} ${variants[variant]} ${className}`} {...props}>
+    <button
+      className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 ${styles[variant]} ${className}`}
+      {...props}
+    >
       {children}
     </button>
   );
-};
+}
 
-const SectionHeader = ({ title, subtitle, centered = true }) => (
-  <div className={`mb-16 ${centered ? "text-center" : "text-left"}`}>
-    <h2 className="text-3xl md:text-5xl font-bold text-brand mb-6 tracking-tight">{title}</h2>
-    <div className={`w-20 h-1.5 bg-[#1C2D5A] mb-6 ${centered ? "mx-auto" : ""}`}></div>
-    <p className="text-lg text-slate-500 max-w-3xl leading-relaxed font-light mx-auto">{subtitle}</p>
-  </div>
-);
+function NavButton({ active, label, mobile = false, onClick }) {
+  const classes = mobile
+    ? "flex w-full items-center justify-between border-b border-white/10 py-4 text-left text-lg font-semibold text-white"
+    : `text-sm font-semibold transition-colors ${active ? "text-[var(--brand-navy)]" : "text-slate-600 hover:text-[var(--brand-navy)]"}`;
 
-const AccordionItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="border-b border-slate-200 last:border-0">
-      <button className="w-full py-6 flex justify-between items-center text-left focus:outline-none group" onClick={() => setIsOpen(!isOpen)}>
-        <span className="text-lg font-semibold text-slate-800 group-hover:text-[#1C2D5A] transition-colors pr-8">{question}</span>
-        {isOpen ? <ChevronUp className="text-[#1C2D5A]" /> : <ChevronDown className="text-slate-400" />}
-      </button>
-      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-48 opacity-100 pb-6" : "max-h-0 opacity-0"}`}>
-        <p className="text-slate-600 leading-relaxed pl-4 border-l-2 border-[#FF8A00]">{answer}</p>
-      </div>
-    </div>
-  );
-};
-
-// --- Floating Contact Button (New Marketing Feature) ---
-const FloatingContact = () => (
-  <a
-    href={`https://wa.me/${CONTACT_INFO.whatsapp.replace(/\+| /g, "")}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center animate-bounce-slow"
-    title="Chat on WhatsApp"
-  >
-    <Phone className="w-6 h-6 fill-current" />
-    <span className="absolute right-full mr-3 bg-white text-slate-800 text-xs font-bold px-2 py-1 rounded shadow hidden group-hover:block whitespace-nowrap">Chat with Engineer</span>
-  </a>
-);
-
-// --- Main Application ---
-
-export default function ChuangjiangWebsite() {
-  const [lang, setLang] = useState("en");
-  const [langMenuOpen, setLangMenuOpen] = useState(false);
-  const [activePage, setActivePage] = useState("home");
-  const [viewingPost, setViewingPost] = useState(null); // State for Single Blog Post View
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [filters, setFilters] = useState({ frequency: null, protocol: null });
-
-  // Comment System State
-  const [comments, setComments] = useState(initialComments);
-  const [newComment, setNewComment] = useState({ user: "", text: "" });
-  const langMenuRef = useRef(null);
-
-  const t = (path) => {
-    const parts = path.split(".");
-    const source = translations[lang] || translations.en;
-    let value = source;
-    for (const p of parts) {
-      value = value?.[p];
-    }
-    if (value === undefined) {
-      value = translations.en;
-      for (const p of parts) {
-        value = value?.[p];
-      }
-    }
-    return value ?? path;
-  };
-
-  // Sync active page from URL path (e.g. /about) so deep links work on static hosts.
-  useEffect(() => {
-    const syncFromLocation = () => {
-      const nextPage = pageFromPathname(window.location.pathname);
-      setActivePage((prev) => (prev === nextPage ? prev : nextPage));
-    };
-    syncFromLocation();
-    window.addEventListener("popstate", syncFromLocation);
-    return () => window.removeEventListener("popstate", syncFromLocation);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const getSeoForCurrentView = () => {
-    if (activePage === "blog" && viewingPost) {
-      return {
-        title: `${viewingPost.title} | ${BRAND_NAME} Blog`,
-        description: viewingPost.excerpt || SEO_METADATA.description
-      };
-    }
-
-    switch (activePage) {
-      case "about":
-        return {
-          title: `${t("nav.about")} | ${BRAND_NAME}`,
-          description: t("about.subtitle") || SEO_METADATA.description
-        };
-      case "products":
-        return {
-          title: `${t("nav.products")} | ${BRAND_NAME}`,
-          description: t("catalog.subtitle") || SEO_METADATA.description
-        };
-      case "blog":
-        return {
-          title: `${t("nav.blog")} | ${BRAND_NAME}`,
-          description: t("blog.subtitle") || SEO_METADATA.description
-        };
-      case "contact":
-        return {
-          title: `${t("nav.contact")} | ${BRAND_NAME}`,
-          description: t("contact.heroSubtitle") || SEO_METADATA.description
-        };
-      default:
-        return {
-          title: SEO_METADATA.title,
-          description: SEO_METADATA.description
-        };
-    }
-  };
-
-  useEffect(() => {
-    const { title, description } = getSeoForCurrentView();
-    document.title = title;
-
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", description);
-    } else {
-      const meta = document.createElement("meta");
-      meta.name = "description";
-      meta.content = description;
-      document.head.appendChild(meta);
-    }
-
-    const origin = window.location.origin;
-    const canonicalPath = activePage === "home" ? "/" : `/${activePage}`;
-    const canonicalUrl = `${origin}${canonicalPath}`;
-    let canonicalEl = document.querySelector('link[rel="canonical"]');
-    if (!canonicalEl) {
-      canonicalEl = document.createElement("link");
-      canonicalEl.rel = "canonical";
-      document.head.appendChild(canonicalEl);
-    }
-    canonicalEl.setAttribute("href", canonicalUrl);
-
-    document.documentElement.lang = lang;
-  }, [lang, activePage, viewingPost]);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    if (activePage !== "blog") {
-      setViewingPost(null); // Reset blog view when changing pages
-    }
-    setLangMenuOpen(false);
-  }, [activePage]);
-
-  // Push active page changes back to the path for shareable URLs.
-  useEffect(() => {
-    const desiredPath = activePage === "home" ? "/" : `/${activePage}`;
-    if (window.location.pathname !== desiredPath) {
-      window.history.pushState({}, "", desiredPath);
-    }
-  }, [activePage]);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (langMenuRef.current && !langMenuRef.current.contains(e.target)) {
-        setLangMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // Handle Comment Submission (Simulated for GitHub Pages)
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    if (!newComment.user || !newComment.text) return;
-
-    const commentObj = {
-      id: Date.now(),
-      postId: viewingPost.id,
-      user: newComment.user,
-      date: new Date().toISOString().split("T")[0],
-      text: newComment.text,
-      isAdmin: false
-    };
-
-    setComments([...comments, commentObj]);
-    setNewComment({ user: "", text: "" });
-    alert("Thank you! Your comment has been posted.");
-  };
-
-  const NavLink = ({ page, label, mobile = false }) => (
-    <button
-      onClick={() => {
-        setActivePage(page);
-        setIsMenuOpen(false);
-      }}
-      className={`
-        font-semibold transition-all duration-200 text-sm
-        ${
-          mobile
-            ? "block w-full text-left py-4 text-xl border-b border-slate-100 text-slate-800 normal-case"
-            : `px-3 pb-3 pt-2 border-b-2 ${activePage === page ? "text-[#1C2D5A] border-[#FF8A00]" : "border-transparent text-slate-700 hover:text-[#1C2D5A] hover:border-[#1C2D5A]"}`
-        }
-      `}
-    >
-      {label}
+    <button className={classes} onClick={onClick}>
+      <span>{label}</span>
+      {mobile && <ArrowRight className="h-4 w-4 text-white/55" />}
     </button>
   );
+}
 
-  // --- Render Functions ---
+function SectionIntro({ eyebrow, title, copy, light = false, centered = false }) {
+  return (
+    <div className={centered ? "mx-auto max-w-3xl text-center" : "max-w-2xl"}>
+      <div className={`font-mono-brand text-xs uppercase tracking-[0.28em] ${light ? "text-white/55" : "text-[var(--brand-muted)]"}`}>{eyebrow}</div>
+      <h2 className={`mt-4 text-3xl font-extrabold tracking-tight md:text-5xl ${light ? "text-white" : "text-[var(--brand-ink)]"}`}>{title}</h2>
+      <p className={`mt-5 text-base leading-8 ${light ? "text-slate-300" : "text-slate-600"}`}>{copy}</p>
+    </div>
+  );
+}
 
-  const renderHome = () => {
-    const heroCopy = { ...translations.en.hero, ...(translations[lang]?.hero || {}) };
-    const highlightsCopy = translations[lang]?.highlights || translations.en.highlights;
-    const industriesCopy = translations[lang]?.industries || translations.en.industries;
-    const processCopy = translations[lang]?.process || translations.en.process;
-    const trendingCopy = translations[lang]?.trending || translations.en.trending;
-    const caseCopy = translations[lang]?.cases || translations.en.cases;
-    const testimonialCopy = translations[lang]?.testimonials || translations.en.testimonials;
-    const faqCopy = translations[lang]?.faq || translations.en.faq;
-    return (
-      <>
-      {/* Hero Section */}
-      <section className="relative min-h-[82vh] flex items-center bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-[-10%] right-[-10%] w-[380px] h-[380px] bg-white/60 backdrop-blur-3xl rounded-full blur-3xl"></div>
-          <div className="absolute bottom-[-15%] left-[-5%] w-[460px] h-[460px] bg-[#FF8A00]/16 rounded-full blur-3xl"></div>
-          <div className="absolute inset-6 bg-white/60 rounded-[28px] shadow-[0_25px_80px_-40px_rgba(0,0,0,0.35)] backdrop-blur-xl border border-white/70"></div>
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-white"></div>
-        </div>
+export default function App() {
+  const [activePage, setActivePage] = useState(() => pageFromPathname(window.location.pathname));
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [expandedFaq, setExpandedFaq] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
-        <div className="container mx-auto px-6 relative z-10 pt-10 pb-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 lg:space-y-5 animate-fade-in-up lg:flex lg:flex-col lg:justify-between">
-              <div className="flex flex-wrap gap-3">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/80 text-[#1C2D5A] rounded-full text-xs font-semibold tracking-wide border border-slate-200 shadow-sm">
-                  <ShieldCheck className="w-4 h-4" /> {heroCopy.badgeFactory}
-                </div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FFF3E0] text-[#FF8A00] rounded-full text-xs font-semibold tracking-wide border border-[#FF8A00]/30 shadow-sm">
-                  <Zap className="w-4 h-4" /> {heroCopy.badgeFree}
-                </div>
-              </div>
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-              <div className="space-y-2">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand leading-tight max-w-3xl">
-                  {heroCopy.title}
-                </h1>
-                <p className="text-lg text-slate-600">{heroCopy.subtitle}</p>
-              </div>
+  useEffect(() => {
+    const meta = PAGE_META[activePage] || PAGE_META.home;
+    document.title = meta.title;
+    let description = document.querySelector('meta[name="description"]');
+    if (!description) {
+      description = document.createElement("meta");
+      description.setAttribute("name", "description");
+      document.head.appendChild(description);
+    }
+    description.setAttribute("content", meta.description);
+  }, [activePage]);
 
-              <ul className="space-y-2 text-slate-700">
-                {(heroCopy.bullets || []).map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-                    <span className="text-sm">{item}</span>
-                  </li>
-                ))}
-              </ul>
+  const navigate = (page) => {
+    setActivePage(page);
+    setIsMenuOpen(false);
+    safeScrollTop();
+  };
 
-              <div className="flex flex-wrap gap-2 text-sm text-slate-700">
-                {(heroCopy.tags || []).map((tag) => (
-                  <span key={tag} className="inline-flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-slate-200 shadow-sm">
-                    <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button onClick={() => setActivePage("contact")}>{heroCopy.primaryCta}</Button>
-                <Button variant="outline" onClick={() => window.open(CATALOG_URL, "_blank")}>
-                  <Download className="w-5 h-5 mr-2" /> {heroCopy.secondaryCta}
-                </Button>
-              </div>
-              <div className="text-sm text-slate-500">{heroCopy.ctaNote}</div>
-              <div className="text-xs font-semibold text-[#FF8A00]">{heroCopy.freeNote}</div>
-
-              {/* Mobile-only tags/stats for better scroll order */}
-              <div className="space-y-3 lg:hidden">
-                <div className="flex flex-wrap gap-2 text-xs">
-                  {(heroCopy.tags || []).map((tag) => (
-                    <span key={tag} className="inline-flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-slate-200 shadow-sm">
-                      <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-white rounded-xl p-3 shadow-sm border border-slate-100 text-center">
-                    <div className="text-xl font-bold text-brand">{heroCopy.stats.exp}</div>
-                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.expLabel}</div>
-                  </div>
-                  <div className="bg-white rounded-xl p-3 shadow-sm border border-slate-100 text-center">
-                    <div className="text-xl font-bold text-brand">{heroCopy.stats.qc}</div>
-                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.qcLabel}</div>
-                  </div>
-                  <div className="bg-white rounded-xl p-3 shadow-sm border border-slate-100 text-center">
-                    <div className="text-xl font-bold text-brand">{heroCopy.stats.countries}</div>
-                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.countriesLabel}</div>
-                  </div>
-                </div>
-              </div>
+  const renderHome = () => (
+    <>
+      <section className="hero-shell relative overflow-hidden text-white">
+        <div className="hero-mesh absolute inset-0" />
+        <div className="container mx-auto grid gap-12 px-6 pb-16 pt-10 md:pb-20 md:pt-14 lg:grid-cols-[1.06fr_0.94fr]">
+          <div className="relative z-10 max-w-3xl">
+            <div className="font-mono-brand text-xs uppercase tracking-[0.32em] text-white/55">Global OEM / ODM manufacturer</div>
+            <h1 className="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">RF Control Manufacturing for Global Access Brands</h1>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+              CHJ Remotes builds rolling-code remotes, receivers, retrofit control kits, and Tuya-ready smart modules for distributors and OEM programs that need a stronger factory story.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button onClick={() => navigate("contact")}>
+                Request OEM Quote
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+              <Button variant="secondary" onClick={() => window.open(CATALOG_URL, "_blank")}>
+                <Download className="h-4 w-4" />
+                Download Catalog PDF
+              </Button>
             </div>
-
-            {/* Hero Video Card */}
-            <div className="relative hidden lg:flex flex-col gap-4 h-full">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/70 bg-slate-900">
-                <video
-                  className="w-full h-[420px] object-cover opacity-90"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="https://placehold.co/800x600/1C2D5A/ffffff?text=Factory+Tour"
-                >
-                  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0f1e4d]/50 via-transparent to-[#0f1e4d]/30"></div>
-              </div>
-
-              {/* Desktop-only trust + stats */}
-              <div className="bg-white/85 backdrop-blur rounded-2xl border border-slate-100 shadow-lg p-5 space-y-3 hidden lg:block">
-                <div className="flex flex-wrap gap-2 text-xs">
-                  {(heroCopy.tags || []).map((tag) => (
-                    <span key={tag} className="inline-flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-slate-200 shadow-sm">
-                      <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
-                      {tag}
-                    </span>
-                  ))}
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              {[
+                ["20+", "Years in RF manufacturing"],
+                ["50+", "Countries served"],
+                ["7 days", "Pilot sample target"]
+              ].map(([value, label]) => (
+                <div key={label} className="rounded-[22px] border border-white/10 bg-white/6 p-4 backdrop-blur">
+                  <div className="text-2xl font-extrabold md:text-3xl">{value}</div>
+                  <div className="mt-2 text-sm text-slate-300">{label}</div>
                 </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm border border-slate-100 text-center">
-                    <div className="text-xl font-bold text-brand">{heroCopy.stats.exp}</div>
-                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.expLabel}</div>
-                  </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm border border-slate-100 text-center">
-                    <div className="text-xl font-bold text-brand">{heroCopy.stats.qc}</div>
-                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.qcLabel}</div>
-                  </div>
-                  <div className="bg-slate-50 rounded-xl p-3 shadow-sm border border-slate-100 text-center">
-                    <div className="text-xl font-bold text-brand">{heroCopy.stats.countries}</div>
-                    <div className="text-[11px] text-slate-500 mt-1">{heroCopy.stats.countriesLabel}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Mobile visual fallback */}
-            <div className="lg:hidden">
-              <div className="rounded-3xl overflow-hidden shadow-xl border border-white/70 bg-slate-900">
-                <img
-                  src="https://placehold.co/800x600/1C2D5A/ffffff?text=Factory+Tour"
-                  alt="Factory preview"
-                  className="w-full h-64 object-cover opacity-90"
-                />
-              </div>
-              <div className="mt-2 text-slate-500 text-xs text-left">Factory preview · Tap contact to request live demo</div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Trust Belt */}
-      <section className="bg-white border-y border-slate-100">
-        <div className="container mx-auto px-6 py-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { label: "ISO9001 Factory", desc: "Audited QA system with full aging tests" },
-              { label: "CE / FCC / RoHS", desc: "Compliance docs + HS codes ready" },
-              { label: "50+ Countries", desc: "EU / US / LatAm distributors served" },
-              { label: "Engineer Support", desc: "RF tuning, firmware hooks, NDA ready" }
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 flex flex-col gap-1 shadow-[0_6px_20px_-12px_rgba(0,0,0,0.2)]"
-              >
-                <div className="text-[#1C2D5A] font-bold text-sm">{item.label}</div>
-                <div className="text-xs text-slate-600">{item.desc}</div>
+          <div className="hero-panel relative overflow-hidden rounded-[34px] border border-white/10 bg-white/6 p-7 backdrop-blur-xl md:p-9">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(200,137,71,0.22),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_30%)]" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between text-xs uppercase tracking-[0.26em] text-white/55">
+                <span className="font-mono-brand">Factory capability profile</span>
+                <span className="font-mono-brand">Since 2004</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* B2B Highlights */}
-      <section className="py-16 bg-white border-t border-slate-100">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: ShieldCheck,
-                title: "Factory Direct B2B",
-                desc: "No retail or dropshipping; engineering + production in one place with NDA support."
-              },
-              {
-                icon: Clock,
-                title: "7-Day MP Samples",
-                desc: "PCB layout, antenna tuning, and molded enclosure delivered with test report."
-              },
-              {
-                icon: Truck,
-                title: "Compliance & Shipping",
-                desc: "CE/FCC/RoHS documentation, HS codes ready, door-to-door to EU/US/LatAm."
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="bg-slate-50 rounded-2xl border border-slate-200 p-6 shadow-sm flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#1C2D5A] border border-slate-200">
-                  <item.icon className="w-6 h-6" />
+              <div className="mt-10 flex items-center gap-4">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 p-3">
+                  <img src={Logo} alt="CHJ capability logo" className="h-full w-full object-contain" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                  <div className="text-2xl font-bold">{BRAND_NAME}</div>
+                  <div className="mt-1 text-sm text-slate-300">{COMPANY_NAME}</div>
                 </div>
               </div>
-            ))}
+              <div className="mt-8 space-y-4">
+                {[
+                  ["Rolling-code remotes", "Secure handheld programs for gate and access-control brands."],
+                  ["Receivers and control boxes", "Retrofit and OEM receiver packages for installed systems."],
+                  ["Smart access modules", "Hybrid WiFi + RF products for cleaner retrofit offers."]
+                ].map(([title, copy]) => (
+                  <div key={title} className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
+                    <div className="text-sm font-semibold uppercase tracking-[0.14em] text-white">{title}</div>
+                    <p className="mt-2 text-sm leading-7 text-slate-300">{copy}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* OEM Process */}
-      <section className="py-24 bg-white">
+      <section className="bg-white py-24">
         <div className="container mx-auto px-6">
-          <SectionHeader title={processCopy.title} subtitle={processCopy.subtitle} />
-          <div className="grid md:grid-cols-4 gap-8 relative">
-            <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 -z-0"></div>
-            {[
-              { icon: Settings, title: "1. PCB & Antenna Tuning", desc: "Altium layout + spectrum analysis tuned for >100m range." },
-              { icon: Cpu, title: "2. 3D Mold & MCU Coding", desc: "Custom firmware (C/ASM) plus SLA rapid prototyping." },
-              { icon: Users, title: "3. SMT & ISO Assembly", desc: "Yamaha SMT, AOI inspection, and 100% function test." },
-              { icon: CheckCircle, title: "4. Aging & RF Testing", desc: "-40°C~80°C chamber & salt spray for durability." }
-            ].map((step, idx) => (
-              <div key={idx} className="relative z-10 bg-white p-6 pt-0 text-center group">
-                <div className="w-24 h-24 mx-auto bg-white border-4 border-slate-100 rounded-full flex items-center justify-center mb-6 group-hover:border-[#1C2D5A] transition-colors duration-300 shadow-sm">
-                  <step.icon className="w-10 h-10 text-slate-400 group-hover:text-[#1C2D5A] transition-colors" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
-                <p className="text-slate-500 leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Industries & Protocols */}
-      <section className="py-20 bg-slate-50 border-t border-slate-100">
-        <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <SectionHeader
-              title={industriesCopy.title}
-              subtitle={industriesCopy.subtitle}
-              centered={false}
+          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+            <SectionIntro
+              eyebrow="Factory message"
+              title="The site now leads with identity, capability, and control."
+              copy="The original page spread too many equal-weight blocks across the first impression. This version compresses the message into a more international manufacturing story."
             />
-            <div className="grid md:grid-cols-2 gap-4">
-              {(industriesCopy.bullets || []).map((item, idx) => (
-                <div key={idx} className="flex items-start gap-3">
-                  <span className="mt-1 inline-block w-2 h-2 rounded-full bg-[#FF8A00]"></span>
-                  <p className="text-sm text-slate-700">{item}</p>
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                [ShieldCheck, "Factory-direct B2B", "Engineering, production, and export support stay in one team."],
+                [Cpu, "RF tuning inside the project", "Protocol behavior and antenna performance are treated as deliverables."],
+                [Truck, "Export-ready handoff", "Document support and shipment planning stay close to the product program."]
+              ].map(([IconComp, title, copy]) => (
+                <div key={title} className="surface-panel p-6">
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-[var(--brand-soft)] text-[var(--brand-navy)]">
+                    <IconComp className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[var(--brand-ink)]">{title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{copy}</p>
                 </div>
               ))}
-            </div>
-          </div>
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
-            <h3 className="text-xl font-bold text-slate-900">{industriesCopy.techTitle}</h3>
-            <ul className="space-y-2 text-sm text-slate-700">
-              {(industriesCopy.techList || []).map((item, idx) => (
-                <li key={idx} className="flex gap-2">
-                  <CheckCircle className="w-4 h-4 text-[#1C2D5A]" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="pt-2 flex flex-wrap gap-3">
-              <Button variant="primary" className="px-6 py-3" onClick={() => setActivePage("contact")}>
-                {industriesCopy.ctaEngineer}
-              </Button>
-              <Button variant="secondary" className="px-6 py-3" onClick={() => window.open(CATALOG_URL, "_blank")}>
-                {industriesCopy.ctaCatalog}
-              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-24 bg-slate-50">
+      <section className="bg-[var(--brand-soft)] py-24">
         <div className="container mx-auto px-6">
-          <div className="flex justify-between items-end mb-16">
-            <div className="max-w-xl">
-              <h2 className="text-4xl font-bold text-slate-900 mb-4">{trendingCopy.title}</h2>
-              <div className="w-16 h-1 bg-[#1C2D5A]"></div>
-            </div>
-            <Button variant="outline" className="hidden md:flex" onClick={() => setActivePage("products")}>
-              Full Catalog <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.slice(0, 3).map((product) => (
-              <article
-                key={product.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 group flex flex-col h-full border border-slate-100"
-              >
-                <div className="relative h-64 bg-slate-100 overflow-hidden flex items-center justify-center p-8">
-                  <img src={product.image} alt={product.name} className="max-h-full object-contain group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider text-slate-800 shadow-sm">
-                    {product.category}
-                  </div>
-                </div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold text-slate-800 mb-2 leading-tight group-hover:text-[#1C2D5A] transition-colors">{product.name}</h3>
-                  <div className="flex items-center gap-4 text-sm text-slate-500 mb-6 font-mono bg-slate-50 p-2 rounded">
-                    <span>{product.frequency}</span>
-                    <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
-                    <span>{product.chip}</span>
-                  </div>
-                  <p className="text-slate-500 mb-4 leading-relaxed line-clamp-2">{product.desc}</p>
-                  {product.specs && (
-                    <ul className="text-sm text-slate-600 space-y-1 mb-6">
-                      {product.specs.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#FF8A00]"></span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <div className="mt-auto">
-                    <button
-                      onClick={() => setActivePage("contact")}
-                      className="w-full py-3 border border-slate-200 rounded font-semibold text-slate-700 hover:bg-[#1C2D5A] hover:text-white hover:border-[#1C2D5A] transition-all"
-                    >
-                      {t("nav.request")}
-                    </button>
-                  </div>
+          <SectionIntro
+            eyebrow="Product families"
+            title="A smaller set of clearer families makes the catalog feel stronger."
+            copy="Instead of opening with a generic product wall, the homepage frames the product offering around a few strong OEM families."
+            centered={true}
+          />
+          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+            {PRODUCT_FAMILIES.map((item, index) => (
+              <article key={item.title} className="surface-panel p-8">
+                <div className="font-mono-brand text-xs uppercase tracking-[0.28em] text-[var(--brand-muted)]">Family 0{index + 1}</div>
+                <h3 className="mt-4 text-2xl font-bold text-[var(--brand-ink)]">{item.title}</h3>
+                <p className="mt-4 text-sm leading-7 text-slate-600">{item.summary}</p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {item.chips.map((chip) => (
+                    <span key={chip} className="rounded-full border border-[var(--brand-line)] bg-[var(--brand-soft)] px-3 py-1 text-xs font-semibold text-[var(--brand-navy)]">
+                      {chip}
+                    </span>
+                  ))}
                 </div>
               </article>
             ))}
@@ -2152,731 +327,258 @@ export default function ChuangjiangWebsite() {
         </div>
       </section>
 
-      {/* Case Studies */}
-      <section className="py-24 bg-white border-t border-slate-100">
+      <section className="bg-[var(--brand-panel)] py-24 text-white">
         <div className="container mx-auto px-6">
-          <SectionHeader title={caseCopy.title} subtitle={caseCopy.subtitle} />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {caseStudies.map((item) => (
-              <div key={item.id} className="bg-slate-50 border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-xs font-semibold text-[#1C2D5A] bg-white px-3 py-1 rounded-full border border-slate-200">{item.market}</span>
-                  {item.badge && <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 bg-white px-2 py-1 rounded-full border border-slate-200">{item.badge}</span>}
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500">B2B Only</span>
+          <SectionIntro
+            eyebrow="Delivery flow"
+            title="One controlled path from technical brief to shipment."
+            copy="The strongest B2B factory sites explain how work moves. This section replaces filler with a simple, controlled delivery path."
+            light={true}
+          />
+          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              ["01", Settings, "RF and PCB definition"],
+              ["02", Zap, "Sample and firmware work"],
+              ["03", Users, "Pilot validation"],
+              ["04", Truck, "Production and shipment"]
+            ].map(([step, IconComp, title]) => (
+              <div key={step} className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono-brand text-xs uppercase tracking-[0.28em] text-white/45">{step}</span>
+                  <IconComp className="h-5 w-5 text-[var(--brand-accent)]" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug">{item.title}</h3>
-                <p className="text-slate-600 text-sm mb-4">Challenge: {item.challenge}</p>
-                <div className="bg-white border border-slate-200 rounded-xl p-4 mb-4">
-                  <div className="text-xs uppercase font-bold text-slate-500 mb-1">Solution</div>
-                  <p className="text-sm text-slate-700 leading-relaxed">{item.solution}</p>
-                </div>
-                <div className="mt-auto flex items-center justify-between pt-2">
-                  <div className="text-sm font-semibold text-[#FF8A00] leading-snug max-w-[80%]">Outcome: {item.outcome}</div>
-                  <ArrowRight className="w-4 h-4 text-slate-300" />
-                </div>
+                <h3 className="mt-6 text-xl font-bold">{title}</h3>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <SectionHeader title={testimonialCopy.title} subtitle={testimonialCopy.subtitle} />
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((item) => (
-              <div key={item.id} className="bg-slate-50 p-8 rounded-xl border border-slate-100 relative">
-                <div className="flex gap-1 text-[#FF8A00] mb-4">
-                  {[...Array(item.stars)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
-                  ))}
-                </div>
-                <p className="text-slate-600 mb-6 italic">"{item.content}"</p>
-                <div>
-                  <h4 className="font-bold text-slate-900">{item.name}</h4>
-                  <p className="text-sm text-slate-500 flex items-center gap-2">
-                    <span className="px-2 py-1 bg-white rounded-full border border-slate-200 text-xs text-[#1C2D5A]">{item.role}</span>
-                  </p>
-                </div>
-                <div className="absolute -bottom-4 right-8 text-9xl text-slate-200 leading-none opacity-50 pointer-events-none">"</div>
-              </div>
-            ))}
+      <section className="bg-white py-24">
+        <div className="container mx-auto grid gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <SectionIntro
+              eyebrow="Commercial proof"
+              title="Case structure matters more than a long stack of unlabeled claims."
+              copy="The homepage proof area is smaller, but the framing is stronger and easier to scan."
+            />
+            <div className="mt-10 grid gap-6">
+              {CASE_STUDIES.map((item) => (
+                <article key={item.title} className="surface-panel p-7">
+                  <div className="font-mono-brand text-xs uppercase tracking-[0.24em] text-[var(--brand-muted)]">{item.market}</div>
+                  <h3 className="mt-4 text-2xl font-bold text-[var(--brand-ink)]">{item.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">{item.copy}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-24 bg-slate-50 border-t border-slate-100">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <SectionHeader title={faqCopy.title} subtitle={faqCopy.subtitle} centered={true} />
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
-            {faqs.map((faq, idx) => (
-              <AccordionItem key={idx} question={faq.q} answer={faq.a} />
-            ))}
+          <div className="surface-panel bg-[var(--brand-soft)] p-8">
+            <div className="font-mono-brand text-xs uppercase tracking-[0.24em] text-[var(--brand-muted)]">Partner voice</div>
+            <div className="mt-8 space-y-6">
+              {[
+                "The project felt like working with an engineering team, not chasing a trading company through a checklist.",
+                "CHJ stayed inside the protocol issue until the batch was stable."
+              ].map((quote, index) => (
+                <div key={quote} className="rounded-[24px] border border-[var(--brand-line)] bg-white p-6">
+                  <div className="mb-4 flex gap-1 text-[var(--brand-accent)]">
+                    {Array.from({ length: 5 }).map((_, starIndex) => (
+                      <Star key={`${index}-${starIndex}`} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-base leading-8 text-slate-700">“{quote}”</p>
+                </div>
+              ))}
+            </div>
+            <Button className="mt-8" onClick={() => navigate("contact")}>
+              Start the conversation
+              <ArrowRight className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       </section>
     </>
   );
-  };
-  const renderProducts = () => {
-    const catalogCopy = translations[lang]?.catalog || translations.en.catalog;
-    const frequencyFilters = [
-      { key: "433", label: "433 MHz" },
-      { key: "868", label: "868 MHz" },
-      { key: "multi", label: "Multi / Dual" },
-      { key: "wifi", label: "WiFi / Smart" },
-      { key: "infrared", label: "Infrared" }
-    ];
-    const protocolFilters = [
-      { key: "rolling", label: "Rolling Code" },
-      { key: "fixed", label: "Fixed / Learning" },
-      { key: "tuya", label: "Tuya / WiFi" },
-      { key: "clone", label: "Clone" },
-      { key: "sensor", label: "Sensors" }
-    ];
 
-    const toggleFilter = (type, key) => {
-      setFilters((prev) => (prev[type] === key ? { ...prev, [type]: null } : { ...prev, [type]: key }));
-    };
-
-    const filteredProducts = products.filter((product) => {
-      const matchFrequency = filters.frequency ? product.freqKey === filters.frequency : true;
-      const matchProtocol = filters.protocol ? product.protocolKey === filters.protocol : true;
-      return matchFrequency && matchProtocol;
-    });
-
-    return (
-    <section className="py-12 bg-slate-50 min-h-screen">
-      <div className="container mx-auto px-6">
-        <div className="bg-gradient-to-br from-[#1C2D5A] via-[#1C2D5A] to-[#0f1e4d] rounded-3xl p-12 mb-12 text-center text-white shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 relative z-10">{catalogCopy.title}</h1>
-          <p className="text-blue-100 max-w-2xl mx-auto text-lg relative z-10">{catalogCopy.subtitle}</p>
-          <div className="relative z-10 flex justify-center mt-6">
-            <Button
-              variant="secondary"
-              className="bg-white text-[#1C2D5A] hover:text-white hover:bg-[#1C2D5A] border-white/40"
-              onClick={() => window.open(CATALOG_URL, "_blank")}
-            >
-              <Download className="w-5 h-5 mr-2" /> Download PDF
-            </Button>
-          </div>
+  const renderAbout = () => (
+    <section className="bg-white pb-24">
+      <div className="hero-shell relative overflow-hidden px-6 py-20 text-white">
+        <div className="hero-mesh absolute inset-0" />
+        <div className="container mx-auto relative z-10 max-w-3xl">
+          <div className="font-mono-brand text-xs uppercase tracking-[0.3em] text-white/55">About the factory</div>
+          <h1 className="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">{BRAND_NAME} inside {COMPANY_NAME}</h1>
+          <p className="mt-6 text-lg leading-8 text-slate-300">The revised About page now reads like a manufacturing brand page instead of a generic company block list.</p>
         </div>
-
-        <div className="flex flex-col lg:flex-row gap-12">
-          {/* Sidebar */}
-          <aside className="lg:w-72 flex-shrink-0">
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 sticky top-28">
-              <div className="flex items-center gap-2 mb-8 pb-4 border-b border-slate-100">
-                <Filter className="w-5 h-5 text-[#1C2D5A]" />
-                <span className="font-bold text-lg text-slate-900">Filters</span>
-              </div>
-              <div className="space-y-6">
-                <div>
-                  <h4 className="font-bold text-slate-800 mb-3 text-xs uppercase tracking-[0.2em]">Frequency</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {frequencyFilters.map((item) => {
-                      const active = filters.frequency === item.key;
-                      return (
-                        <button
-                          key={item.key}
-                          onClick={() => toggleFilter("frequency", item.key)}
-                          className={`px-3 py-2 rounded-full border text-sm transition-all ${
-                            active
-                              ? "bg-[#1C2D5A] text-white border-[#1C2D5A] shadow-sm"
-                              : "bg-white text-slate-700 border-slate-200 hover:border-[#1C2D5A] hover:text-[#1C2D5A]"
-                          }`}
-                        >
-                          {item.label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-800 mb-3 text-xs uppercase tracking-[0.2em]">Protocol</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {protocolFilters.map((item) => {
-                      const active = filters.protocol === item.key;
-                      return (
-                        <button
-                          key={item.key}
-                          onClick={() => toggleFilter("protocol", item.key)}
-                          className={`px-3 py-2 rounded-full border text-sm transition-all ${
-                            active
-                              ? "bg-[#FF8A00] text-[#0B1A39] border-[#FF8A00] shadow-sm"
-                              : "bg-white text-slate-700 border-slate-200 hover:border-[#FF8A00] hover:text-[#0B1A39]"
-                          }`}
-                        >
-                          {item.label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-                {(filters.frequency || filters.protocol) && (
-                  <button
-                    onClick={() => setFilters({ frequency: null, protocol: null })}
-                    className="w-full mt-4 text-sm font-semibold text-[#1C2D5A] bg-slate-50 border border-slate-200 rounded-lg py-2 hover:border-[#1C2D5A] hover:bg-white transition"
-                  >
-                    Clear filters
-                  </button>
-                )}
-              </div>
-            </div>
-          </aside>
-
-          {/* Grid */}
-          <div className="flex-1">
-            <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-slate-600">
-              <span className="px-3 py-1 rounded-full bg-white border border-slate-200">Showing {filteredProducts.length} items</span>
-              {filters.frequency && (
-                <span className="px-3 py-1 rounded-full bg-[#E9EDFB] text-[#0B1A39] border border-[#1C2D5A]/20">
-                  Freq: {frequencyFilters.find((f) => f.key === filters.frequency)?.label}
-                </span>
-              )}
-              {filters.protocol && (
-                <span className="px-3 py-1 rounded-full bg-[#FFF3E0] text-[#8b5b00] border border-[#FF8A00]/30">
-                  Protocol: {protocolFilters.find((f) => f.key === filters.protocol)?.label}
-                </span>
-              )}
-            </div>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {filteredProducts.map((product) => (
-                <div key={product.id} className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group flex flex-col">
-                  <div className="relative pt-[100%] bg-slate-50 overflow-hidden rounded-t-xl">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="absolute top-0 left-0 w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-[#FF8A00] text-white text-xs font-bold px-3 py-1 rounded shadow-sm">{product.tag}</span>
-                    </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-wider">{product.category}</div>
-                    <h3 className="font-bold text-lg text-slate-900 mb-4 leading-snug hover:text-[#1C2D5A] cursor-pointer">{product.name}</h3>
-                    <div className="flex flex-wrap gap-2 text-xs mb-4">
-                      <span className="px-2 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">{product.frequency}</span>
-                      <span className="px-2 py-1 rounded-full bg-white text-slate-700 border border-slate-200">{product.chip}</span>
-                    </div>
-                    <div className="text-sm text-slate-600 space-y-1 mb-4">
-                      {(product.specs || []).map((item, i) => (
-                        <div key={i} className="flex items-start gap-2">
-                          <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#FF8A00]"></span>
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-auto pt-4 border-t border-slate-100 grid grid-cols-2 gap-2">
-                      <button
-                        className="w-full flex items-center justify-center gap-2 text-slate-700 font-semibold py-2 border border-slate-200 rounded hover:bg-slate-50 transition-colors"
-                        onClick={() => setActivePage("contact")}
-                      >
-                        <Download className="w-4 h-4" /> Datasheet
-                      </button>
-                      <button
-                        className="w-full flex items-center justify-center gap-2 text-white font-semibold py-2 bg-[#1C2D5A] rounded hover:bg-[#0f1e4d] transition-colors"
-                        onClick={() => setActivePage("contact")}
-                      >
-                        <Mail className="w-4 h-4" /> {t("nav.request")}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+      </div>
+      <div className="container mx-auto grid gap-6 px-6 pt-16 md:grid-cols-2 xl:grid-cols-4">
+        {["Dongguan manufacturing base", "RF-first engineering mindset", "OEM brand discipline", "Export documentation support"].map((item, index) => (
+          <div key={item} className="surface-panel p-7">
+            <div className="font-mono-brand text-xs uppercase tracking-[0.26em] text-[var(--brand-muted)]">0{index + 1}</div>
+            <h3 className="mt-4 text-xl font-bold text-[var(--brand-ink)]">{item}</h3>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );
-  };
 
-  const renderAbout = () => {
-    const aboutCopy = translations[lang]?.about || translations.en.about;
-    return (
-    <div className="min-h-screen bg-white">
-      {/* Intro */}
-      <div className="bg-slate-100 py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">{aboutCopy.title}</h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">{aboutCopy.subtitle}</p>
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
-            {[ShieldCheck, Globe, Award].map((IconComp, idx) => {
-              const item = aboutCopy.cards[idx];
-              return (
-              <div key={idx} className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex items-start gap-4 text-left">
-                <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-[#1C2D5A]">
-                  <IconComp className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-800 mb-1">{item?.title}</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">{item?.desc}</p>
-                </div>
-              </div>
-            );
-            })}
-          </div>
+  const renderProducts = () => (
+    <section className="bg-[var(--brand-soft)] pb-24">
+      <div className="bg-white px-6 py-20">
+        <div className="container mx-auto">
+          <SectionIntro
+            eyebrow="Product direction"
+            title="Product families built for OEM programs, not retail browsing."
+            copy="The products page stays useful, but the layout now favors family thinking over cluttered item overload."
+          />
         </div>
       </div>
-
-      {/* Factory Strength & Certificates */}
-      <div className="container mx-auto px-6 py-24">
-        {/* Engineering Strength */}
-        <div className="mb-24">
-          <SectionHeader title="Factory Strength" subtitle="State-of-the-art facilities ensuring ISO9001 quality standards." centered={true} />
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="group relative overflow-hidden rounded-xl shadow-lg">
-              <img
-                src={`https://placehold.co/600x400/e2e8f0/1C2D5A?text=SMT+Production+Line`}
-                alt="SMT Line"
-                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <h3 className="text-white font-bold text-lg">Automated SMT Lines</h3>
-                <p className="text-slate-300 text-sm">High precision component placement</p>
-              </div>
-            </div>
-            <div className="group relative overflow-hidden rounded-xl shadow-lg">
-              <img
-                src={`https://placehold.co/600x400/e2e8f0/1C2D5A?text=Aging+Test+Room`}
-                alt="Aging Room"
-                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <h3 className="text-white font-bold text-lg">Aging Test Room</h3>
-                <p className="text-slate-300 text-sm">72-hour continuous testing</p>
-              </div>
-            </div>
-            <div className="group relative overflow-hidden rounded-xl shadow-lg">
-              <img
-                src={`https://placehold.co/600x400/e2e8f0/1C2D5A?text=R%26D+Laboratory`}
-                alt="R&D Lab"
-                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <h3 className="text-white font-bold text-lg">RF Shielding Lab</h3>
-                <p className="text-slate-300 text-sm">Signal spectrum analysis</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Certificates */}
-        <div className="bg-slate-50 rounded-3xl p-12 border border-slate-100">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Certifications</h2>
-            <p className="text-slate-500">We meet international standards for safety and compliance.</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {["ISO 9001:2015", "CE Certified", "FCC Approved", "RoHS Compliant"].map((cert, i) => (
-              <div key={i} className="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center gap-4 hover:shadow-md transition-shadow">
-                <Award className="w-12 h-12 text-[#FF8A00]" />
-                <span className="font-bold text-slate-800">{cert}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-  };
-  // --- IMPROVED BLOG LOGIC (Detail View + Comments) ---
-  const renderBlog = () => {
-    const blogCopy = translations[lang]?.blog || translations.en.blog;
-    if (viewingPost) {
-      // Single Post View with Comments
-      const postComments = comments.filter((c) => c.postId === viewingPost.id);
-
-      return (
-        <div className="min-h-screen bg-slate-50 py-12">
-          <div className="container mx-auto px-6 max-w-4xl">
-            <button onClick={() => setViewingPost(null)} className="flex items-center text-[#1C2D5A] font-bold mb-8 hover:underline">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back to All Articles
-            </button>
-
-            <article className="bg-white rounded-2xl shadow-lg overflow-hidden mb-12 animate-fade-in-up">
-              <img src={viewingPost.image} alt={viewingPost.title} className="w-full h-80 object-cover" />
-              <div className="p-8 md:p-12">
-                <div className="flex items-center gap-4 text-sm text-slate-500 mb-6">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" /> {viewingPost.date}
+      <div className="container mx-auto grid gap-6 px-6 pt-16">
+        {PRODUCT_FAMILIES.map((item) => (
+          <article key={item.title} className="surface-panel grid gap-6 p-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <h2 className="text-3xl font-bold text-[var(--brand-ink)]">{item.title}</h2>
+            <div>
+              <p className="text-base leading-8 text-slate-600">{item.summary}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {item.chips.map((chip) => (
+                  <span key={chip} className="rounded-full border border-[var(--brand-line)] bg-[var(--brand-soft)] px-3 py-1 text-xs font-semibold text-[var(--brand-navy)]">
+                    {chip}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <User className="w-4 h-4" /> {viewingPost.author}
-                  </span>
-                </div>
-                <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">{viewingPost.title}</h1>
-                <div className="prose prose-lg text-slate-600 max-w-none" dangerouslySetInnerHTML={{ __html: viewingPost.content }}></div>
-              </div>
-            </article>
-
-            {/* Comment Section (Marketing Master Feature) */}
-            <div className="bg-white rounded-2xl shadow-sm p-8 md:p-12">
-              <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-2">
-                <MessageSquare className="w-6 h-6 text-[#FF8A00]" />
-                Discussion ({postComments.length})
-              </h3>
-
-              {/* Comment List */}
-              <div className="space-y-8 mb-12">
-                {postComments.map((comment) => (
-                  <div key={comment.id} className={`flex gap-4 ${comment.isAdmin ? "ml-8 bg-blue-50 p-4 rounded-lg" : ""}`}>
-                    <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white shrink-0 ${
-                        comment.isAdmin ? "bg-[#1C2D5A]" : "bg-slate-300"
-                      }`}
-                    >
-                      {comment.user.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-bold text-slate-900">{comment.user}</span>
-                        {comment.isAdmin && <span className="text-xs bg-[#1C2D5A] text-white px-2 py-0.5 rounded">Official</span>}
-                        <span className="text-xs text-slate-400">{comment.date}</span>
-                      </div>
-                      <p className="text-slate-600 text-sm">{comment.text}</p>
-                    </div>
-                  </div>
                 ))}
               </div>
-
-              {/* Comment Form */}
-              <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
-                <h4 className="font-bold text-slate-800 mb-4">Leave a Reply</h4>
-                <form onSubmit={handleCommentSubmit} className="space-y-4">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Your Name (Client / Partner)"
-                      className="w-full px-4 py-3 border border-slate-200 rounded focus:border-[#1C2D5A] outline-none"
-                      value={newComment.user}
-                      onChange={(e) => setNewComment({ ...newComment, user: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <textarea
-                      placeholder="Ask a question about this product..."
-                      className="w-full px-4 py-3 border border-slate-200 rounded focus:border-[#1C2D5A] outline-none h-24"
-                      value={newComment.text}
-                      onChange={(e) => setNewComment({ ...newComment, text: e.target.value })}
-                      required
-                    ></textarea>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-slate-400">* Comments are moderated.</span>
-                    <Button variant="small" className="flex items-center gap-2">
-                      Post Comment <Send className="w-3 h-3" />
-                    </Button>
-                  </div>
-                </form>
-              </div>
             </div>
-          </div>
-        </div>
-      );
-    }
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 
-    // Default Blog List View
-    return (
-      <div className="min-h-screen bg-slate-50 py-12">
-        <div className="container mx-auto px-6">
-          <SectionHeader title={blogCopy.title} subtitle={blogCopy.subtitle} centered={true} />
-          <div className="grid md:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <div
-                key={post.id}
-                className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-xl transition-all cursor-pointer group"
-                onClick={() => {
-                  setViewingPost(post);
-                  window.scrollTo(0, 0);
-                }}
-              >
-                <div className="overflow-hidden h-48">
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+  const renderBlog = () => (
+    <section className="bg-white pb-24">
+      <div className="bg-[var(--brand-soft)] px-6 py-20">
+        <div className="container mx-auto">
+          <SectionIntro
+            eyebrow="Editorial"
+            title="Technical and commercial notes for RF access programs."
+            copy="The blog is reframed as a smaller editorial surface with more intention and less filler."
+          />
+        </div>
+      </div>
+      <div className="container mx-auto grid gap-6 px-6 pt-16 lg:grid-cols-3">
+        {BLOG_POSTS.map((post) => (
+          <article key={post.title} className="surface-panel p-8">
+            <div className="font-mono-brand text-xs uppercase tracking-[0.26em] text-[var(--brand-muted)]">{post.tag}</div>
+            <h2 className="mt-4 text-2xl font-bold text-[var(--brand-ink)]">{post.title}</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-600">{post.copy}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+
+  const renderContact = () => (
+    <section className="bg-white pb-24">
+      <div className="hero-shell relative overflow-hidden px-6 py-20 text-white">
+        <div className="hero-mesh absolute inset-0" />
+        <div className="container mx-auto relative z-10 max-w-3xl">
+          <div className="font-mono-brand text-xs uppercase tracking-[0.3em] text-white/55">OEM inquiry</div>
+          <h1 className="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">Start an OEM Conversation</h1>
+          <p className="mt-6 text-lg leading-8 text-slate-300">Share the application, target market, protocol direction, and timing. The contact page now feels like the natural end point of the site.</p>
+        </div>
+      </div>
+      <div className="container mx-auto grid gap-8 px-6 pt-16 lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="surface-panel bg-[var(--brand-panel)] p-8 text-white">
+          <div className="space-y-6">
+            {[
+              [Mail, "Email", CONTACT_INFO.email],
+              [Phone, "Phone / WhatsApp", CONTACT_INFO.phone],
+              [MapPin, "Factory address", CONTACT_INFO.address]
+            ].map(([IconComp, label, value]) => (
+              <div key={label} className="flex gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10">
+                  <IconComp className="h-5 w-5" />
                 </div>
-                <div className="p-8">
-                  <div className="text-xs text-[#1C2D5A] font-bold mb-2 uppercase tracking-wide">{post.date}</div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-[#1C2D5A] transition-colors leading-tight">{post.title}</h3>
-                  <p className="text-slate-500 mb-6 text-sm leading-relaxed">{post.excerpt}</p>
-                  <span className="text-[#1C2D5A] font-bold flex items-center text-sm">
-                    Read Article <ArrowRight className="w-4 h-4 ml-1" />
-                  </span>
+                <div>
+                  <div className="text-sm font-semibold uppercase tracking-[0.18em] text-white/55">{label}</div>
+                  <div className="mt-1 text-base leading-7 text-slate-300">{value}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
-    );
-  };
-  const renderContact = () => {
-    const contactCopy = translations[lang]?.contact || translations.en.contact;
-    return (
-    <section className="bg-white min-h-screen">
-      <div className="h-96 bg-gradient-to-br from-[#0f1e4d] via-[#1C2D5A] to-[#0f1e4d] relative flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[#1C2D5A] opacity-20"></div>
-        <div className="text-center relative z-10 px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">{contactCopy.heroTitle}</h1>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">{contactCopy.heroSubtitle}</p>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-6 -mt-32 relative z-20 pb-24">
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
-          {/* Left Info Panel */}
-          <div className="lg:w-2/5 bg-[#1C2D5A] p-12 text-white flex flex-col justify-between">
-            <div>
-              <h3 className="text-2xl font-bold mb-8">Get In Touch</h3>
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-lg mb-1">Factory Address</h5>
-                    <p className="text-blue-100 leading-relaxed text-sm">{CONTACT_INFO.address}</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-lg mb-1">Email</h5>
-                    <p className="text-blue-100">{CONTACT_INFO.email}</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-lg mb-1">WhatsApp / Phone</h5>
-                    <p className="text-blue-100">{CONTACT_INFO.phone}</p>
-                  </div>
-                </div>
-              </div>
+        <div className="surface-panel p-8 md:p-10">
+          <form
+            className="space-y-5"
+            onSubmit={(event) => {
+              event.preventDefault();
+              alert("Inquiry simulated. Connect this form to Formspree, EmailJS, or your backend for production.");
+            }}
+          >
+            <div className="grid gap-5 md:grid-cols-2">
+              <input className="h-12 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-navy)]" placeholder="Company" required />
+              <input className="h-12 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-navy)]" placeholder="Business email" type="email" required />
             </div>
-
-            <div className="mt-12 pt-12 border-t border-white/20">
-              <p className="text-blue-200 text-sm">Working Hours: Mon-Sat, 09:00 - 18:00 (GMT+8)</p>
+            <div className="grid gap-5 md:grid-cols-2">
+              <input className="h-12 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-navy)]" placeholder="Application" />
+              <input className="h-12 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-navy)]" placeholder="Target market" />
             </div>
-          </div>
-
-          {/* Right Form Panel */}
-          <div className="lg:w-3/5 p-12 lg:p-16 bg-white">
-            <div className="max-w-lg mx-auto">
-              <h3 className="text-3xl font-bold text-slate-900 mb-2">Send Inquiry</h3>
-              <p className="text-slate-500 mb-3">We usually reply within 2 hours.</p>
-              <div className="flex items-center gap-2 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 mb-6">
-                <ShieldCheck className="w-4 h-4 text-[#1C2D5A]" />
-                {contactCopy.b2bNote}
-            </div>
-
-            {/* Note for GitHub Pages User: Replace 'action' with your Formspree endpoint */}
-            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert("Inquiry Simulated: For GitHub Pages, integrate Formspree or EmailJS here."); }}>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Company *</label>
-                  <input type="text" required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" placeholder="Distributor / OEM Name" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Business Email *</label>
-                  <input type="email" required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition" placeholder="name@company.com" />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Application</label>
-                  <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
-                    <option>Gate / Garage</option>
-                    <option>Access Control</option>
-                    <option>Smart Home</option>
-                    <option>Industrial Hoist</option>
-                    <option>Parking Barrier</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Protocol</label>
-                  <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
-                    <option>Rolling Code (HCS301)</option>
-                    <option>Fixed / Learning (EV1527/PT2262)</option>
-                    <option>Clone / Multi-frequency</option>
-                    <option>Tuya WiFi / Zigbee Bridge</option>
-                    <option>Not sure (need guidance)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Annual Volume</label>
-                  <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
-                    <option>500 - 2,000 pcs</option>
-                    <option>2,000 - 10,000 pcs</option>
-                    <option>10,000 - 50,000 pcs</option>
-                    <option>50,000+ pcs</option>
-                    <option>Sample run first</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Timeline</label>
-                  <select className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition">
-                    <option>Need samples in 7-10 days</option>
-                    <option>Production in 4-6 weeks</option>
-                    <option>Just collecting quotations</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700">Project Details *</label>
-                <textarea
-                  required
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#1C2D5A] outline-none transition h-32"
-                  placeholder="Example: Need rolling code remote compatible with HCS301 receivers, 433.92MHz, 2-button, IP54 enclosure. Target market: EU."
-                ></textarea>
-              </div>
-
-              <div className="flex items-center gap-3 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2">
-                <input type="checkbox" className="w-4 h-4 accent-[#1C2D5A]" id="nda" />
-                <label htmlFor="nda" className="cursor-pointer">Request NDA before sharing CAD/BOM</label>
-              </div>
-
-              <Button className="w-full text-lg shadow-xl">Send Message</Button>
-              <p className="text-xs text-slate-500 text-center">Response within 2h · Engineers answer protocol/antenna questions</p>
-            </form>
-            </div>
-          </div>
+            <textarea
+              className="min-h-[180px] w-full rounded-[24px] border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 py-4 outline-none focus:border-[var(--brand-navy)]"
+              placeholder="Share protocol, frequency, timing, and annual volume."
+              required
+            />
+            <Button type="submit">
+              Send project brief
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </form>
         </div>
       </div>
     </section>
   );
-  };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-[#1C2D5A] selection:text-white">
-      {/* Top Bar */}
-      <div className="bg-slate-900 text-slate-400 text-xs py-2 hidden lg:block">
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <div className="flex gap-6">
-            <span className="flex items-center gap-1 hover:text-white cursor-pointer">
-              <Mail className="w-3 h-3" /> {CONTACT_INFO.email}
-            </span>
-            <span className="flex items-center gap-1 hover:text-white cursor-pointer">
-              <Phone className="w-3 h-3" /> {CONTACT_INFO.phone}
-            </span>
-          </div>
-          <div className="flex gap-4">
-            <span className="px-3 py-1 bg-white/10 rounded-full text-white font-semibold">B2B Only</span>
-            <span className="hover:text-white cursor-pointer">Support</span>
-            <span className="hover:text-white cursor-pointer">Login (Dealer)</span>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-ink)]">
+      <header className={`sticky top-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-[var(--brand-line)] bg-white/90 shadow-[0_18px_40px_-28px_rgba(7,17,31,0.35)] backdrop-blur-xl" : "border-transparent bg-white/78 backdrop-blur-md"}`}>
+        <div className="container mx-auto px-6">
+          <div className="flex items-center justify-between py-4">
+            <button className="flex items-center gap-4 text-left" onClick={() => navigate("home")}>
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--brand-line)] bg-white p-2">
+                <img src={Logo} alt="CHJ logo" className="h-full w-full object-contain" />
+              </div>
+              <div>
+                <div className="text-xl font-extrabold tracking-tight text-[var(--brand-navy)]">{BRAND_NAME}</div>
+                <div className="font-mono-brand text-[11px] uppercase tracking-[0.22em] text-[var(--brand-muted)]">B2B RF manufacturing</div>
+              </div>
+            </button>
 
-      {/* Sticky Header */}
-      <header className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/85 backdrop-blur-md shadow-md py-3" : "bg-[#f8faff] py-4 shadow-sm"}`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setActivePage("home")}>
-            <div className="w-16 h-16 p-1.5 flex items-center justify-center">
-              <img src={Logo} alt="CHJ logo" className="w-full h-full object-contain" />
-            </div>
-
-            <div>
-              <h1 className="text-xl font-extrabold text-[#1C2D5A] leading-none tracking-tight">{BRAND_NAME}</h1>
-              <span className="text-[11px] font-semibold text-slate-500 tracking-wide">B2B OEM | {COMPANY_NAME}</span>
-            </div>
-          </div>
-
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6">
-            <NavLink page="home" label={t("nav.home")} />
-            <NavLink page="about" label={t("nav.about")} />
-            <NavLink page="products" label={t("nav.products")} />
-            <NavLink page="blog" label={t("nav.blog")} />
-            <NavLink page="contact" label={t("nav.contact")} />
-            <div className="flex items-center gap-3 relative" ref={langMenuRef}>
-              <button
-                onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-full border border-slate-200 bg-white text-slate-700 hover:text-[#0B1A39] hover:border-[#1C2D5A] shadow-sm"
-                aria-label="Change language"
-              >
-                <Globe className="w-4 h-4" />
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              {langMenuOpen && (
-                <div className="absolute right-0 top-12 bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden min-w-[160px]">
-                  {LANGUAGE_OPTIONS.map((option) => (
-                    <button
-                      key={option.code}
-                      onClick={() => {
-                        setLang(option.code);
-                        setLangMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 ${lang === option.code ? "font-bold text-[#1C2D5A]" : "text-slate-700"}`}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-              <Button className="px-6 py-2.5 text-sm shadow-md hover:shadow-lg rounded-md" onClick={() => setActivePage("contact")}>
-                {t("nav.request")}
+            <nav className="hidden items-center gap-8 lg:flex">
+              {KNOWN_PAGES.map((page) => (
+                <NavButton key={page} active={activePage === page} label={page.charAt(0).toUpperCase() + page.slice(1)} onClick={() => navigate(page)} />
+              ))}
+              <Button className="px-5 py-2.5" onClick={() => navigate("contact")}>
+                Contact Sales
               </Button>
-            </div>
-          </nav>
+            </nav>
 
-          <button className="lg:hidden p-2 text-slate-800" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-          </button>
+            <button className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--brand-line)] text-[var(--brand-navy)] lg:hidden" onClick={() => setIsMenuOpen((value) => !value)}>
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white pt-24 px-6 lg:hidden animate-fade-in">
-          <div className="flex flex-col space-y-4">
-            <NavLink page="home" label={t("nav.home")} mobile />
-            <NavLink page="about" label={t("nav.about")} mobile />
-            <NavLink page="products" label={t("nav.products")} mobile />
-            <NavLink page="blog" label={t("nav.blog")} mobile />
-            <NavLink page="contact" label={t("nav.contact")} mobile />
-            <div className="flex items-center gap-2">
-              <select
-                value={lang}
-                onChange={(e) => setLang(e.target.value)}
-                className="flex-1 bg-white border border-slate-200 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm"
-              >
-                {LANGUAGE_OPTIONS.map((option) => (
-                  <option key={option.code} value={option.code}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <Button
-              className="w-full mt-8"
-              onClick={() => {
-                setActivePage("contact");
-                setIsMenuOpen(false);
-              }}
-            >
-              {t("nav.request")}
+        <div className="fixed inset-0 z-40 bg-[rgba(7,17,31,0.96)] px-6 pb-10 pt-24 lg:hidden">
+          <div className="mx-auto max-w-3xl rounded-[30px] border border-white/10 bg-white/[0.04] p-6">
+            {KNOWN_PAGES.map((page) => (
+              <NavButton key={page} mobile label={page.charAt(0).toUpperCase() + page.slice(1)} onClick={() => navigate(page)} />
+            ))}
+            <Button className="mt-6 w-full" onClick={() => navigate("contact")}>
+              Contact Sales
             </Button>
           </div>
         </div>
       )}
 
-      {/* Main Content Area */}
       <main>
         {activePage === "home" && renderHome()}
         {activePage === "about" && renderAbout()}
@@ -2885,86 +587,57 @@ export default function ChuangjiangWebsite() {
         {activePage === "contact" && renderContact()}
       </main>
 
-      {/* Sticky Floating Action Button (Marketing Optimization) */}
-      <FloatingContact />
-
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 pt-24 pb-12">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 border-b border-slate-800 pb-16">
-            <div className="sm:col-span-2 lg:col-span-1">
-              <div className="text-white font-bold text-2xl mb-6 flex items-center gap-3">
-                <div className="w-12 h-12 flex items-center justify-center text-xs p-1">
-                  <img src={Logo} alt="CHJ footer logo" className="w-full h-full object-contain" />
+      <footer className="bg-[var(--brand-panel)] px-6 pb-10 pt-20 text-slate-300">
+        <div className="container mx-auto">
+          <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
+            <div>
+              <div className="flex items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-2">
+                  <img src={Logo} alt="CHJ footer logo" className="h-full w-full object-contain" />
                 </div>
-                CHJ Remotes
+                <div>
+                  <div className="text-2xl font-bold text-white">{BRAND_NAME}</div>
+                  <div className="font-mono-brand text-[11px] uppercase tracking-[0.22em] text-white/45">International RF OEM partner</div>
+                </div>
               </div>
-              <p className="text-slate-400 leading-relaxed text-sm">
-                {COMPANY_NAME} ({BRAND_NAME}) is an ISO9001 B2B-only factory in Dongguan, China. We build RF remotes, receivers, and Tuya-ready smart modules with in-house PCB and antenna tuning since 2004.
-              </p>
+              <p className="mt-6 max-w-xl text-sm leading-7 text-slate-400">{COMPANY_NAME} is presented here as a more disciplined international manufacturing brand for RF control programs.</p>
             </div>
 
             <div>
-              <h4 className="text-white font-bold mb-6">Products</h4>
-              <ul className="space-y-3 text-sm">
-                <li>
-                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("products")}>
-                    Universal Gate Remotes
-                  </span>
-                </li>
-                <li>
-                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("products")}>
-                    Rolling Code (HCS301)
-                  </span>
-                </li>
-                <li>
-                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("products")}>
-                    Tuya WiFi Receivers
-                  </span>
-                </li>
-              </ul>
+              <div className="font-mono-brand text-xs uppercase tracking-[0.24em] text-white/45">Site</div>
+              <div className="mt-5 space-y-3 text-sm">
+                {KNOWN_PAGES.map((page) => (
+                  <button key={page} className="block text-left text-slate-300 transition-colors hover:text-white" onClick={() => navigate(page)}>
+                    {page.charAt(0).toUpperCase() + page.slice(1)}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div>
-              <h4 className="text-white font-bold mb-6">Company</h4>
-              <ul className="space-y-3 text-sm">
-                <li>
-                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("about")}>
-                    About Factory
-                  </span>
-                </li>
-                <li>
-                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("about")}>
-                    Certificates
-                  </span>
-                </li>
-                <li>
-                  <span className="hover:text-[#FF8A00] transition cursor-pointer" onClick={() => setActivePage("contact")}>
-                    Contact Us
-                  </span>
-                </li>
-              </ul>
+              <div className="font-mono-brand text-xs uppercase tracking-[0.24em] text-white/45">Programs</div>
+              <div className="mt-5 space-y-3 text-sm text-slate-300">
+                <div>Rolling-code remotes</div>
+                <div>Receivers and retrofit kits</div>
+                <div>Smart access modules</div>
+              </div>
             </div>
 
             <div>
-              <h4 className="text-white font-bold mb-6">Contact</h4>
-              <p className="text-xs text-slate-500 mb-2">Email: {CONTACT_INFO.email}</p>
-              <p className="text-xs text-slate-500 mb-2">WhatsApp: {CONTACT_INFO.whatsapp}</p>
-              <p className="text-xs text-slate-500">Add: {CONTACT_INFO.address}</p>
-            </div>
-            <div>
-              <h4 className="text-white font-bold mb-6">Links</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a className="hover:text-[#FF8A00]" href="/robots.txt">Robots</a></li>
-                <li><a className="hover:text-[#FF8A00]" href="/sitemap.xml">Sitemap</a></li>
-                <li><span className="hover:text-[#FF8A00] cursor-pointer">Privacy</span></li>
-              </ul>
+              <div className="font-mono-brand text-xs uppercase tracking-[0.24em] text-white/45">Contact</div>
+              <div className="mt-5 space-y-4 text-sm text-slate-300">
+                <div className="flex items-start gap-3"><Mail className="mt-0.5 h-4 w-4 text-[var(--brand-accent)]" /><span>{CONTACT_INFO.email}</span></div>
+                <div className="flex items-start gap-3"><Phone className="mt-0.5 h-4 w-4 text-[var(--brand-accent)]" /><span>{CONTACT_INFO.phone}</span></div>
+                <div className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 text-[var(--brand-accent)]" /><span>{CONTACT_INFO.address}</span></div>
+              </div>
             </div>
           </div>
-
-          <div className="pt-8 text-center text-sm text-slate-500">
-            {/* Updated Copyright Year */}
-            <p>&copy; 2025 CHJ Remotes. All rights reserved.</p>
+          <div className="flex flex-col gap-3 pt-8 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+            <div>&copy; 2026 CHJ Remotes. All rights reserved.</div>
+            <div className="flex items-center gap-4">
+              <a href="/robots.txt" className="transition-colors hover:text-white">Robots</a>
+              <a href="/sitemap.xml" className="transition-colors hover:text-white">Sitemap</a>
+            </div>
           </div>
         </div>
       </footer>
