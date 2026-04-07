@@ -23,6 +23,7 @@ import Logo from "../logo/LOGO.png";
 const COMPANY_NAME = "Dongguan Chuangjiang Electronics Co., Ltd.";
 const BRAND_NAME = "CHJ Remotes";
 const CATALOG_URL = "/catalog.pdf";
+const HERO_VIDEO_URL = `${import.meta.env.BASE_URL}videos/factory-hero.mp4`;
 const KNOWN_PAGES = ["home", "about", "products", "blog", "contact"];
 
 const CONTACT_INFO = {
@@ -244,28 +245,39 @@ export default function App() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(200,137,71,0.22),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_30%)]" />
             <div className="relative z-10">
               <div className="flex items-center justify-between text-xs uppercase tracking-[0.26em] text-white/55">
-                <span className="font-mono-brand">Factory capability profile</span>
-                <span className="font-mono-brand">Since 2004</span>
+                <span className="font-mono-brand">Factory floor preview</span>
+                <span className="font-mono-brand">90 sec reel</span>
               </div>
-              <div className="mt-10 flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 p-3">
-                  <img src={Logo} alt="CHJ capability logo" className="h-full w-full object-contain" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold">{BRAND_NAME}</div>
-                  <div className="mt-1 text-sm text-slate-300">{COMPANY_NAME}</div>
-                </div>
-              </div>
-              <div className="mt-8 space-y-4">
-                {[
-                  ["Rolling-code remotes", "Secure handheld programs for gate and access-control brands."],
-                  ["Receivers and control boxes", "Retrofit and OEM receiver packages for installed systems."],
-                  ["Smart access modules", "Hybrid WiFi + RF products for cleaner retrofit offers."]
-                ].map(([title, copy]) => (
-                  <div key={title} className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
-                    <div className="text-sm font-semibold uppercase tracking-[0.14em] text-white">{title}</div>
-                    <p className="mt-2 text-sm leading-7 text-slate-300">{copy}</p>
+              <div className="mt-6 overflow-hidden rounded-[28px] border border-white/10 bg-black/30 shadow-[0_24px_70px_-40px_rgba(0,0,0,0.85)]">
+                <div className="relative">
+                  <video
+                    aria-label="Factory floor video"
+                    className="h-[380px] w-full object-cover md:h-[460px] lg:h-[540px]"
+                    src={HERO_VIDEO_URL}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                  />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-6 pb-6 pt-16">
+                    <div className="font-mono-brand text-[11px] uppercase tracking-[0.24em] text-white/60">
+                      Dongguan production line
+                    </div>
+                    <p className="mt-3 max-w-md text-sm leading-7 text-slate-200">
+                      A short look at factory assembly, RF tuning, and export packing inside the same production flow.
+                    </p>
                   </div>
+                </div>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {["Assembly", "RF testing", "Packaging"].map((label) => (
+                  <span
+                    key={label}
+                    className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 font-mono-brand text-[11px] uppercase tracking-[0.18em] text-white/70"
+                  >
+                    {label}
+                  </span>
                 ))}
               </div>
             </div>

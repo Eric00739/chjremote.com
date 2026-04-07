@@ -1,0 +1,32 @@
+# Homepage Hero Video Design
+
+**Date:** 2026-04-07
+
+**Goal:** Replace the homepage hero's right-side capability panel with a muted, autoplaying, looping factory video sourced from the approved `Factory video-90S.mp4` asset.
+
+## Scope
+
+- Change only the homepage hero media block in [E:\Codex_20260402\chjremote\src\App.jsx](E:\Codex_20260402\chjremote\src\App.jsx).
+- Keep the left-side headline, supporting copy, CTA buttons, and metrics unchanged.
+- Preserve the current rounded panel frame, border treatment, and dark hero atmosphere.
+- Do not change other pages or site navigation behavior.
+
+## Media Strategy
+
+- Do not ship the original 131 MB source video to GitHub Pages.
+- Transcode the approved source into a smaller web MP4 under `public/videos/`.
+- Configure the video for `muted`, `autoPlay`, `loop`, and `playsInline`.
+- If autoplay is blocked, the element should still render a playable video frame inside the hero shell.
+
+## Implementation Notes
+
+- Replace the static capability cards with a single media card that holds the video.
+- Expose a stable `aria-label` on the video so homepage behavior can be tested.
+- Build the video URL from `import.meta.env.BASE_URL` so the asset remains correct under Vite's relative base path.
+- Add minimal CSS only if the existing utility classes are not enough to preserve layout and cropping.
+
+## Verification
+
+- Add a homepage test proving the video element exists with the expected autoplay, muted, loop, and inline playback attributes.
+- Run the focused test first to watch it fail before implementation.
+- After implementation, run the full test suite and a production build.

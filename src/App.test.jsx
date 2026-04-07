@@ -17,6 +17,18 @@ test("shows the new brand-led hero and primary CTA on the homepage", () => {
   ).toBeInTheDocument();
 });
 
+test("shows the homepage factory video as muted looping media", () => {
+  render(<App />);
+
+  const video = screen.getByLabelText(/factory floor video/i);
+
+  expect(video.autoplay).toBe(true);
+  expect(video.muted).toBe(true);
+  expect(video.loop).toBe(true);
+  expect(video.playsInline).toBe(true);
+  expect(video.getAttribute("src")).toContain("videos/factory-hero.mp4");
+});
+
 test("navigates to the contact page from the global nav", async () => {
   const user = userEvent.setup();
   render(<App />);
