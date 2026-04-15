@@ -67,19 +67,103 @@ const CASE_STUDIES = [
 
 const BLOG_POSTS = [
   {
+    id: "rf-architecture-buyers",
     tag: "RF Architecture",
     title: "What buyers actually need from an RF remote supplier",
-    copy: "Protocol behavior, range stability, and export readiness matter more than a long generic catalog"
+    copy: "Protocol behavior, range stability, and export readiness matter more than a long generic catalog",
+    date: "2026-04-10",
+    author: "CHJ Engineering Team",
+    content: `
+      <h2>The real decision criteria for RF remote sourcing</h2>
+      <p>When distributors and OEMs evaluate RF remote suppliers, the surface-level comparison often focuses on catalog size and unit price. The deeper technical and commercial criteria that actually drive successful programs get less attention.</p>
+
+      <h3>Protocol behavior is the first real test</h3>
+      <p>A supplier that understands protocol behavior can explain how their rolling-code implementation handles edge cases — interference, replay attacks, receiver compatibility. Generic catalogs rarely address these questions.</p>
+      <p>The supplier that can discuss protocol details is usually the one that can support custom frequency allocation, regional certification, and protocol matching for installed-base programs.</p>
+
+      <h3>Range stability under real conditions</h3>
+      <p>Testing range in a lab is straightforward. Maintaining range stability across temperature extremes, metal-adjacent mounting, and crowded RF environments requires design choices that generic products often skip.</p>
+      <p>Buyers who ask about antenna tuning, RF output power control, and coexistence strategies tend to find suppliers that can deliver consistent field performance.</p>
+
+      <h3>Export readiness as a factory capability</h3>
+      <p>Export-ready documentation and shipment planning are separate from product design. A supplier that treats export support as a deliverable — not an afterthought — reduces the friction that delays shipment and complicates compliance.</p>
+      <p>The factory that can discuss documentation timelines, regional certification paths, and shipment planning is the one that can support multi-region programs without last-minute scrambles.</p>
+
+      <h3>What to ask in the first conversation</h3>
+      <ul>
+        <li>How do you handle protocol matching for installed systems?</li>
+        <li>What is your approach to antenna tuning and range optimization?</li>
+        <li>Can you support documentation and certification for export markets?</li>
+        <li>What is the minimum annual volume for a custom program?</li>
+      </ul>
+      <p>The answers to these questions reveal whether a supplier is positioned for OEM support or catalog resale.</p>
+    `
   },
   {
+    id: "hybrid-tuya-rf-retrofit",
     tag: "Smart Retrofit",
     title: "Why hybrid Tuya + RF projects reduce retrofit friction",
-    copy: "The best retrofit path keeps the installed base useful while opening a modern control layer"
+    copy: "The best retrofit path keeps the installed base useful while opening a modern control layer",
+    date: "2026-04-08",
+    author: "CHJ Engineering Team",
+    content: `
+      <h2>The retrofit challenge for installed RF systems</h2>
+      <p>Many residential and commercial access systems already use RF remotes. Adding smartphone control without disrupting the existing remote behavior requires a bridge approach — not a wholesale replacement.</p>
+
+      <h3>Hybrid modules preserve installed behavior</h3>
+      <p>A hybrid WiFi + RF module can pair with Tuya smart apps while maintaining the existing remote protocol. The installed remote continues to work alongside the new smartphone layer.</p>
+      <p>This approach avoids the friction of explaining why existing remotes no longer work, and it preserves the fallback reliability that RF provides when network connectivity is interrupted.</p>
+
+      <h3>The receiver bridge as the integration point</h3>
+      <p>A receiver bridge that accepts both RF and WiFi inputs can be installed without changing the gate controller. The bridge receives RF commands from existing remotes and WiFi commands from the Tuya app, passing both to the controller.</p>
+      <p>This integration approach reduces the scope of retrofit work and maintains compatibility with the installed base.</p>
+
+      <h3>Installation and setup workflow</h3>
+      <p>The installation workflow for a hybrid retrofit package typically includes:</p>
+      <ul>
+        <li>Mounting the receiver bridge near the controller</li>
+        <li>Pairing existing remotes to the bridge</li>
+        <li>Connecting the bridge to WiFi and the Tuya app</li>
+        <li>Testing both RF and app control paths</li>
+      </ul>
+      <p>The setup process is simpler than replacing the entire control system.</p>
+
+      <h3>Why hybrid retrofit packages sell better</h3>
+      <p>Installers and distributors prefer retrofit packages that preserve installed behavior. A hybrid approach that adds smartphone control without removing RF functionality is easier to explain and easier to support.</p>
+      <p>The retrofit market is large, and the hybrid approach is the one that addresses it without forcing a complete system change.</p>
+    `
   },
   {
+    id: "oem-brief-quotations",
     tag: "Program Planning",
     title: "The OEM brief that gets a serious quotation faster",
-    copy: "Application, target region, protocol direction, timing, and annual volume are the minimum useful inputs"
+    copy: "Application, target region, protocol direction, timing, and annual volume are the minimum useful inputs",
+    date: "2026-04-05",
+    author: "CHJ Engineering Team",
+    content: `
+      <h2>The information that accelerates OEM quotation</h2>
+      <p>OEM programs require more information than catalog purchases. The brief that includes the right inputs from the start reduces back-and-forth and accelerates quotation.</p>
+
+      <h3>Application as the starting point</h3>
+      <p>The application — gate automation, access control, vehicle security — determines the protocol direction, frequency allocation, and environmental requirements.</p>
+      <p>A supplier that understands the application can propose protocol choices, frequency options, and enclosure directions that match the use case.</p>
+
+      <h3>Target region as the certification path</h3>
+      <p>Different regions have different certification requirements. A brief that specifies the target region allows the supplier to propose documentation paths and certification strategies.</p>
+      <p>The supplier that can discuss regional certification is the one that can support export programs without compliance surprises.</p>
+
+      <h3>Protocol direction as the compatibility decision</h3>
+      <p>Rolling-code, learning-code, and fixed-code protocols each have different compatibility implications. The brief that specifies protocol direction allows the supplier to propose receiver and remote combinations that match the installed base.</p>
+      <p>The protocol decision affects security, range, and compatibility — and it is the decision that determines the rest of the program direction.</p>
+
+      <h3>Timing and volume as the production plan</h3>
+      <p>Timing and annual volume determine the production planning. A brief that includes realistic timing and volume expectations allows the supplier to propose sample timelines, pilot batch sizes, and production scheduling.</p>
+      <p>The supplier that can discuss timing and volume is the one that can support pilot and production phases without schedule conflicts.</p>
+
+      <h3>The minimum useful brief</h3>
+      <p>The brief that includes application, target region, protocol direction, timing, and annual volume is the minimum input that allows a supplier to propose a serious quotation.</p>
+      <p>Briefs that omit these inputs tend to generate exploratory responses rather than actionable quotations.</p>
+    `
   }
 ];
 
@@ -181,6 +265,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -464,28 +549,91 @@ export default function App() {
     </section>
   );
 
-  const renderBlog = () => (
-    <section className="bg-white pb-24">
-      <div className="bg-[var(--brand-soft)] px-6 py-20">
-        <div className="container mx-auto">
-          <SectionIntro
-            eyebrow="Editorial"
-            title="Technical and commercial notes for RF access programs"
-            copy="The blog is reframed as a smaller editorial surface with more intention and less filler"
-          />
+  const renderBlog = () => {
+    // If a post is selected, show the article detail
+    if (selectedPost) {
+      const post = BLOG_POSTS.find(p => p.id === selectedPost);
+      if (!post) return null;
+
+      return (
+        <section className="bg-white pb-24">
+          <div className="hero-shell relative overflow-hidden px-6 py-16 text-white">
+            <div className="hero-mesh absolute inset-0" />
+            <div className="container mx-auto relative z-10 max-w-4xl">
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white transition-colors"
+              >
+                <ArrowRight className="h-4 w-4 rotate-180" />
+                Back to all articles
+              </button>
+              <div className="badge-accent mb-6">{post.tag}</div>
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">{post.title}</h1>
+              <div className="mt-6 flex items-center gap-4 text-sm text-white/60">
+                <span>{post.author}</span>
+                <span>·</span>
+                <span>{post.date}</span>
+              </div>
+            </div>
+          </div>
+          <div className="container mx-auto max-w-4xl px-6 pt-12">
+            <article className="prose prose-lg max-w-none">
+              <div
+                className="text-slate-700 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            </article>
+            <div className="mt-12 pt-8 border-t border-slate-200">
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="btn-secondary"
+              >
+                <ArrowRight className="h-4 w-4 rotate-180" />
+                Back to articles
+              </button>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Otherwise, show the blog listing
+    return (
+      <section className="bg-white pb-24">
+        <div className="bg-[var(--brand-soft)] px-6 py-20">
+          <div className="container mx-auto">
+            <SectionIntro
+              eyebrow="Editorial"
+              title="Technical and commercial notes for RF access programs"
+              copy="The blog is reframed as a smaller editorial surface with more intention and less filler"
+            />
+          </div>
         </div>
-      </div>
-      <div className="container mx-auto grid gap-6 px-6 pt-16 lg:grid-cols-3">
-        {BLOG_POSTS.map((post) => (
-          <article key={post.title} className="surface-panel p-8">
-            <div className="font-mono-brand text-xs uppercase tracking-[0.26em] text-[var(--brand-muted)]">{post.tag}</div>
-            <h2 className="mt-4 text-2xl font-bold text-[var(--brand-ink)]">{post.title}</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-600">{post.copy}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
+        <div className="container mx-auto grid gap-6 px-6 pt-16 lg:grid-cols-3">
+          {BLOG_POSTS.map((post) => (
+            <article
+              key={post.id}
+              className="card-featured p-8 cursor-pointer"
+              onClick={() => setSelectedPost(post.id)}
+            >
+              <div className="badge-accent mb-4">{post.tag}</div>
+              <h2 className="mt-4 text-2xl font-bold text-[var(--brand-ink)] leading-tight">{post.title}</h2>
+              <p className="mt-4 text-sm leading-7 text-slate-600">{post.copy}</p>
+              <div className="mt-6 flex items-center gap-2 text-xs text-[var(--brand-muted)]">
+                <span>{post.author}</span>
+                <span>·</span>
+                <span>{post.date}</span>
+              </div>
+              <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-accent)] group-hover:text-[var(--brand-accent-hover)] transition-colors">
+                Read article
+                <ArrowRight className="h-4 w-4" />
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    );
+  };
 
   const renderContact = () => (
     <section className="bg-white pb-24">
