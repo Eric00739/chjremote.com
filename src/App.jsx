@@ -56,12 +56,12 @@ const CASE_STUDIES = [
   {
     market: "Italy · Gate distributor",
     title: "Rolling-code replacement program",
-    copy: "A cleaner pilot program reduced compatibility friction and gave the distributor a more premium replacement offer."
+    copy: "A cleaner pilot program reduced compatibility friction and gave the distributor a more premium replacement offer"
   },
   {
     market: "United States · Access OEM",
     title: "Hybrid smart retrofit package",
-    copy: "A receiver bridge preserved legacy RF use while adding smartphone access for the next product tier."
+    copy: "A receiver bridge preserved legacy RF use while adding smartphone access for the next product tier"
   }
 ];
 
@@ -69,55 +69,55 @@ const BLOG_POSTS = [
   {
     tag: "RF Architecture",
     title: "What buyers actually need from an RF remote supplier",
-    copy: "Protocol behavior, range stability, and export readiness matter more than a long generic catalog."
+    copy: "Protocol behavior, range stability, and export readiness matter more than a long generic catalog"
   },
   {
     tag: "Smart Retrofit",
     title: "Why hybrid Tuya + RF projects reduce retrofit friction",
-    copy: "The best retrofit path keeps the installed base useful while opening a modern control layer."
+    copy: "The best retrofit path keeps the installed base useful while opening a modern control layer"
   },
   {
     tag: "Program Planning",
     title: "The OEM brief that gets a serious quotation faster",
-    copy: "Application, target region, protocol direction, timing, and annual volume are the minimum useful inputs."
+    copy: "Application, target region, protocol direction, timing, and annual volume are the minimum useful inputs"
   }
 ];
 
 const FAQS = [
   {
     q: "Do you support both rolling-code and learning-code projects?",
-    a: "Yes. The exact direction depends on the installed system, market expectations, and security requirement."
+    a: "Yes — The exact direction depends on the installed system, market expectations, and security requirement"
   },
   {
     q: "Can you support custom branding and enclosure direction?",
-    a: "Yes. OEM programs can include shell direction, finish, logo treatment, and packaging alignment."
+    a: "Yes — OEM programs can include shell direction, finish, logo treatment, and packaging alignment"
   },
   {
     q: "Can you prepare projects for overseas distribution?",
-    a: "Yes. Export-oriented documentation support and shipment planning are part of the manufacturing conversation."
+    a: "Yes — Export-oriented documentation support and shipment planning are part of the manufacturing conversation"
   }
 ];
 
 const PAGE_META = {
   home: {
     title: "CHJ Remotes | RF Control Manufacturing for Global Access Brands",
-    description: "International OEM and ODM manufacturer for RF remotes, receivers, and smart retrofit modules."
+    description: "International OEM and ODM manufacturer for RF remotes, receivers, and smart retrofit modules"
   },
   about: {
     title: "About CHJ Remotes | Factory Capability",
-    description: "Factory capability, RF tuning workflow, and export-ready OEM manufacturing."
+    description: "Factory capability, RF tuning workflow, and export-ready OEM manufacturing"
   },
   products: {
     title: "Products | CHJ Remotes",
-    description: "Rolling-code remotes, receivers, retrofit kits, and smart access module programs."
+    description: "Rolling-code remotes, receivers, retrofit kits, and smart access module programs"
   },
   blog: {
     title: "Insights | CHJ Remotes",
-    description: "Technical and commercial notes for RF access and control programs."
+    description: "Technical and commercial notes for RF access and control programs"
   },
   contact: {
     title: "Contact CHJ Remotes | Start an OEM Conversation",
-    description: "Start an OEM conversation with CHJ Remotes about RF control programs."
+    description: "Start an OEM conversation with CHJ Remotes about RF control programs"
   }
 };
 
@@ -266,7 +266,7 @@ export default function App() {
                       Dongguan production line
                     </div>
                     <p className="mt-3 max-w-md text-sm leading-7 text-slate-200">
-                      A short look at factory assembly, RF tuning, and export packing inside the same production flow.
+                      A short look at factory assembly, RF tuning, and export packing inside the same production flow
                     </p>
                   </div>
                 </div>
@@ -291,14 +291,14 @@ export default function App() {
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <SectionIntro
               eyebrow="Factory message"
-              title="The site now leads with identity, capability, and control."
-              copy="The original page spread too many equal-weight blocks across the first impression. This version compresses the message into a more international manufacturing story."
+              title="The site now leads with identity, capability, and control"
+              copy="The original page spread too many equal-weight blocks across the first impression. This version compresses the message into a more international manufacturing story"
             />
             <div className="grid gap-4 md:grid-cols-3">
               {[
-                [ShieldCheck, "Factory-direct B2B", "Engineering, production, and export support stay in one team."],
-                [Cpu, "RF tuning inside the project", "Protocol behavior and antenna performance are treated as deliverables."],
-                [Truck, "Export-ready handoff", "Document support and shipment planning stay close to the product program."]
+                [ShieldCheck, "Factory-direct B2B", "Engineering, production, and export support stay in one team"],
+                [Cpu, "RF tuning inside the project", "Protocol behavior and antenna performance are treated as deliverables"],
+                [Truck, "Export-ready handoff", "Document support and shipment planning stay close to the product program"]
               ].map(([IconComp, title, copy]) => (
                 <div key={title} className="surface-panel p-6">
                   <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-[var(--brand-soft)] text-[var(--brand-navy)]">
@@ -317,8 +317,8 @@ export default function App() {
         <div className="container mx-auto px-6">
           <SectionIntro
             eyebrow="Product families"
-            title="A smaller set of clearer families makes the catalog feel stronger."
-            copy="Instead of opening with a generic product wall, the homepage frames the product offering around a few strong OEM families."
+            title="A smaller set of clearer families makes the catalog feel stronger"
+            copy="Instead of opening with a generic product wall, the homepage frames the product offering around a few strong OEM families"
             centered={true}
           />
           <div className="mt-14 grid gap-6 lg:grid-cols-3">
@@ -344,8 +344,8 @@ export default function App() {
         <div className="container mx-auto px-6">
           <SectionIntro
             eyebrow="Delivery flow"
-            title="One controlled path from technical brief to shipment."
-            copy="The strongest B2B factory sites explain how work moves. This section replaces filler with a simple, controlled delivery path."
+            title="One controlled path from technical brief to shipment"
+            copy="The strongest B2B factory sites explain how work moves. This section replaces filler with a simple, controlled delivery path"
             light={true}
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -372,8 +372,8 @@ export default function App() {
           <div>
             <SectionIntro
               eyebrow="Commercial proof"
-              title="Case structure matters more than a long stack of unlabeled claims."
-              copy="The homepage proof area is smaller, but the framing is stronger and easier to scan."
+              title="Case structure matters more than a long stack of unlabeled claims"
+              copy="The homepage proof area is smaller, but the framing is stronger and easier to scan"
             />
             <div className="mt-10 grid gap-6">
               {CASE_STUDIES.map((item) => (
@@ -439,8 +439,8 @@ export default function App() {
         <div className="container mx-auto">
           <SectionIntro
             eyebrow="Product direction"
-            title="Product families built for OEM programs, not retail browsing."
-            copy="The products page stays useful, but the layout now favors family thinking over cluttered item overload."
+            title="Product families built for OEM programs, not retail browsing"
+            copy="The products page stays useful, but the layout now favors family thinking over cluttered item overload"
           />
         </div>
       </div>
@@ -470,8 +470,8 @@ export default function App() {
         <div className="container mx-auto">
           <SectionIntro
             eyebrow="Editorial"
-            title="Technical and commercial notes for RF access programs."
-            copy="The blog is reframed as a smaller editorial surface with more intention and less filler."
+            title="Technical and commercial notes for RF access programs"
+            copy="The blog is reframed as a smaller editorial surface with more intention and less filler"
           />
         </div>
       </div>
@@ -535,7 +535,7 @@ export default function App() {
             </div>
             <textarea
               className="min-h-[180px] w-full rounded-[24px] border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 py-4 outline-none focus:border-[var(--brand-navy)]"
-              placeholder="Share protocol, frequency, timing, and annual volume."
+              placeholder="Share protocol, frequency, timing, and annual volume"
               required
             />
             <Button type="submit">
