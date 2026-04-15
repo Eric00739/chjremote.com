@@ -138,14 +138,14 @@ function safeScrollTop() {
 
 function Button({ children, variant = "primary", className = "", ...props }) {
   const styles = {
-    primary: "bg-[var(--brand-navy)] text-white hover:bg-[#0c2140]",
-    secondary: "border border-white/20 bg-white/8 text-white hover:bg-white/12",
-    outline: "border border-[var(--brand-line)] bg-white text-[var(--brand-ink)] hover:border-[var(--brand-navy)]"
+    primary: "bg-gradient-to-r from-[var(--brand-accent)] to-[var(--brand-accent-hover)] text-white shadow-lg hover:shadow-xl hover:-translate-y-1",
+    secondary: "border-2 border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:border-white/40",
+    outline: "border-2 border-[var(--brand-navy)] bg-transparent text-[var(--brand-navy)] hover:bg-[var(--brand-navy)] hover:text-white"
   };
 
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 ${styles[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2.5 rounded-xl px-7 py-3.5 text-sm font-semibold transition-all duration-300 ease-out ${styles[variant]} ${className}`}
       {...props}
     >
       {children}
@@ -212,10 +212,10 @@ export default function App() {
       <section className="hero-shell relative overflow-hidden text-white">
         <div className="hero-mesh absolute inset-0" />
         <div className="container mx-auto grid gap-12 px-6 pb-16 pt-10 md:pb-20 md:pt-14 lg:grid-cols-[1.06fr_0.94fr]">
-          <div className="relative z-10 max-w-3xl">
-            <div className="font-mono-brand text-xs uppercase tracking-[0.32em] text-white/55">Global OEM / ODM manufacturer</div>
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">RF Control Manufacturing for Global Access Brands</h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+          <div className="relative z-10 max-w-3xl animate-slide-up">
+            <div className="badge-accent mb-6">Global OEM / ODM manufacturer</div>
+            <h1 className="text-responsive-2xl mt-6 font-extrabold tracking-tight">RF Control Manufacturing for Global Access Brands</h1>
+            <p className="mt-8 max-w-2xl text-responsive-base leading-relaxed text-slate-300">
               CHJ Remotes builds rolling-code remotes, receivers, retrofit control kits, and Tuya-ready smart modules for distributors and OEM programs that need a stronger factory story.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -228,15 +228,15 @@ export default function App() {
                 Download Catalog PDF
               </Button>
             </div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            <div className="mt-12 grid gap-4 sm:grid-cols-3">
               {[
                 ["20+", "Years in RF manufacturing"],
                 ["50+", "Countries served"],
                 ["7 days", "Pilot sample target"]
               ].map(([value, label]) => (
-                <div key={label} className="rounded-[22px] border border-white/10 bg-white/6 p-4 backdrop-blur">
-                  <div className="text-2xl font-extrabold md:text-3xl">{value}</div>
-                  <div className="mt-2 text-sm text-slate-300">{label}</div>
+                <div key={label} className="glass-panel rounded-2xl border border-white/20 p-5 transition-smooth hover:scale-105">
+                  <div className="text-gradient text-3xl font-extrabold md:text-4xl">{value}</div>
+                  <div className="mt-3 text-responsive-sm text-slate-300">{label}</div>
                 </div>
               ))}
             </div>
