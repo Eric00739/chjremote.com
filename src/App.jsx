@@ -234,9 +234,9 @@ export default function App() {
                 ["50+", "Countries served"],
                 ["7 days", "Pilot sample target"]
               ].map(([value, label]) => (
-                <div key={label} className="glass-panel rounded-2xl border border-white/20 p-5 transition-smooth hover:scale-105">
-                  <div className="text-gradient text-3xl font-extrabold md:text-4xl">{value}</div>
-                  <div className="mt-3 text-responsive-sm text-slate-300">{label}</div>
+                <div key={label} className="rounded-2xl border border-white/30 bg-white/15 backdrop-blur-md p-6 transition-smooth hover:scale-105 hover:bg-white/20">
+                  <div className="text-amber-400 text-4xl font-extrabold md:text-5xl">{value}</div>
+                  <div className="mt-3 text-white text-sm font-medium">{label}</div>
                 </div>
               ))}
             </div>
