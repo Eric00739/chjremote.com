@@ -17,7 +17,10 @@ import {
   Truck,
   Clock,
   Users,
-  Star
+  Star,
+  Layers,
+  MessageSquare,
+  FileText
 } from "lucide-react";
 import Logo from "../logo/LOGO.png";
 
@@ -670,10 +673,19 @@ export default function App() {
       if (!post) return null;
 
       return (
-        <section className="bg-white pb-24">
-          <div className="hero-shell relative overflow-hidden px-6 py-16 text-white">
+        <>
+          {/* Enhanced Hero Section with Geometric Background */}
+          <section className="hero-shell relative overflow-hidden px-6 py-20 text-white">
             <div className="hero-mesh absolute inset-0" />
-            <div className="container mx-auto relative z-10 max-w-4xl">
+            {/* Geometric pattern overlay */}
+            <div
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage: `radial-gradient(circle at 2px 2px, rgba(245, 158, 11, 0.15) 1px, transparent 0)`,
+                backgroundSize: '32px 32px'
+              }}
+            />
+            <div className="container mx-auto relative z-10 max-w-3xl">
               <button
                 onClick={() => setSelectedPost(null)}
                 className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white transition-colors"
@@ -682,32 +694,112 @@ export default function App() {
                 Back to all articles
               </button>
               <div className="badge-accent mb-6">{post.tag}</div>
-              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">{post.title}</h1>
-              <div className="mt-6 flex items-center gap-4 text-sm text-white/60">
-                <span>{post.author}</span>
+              <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">{post.title}</h1>
+              <div className="mt-8 flex items-center gap-4 text-base text-white/60">
+                <span className="font-semibold">{post.author}</span>
                 <span>·</span>
                 <span>{post.date}</span>
               </div>
             </div>
-          </div>
-          <div className="container mx-auto max-w-4xl px-6 pt-12">
-            <article className="prose prose-lg max-w-none">
-              <div
-                className="text-slate-700 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
-            </article>
-            <div className="mt-12 pt-8 border-t border-slate-200">
-              <button
-                onClick={() => setSelectedPost(null)}
-                className="btn-secondary"
-              >
-                <ArrowRight className="h-4 w-4 rotate-180" />
-                Back to articles
-              </button>
+          </section>
+
+          {/* Main Content Area with Sidebar Layout */}
+          <section className="bg-white pb-24">
+            <div className="container mx-auto px-6 py-12">
+              <div className="grid gap-12 lg:grid-cols-[1fr_320px]">
+                {/* Main Article Content - max-w-3xl centered */}
+                <div className="mx-auto w-full max-w-3xl">
+                  <article className="prose prose-lg max-w-none">
+                    <div
+                      className="text-slate-700 leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    />
+                  </article>
+
+                  {/* Lead Magnet Section */}
+                  <div className="mt-16 rounded-3xl bg-gradient-to-br from-[var(--brand-navy)] to-[var(--brand-panel)] p-8 text-white">
+                    <h3 className="text-2xl font-bold mb-4">Need a custom RF solution?</h3>
+                    <p className="text-slate-300 mb-6 leading-relaxed">
+                      Let our engineering team help you design the right remote-control system for your application.
+                    </p>
+                    <Button onClick={() => navigate("contact")}>
+                      Start Your OEM Brief
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+
+                  {/* Article Footer */}
+                  <div className="mt-12 pt-8 border-t border-slate-200">
+                    <button
+                      onClick={() => setSelectedPost(null)}
+                      className="btn-secondary"
+                    >
+                      <ArrowRight className="h-4 w-4 rotate-180" />
+                      Back to articles
+                    </button>
+                  </div>
+                </div>
+
+                {/* Sticky Sidebar */}
+                <aside className="hidden lg:block">
+                  <div className="sticky top-24 space-y-8">
+                    {/* Quick Consultation Card */}
+                    <div className="surface-panel p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <MessageSquare className="h-5 w-5 text-[var(--brand-accent)]" />
+                        <h4 className="text-sm font-bold text-[var(--brand-navy)]">Quick Consultation</h4>
+                      </div>
+                      <p className="text-sm text-slate-600 mb-4 leading-relaxed">
+                        Questions about RF specifications? Our engineering team is ready to help.
+                      </p>
+                      <button
+                        onClick={() => navigate("contact")}
+                        className="w-full rounded-lg bg-[var(--brand-accent)] px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-[var(--brand-accent-hover)] hover:shadow-md"
+                      >
+                        Contact Engineering
+                      </button>
+                    </div>
+
+                    {/* Related Products */}
+                    <div className="surface-panel p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <Layers className="h-5 w-5 text-[var(--brand-accent)]" />
+                        <h4 className="text-sm font-bold text-[var(--brand-navy)]">Related Products</h4>
+                      </div>
+                      <div className="space-y-4">
+                        {PRODUCT_FAMILIES.slice(0, 2).map((product) => (
+                          <button
+                            key={product.title}
+                            onClick={() => navigate("products")}
+                            className="block w-full rounded-lg border border-[var(--brand-line)] bg-white p-4 text-left transition-all hover:border-[var(--brand-accent)] hover:shadow-md"
+                          >
+                            <div className="text-xs font-mono-brand uppercase tracking-[0.18em] text-[var(--brand-muted)] mb-2">Product Family</div>
+                            <div className="text-sm font-semibold text-[var(--brand-navy)]">{product.title}</div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Download Resources */}
+                    <div className="surface-panel p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <FileText className="h-5 w-5 text-[var(--brand-accent)]" />
+                        <h4 className="text-sm font-bold text-[var(--brand-navy)]">Resources</h4>
+                      </div>
+                      <button
+                        onClick={() => window.open(CATALOG_URL, "_blank")}
+                        className="w-full flex items-center justify-center gap-2 rounded-lg border border-[var(--brand-navy)] bg-white px-4 py-3 text-sm font-semibold text-[var(--brand-navy)] transition-all hover:bg-[var(--brand-navy)] hover:text-white"
+                      >
+                        <Download className="h-4 w-4" />
+                        Download Catalog
+                      </button>
+                    </div>
+                  </div>
+                </aside>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </>
       );
     }
 
@@ -864,9 +956,10 @@ export default function App() {
 
       <footer className="bg-[var(--brand-panel)] px-6 pb-10 pt-20 text-slate-300">
         <div className="container mx-auto">
-          <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
+          <div className="grid gap-12 border-b border-white/10 pb-14 lg:grid-cols-4">
+            {/* Column 1: Company Info */}
             <div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-2">
                   <img src={Logo} alt="CHJ footer logo" className="h-full w-full object-contain" />
                 </div>
@@ -875,43 +968,85 @@ export default function App() {
                   <div className="font-mono-brand text-[11px] uppercase tracking-[0.22em] text-white/45">International RF OEM partner</div>
                 </div>
               </div>
-              <p className="mt-6 max-w-xl text-sm leading-7 text-slate-400">{COMPANY_NAME} is presented here as a more disciplined international manufacturing brand for RF control programs.</p>
+              <p className="text-sm leading-7 text-slate-400 mb-6">{COMPANY_NAME} delivers custom RF control solutions for global OEM programs.</p>
+              <div className="flex gap-3">
+                <a href="mailto:sales@chjremote.com" className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold transition-all hover:bg-white/10">
+                  Email Us
+                </a>
+              </div>
             </div>
 
+            {/* Column 2: Products */}
             <div>
-              <div className="font-mono-brand text-xs uppercase tracking-[0.24em] text-white/45">Site</div>
-              <div className="mt-5 space-y-3 text-sm">
-                {KNOWN_PAGES.map((page) => (
-                  <button key={page} className="block text-left text-slate-300 transition-colors hover:text-white" onClick={() => navigate(page)}>
-                    {page.charAt(0).toUpperCase() + page.slice(1)}
+              <div className="font-mono-brand text-xs uppercase tracking-[0.28em] text-white/45 mb-6">Product Families</div>
+              <div className="space-y-4">
+                {PRODUCT_FAMILIES.map((product) => (
+                  <button
+                    key={product.title}
+                    className="block w-full text-left rounded-lg border border-white/5 bg-white/[0.02] p-3 text-sm text-slate-300 transition-all hover:border-white/20 hover:bg-white/[0.05] hover:text-white"
+                    onClick={() => navigate("products")}
+                  >
+                    <div className="font-semibold">{product.title}</div>
                   </button>
                 ))}
               </div>
             </div>
 
+            {/* Column 3: Support */}
             <div>
-              <div className="font-mono-brand text-xs uppercase tracking-[0.24em] text-white/45">Programs</div>
-              <div className="mt-5 space-y-3 text-sm text-slate-300">
-                <div>Rolling-code remotes</div>
-                <div>Receivers and retrofit kits</div>
-                <div>Smart access modules</div>
+              <div className="font-mono-brand text-xs uppercase tracking-[0.28em] text-white/45 mb-6">Support & Services</div>
+              <div className="space-y-3 text-sm">
+                <button className="block w-full text-left text-slate-300 transition-colors hover:text-white" onClick={() => navigate("contact")}>
+                  OEM Consultation
+                </button>
+                <button className="block w-full text-left text-slate-300 transition-colors hover:text-white" onClick={() => navigate("about")}>
+                  Factory Capability
+                </button>
+                <button className="block w-full text-left text-slate-300 transition-colors hover:text-white" onClick={() => window.open(CATALOG_URL, "_blank")}>
+                  Download Catalog
+                </button>
+                <button className="block w-full text-left text-slate-300 transition-colors hover:text-white" onClick={() => navigate("blog")}>
+                  Technical Articles
+                </button>
               </div>
             </div>
 
+            {/* Column 4: Contact */}
             <div>
-              <div className="font-mono-brand text-xs uppercase tracking-[0.24em] text-white/45">Contact</div>
-              <div className="mt-5 space-y-4 text-sm text-slate-300">
-                <div className="flex items-start gap-3"><Mail className="mt-0.5 h-4 w-4 text-[var(--brand-accent)]" /><span>{CONTACT_INFO.email}</span></div>
-                <div className="flex items-start gap-3"><Phone className="mt-0.5 h-4 w-4 text-[var(--brand-accent)]" /><span>{CONTACT_INFO.phone}</span></div>
-                <div className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 text-[var(--brand-accent)]" /><span>{CONTACT_INFO.address}</span></div>
+              <div className="font-mono-brand text-xs uppercase tracking-[0.28em] text-white/45 mb-6">Contact Factory</div>
+              <div className="space-y-5 text-sm">
+                <div className="flex items-start gap-3">
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-accent)]" />
+                  <div>
+                    <div className="font-mono-brand text-xs text-white/45 mb-1">Email</div>
+                    <div className="text-slate-300">{CONTACT_INFO.email}</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-accent)]" />
+                  <div>
+                    <div className="font-mono-brand text-xs text-white/45 mb-1">WhatsApp</div>
+                    <div className="text-slate-300">{CONTACT_INFO.whatsapp}</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-accent)]" />
+                  <div>
+                    <div className="font-mono-brand text-xs text-white/45 mb-1">Location</div>
+                    <div className="text-slate-300 leading-relaxed">{CONTACT_INFO.address}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Footer Bottom */}
           <div className="flex flex-col gap-3 pt-8 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
-            <div>&copy; 2026 CHJ Remotes. All rights reserved.</div>
-            <div className="flex items-center gap-4">
+            <div>&copy; 2026 {BRAND_NAME}. All rights reserved.</div>
+            <div className="flex items-center gap-6">
               <a href="/robots.txt" className="transition-colors hover:text-white">Robots</a>
               <a href="/sitemap.xml" className="transition-colors hover:text-white">Sitemap</a>
+              <a href="https://github.com/Eric00739/chjremote.com" className="transition-colors hover:text-white">GitHub</a>
             </div>
           </div>
         </div>
