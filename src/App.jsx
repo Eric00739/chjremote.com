@@ -222,14 +222,14 @@ function safeScrollTop() {
 
 function Button({ children, variant = "primary", className = "", ...props }) {
   const styles = {
-    primary: "bg-gradient-to-r from-[var(--brand-accent)] to-[var(--brand-accent-hover)] text-white shadow-lg hover:shadow-xl hover:-translate-y-1",
-    secondary: "border-2 border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:border-white/40",
-    outline: "border-2 border-[var(--brand-navy)] bg-transparent text-[var(--brand-navy)] hover:bg-[var(--brand-navy)] hover:text-white"
+    primary: "bg-gradient-to-r from-[var(--brand-accent)] to-[var(--brand-accent-hover)] text-white shadow-lg hover:shadow-xl hover:-translate-y-1 active:translate-y-0 active:shadow-md",
+    secondary: "border-2 border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:border-white/40 active:bg-white/15",
+    outline: "border-2 border-[var(--brand-navy)] bg-transparent text-[var(--brand-navy)] hover:bg-[var(--brand-navy)] hover:text-white active:bg-[var(--brand-navy)]/90"
   };
 
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2.5 rounded-xl px-7 py-3.5 text-sm font-semibold transition-all duration-300 ease-out ${styles[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2.5 rounded-xl px-7 py-3.5 text-sm font-semibold transition-all duration-200 ease-out ${styles[variant]} ${className}`}
       {...props}
     >
       {children}
@@ -245,7 +245,7 @@ function NavButton({ active, label, mobile = false, onClick }) {
   return (
     <button className={classes} onClick={onClick}>
       <span>{label}</span>
-      {mobile && <ArrowRight className="h-4 w-4 text-white/55" />}
+      {mobile && <ArrowRight className="h-4 w-4 text-white/70" />}
     </button>
   );
 }
@@ -319,7 +319,7 @@ export default function App() {
                 ["50+", "Countries served"],
                 ["7 days", "Pilot sample target"]
               ].map(([value, label]) => (
-                <div key={label} className="rounded-2xl border border-white/30 bg-white/15 backdrop-blur-md p-6 transition-smooth hover:scale-105 hover:bg-white/20">
+                <div key={label} className="rounded-2xl border border-white/30 bg-white/15 backdrop-blur-md p-6 transition-smooth hover:scale-[1.02] hover:bg-white/20 hover:border-white/40">
                   <div className="text-amber-400 text-4xl font-extrabold md:text-5xl">{value}</div>
                   <div className="mt-3 text-white text-sm font-medium">{label}</div>
                 </div>
@@ -327,27 +327,32 @@ export default function App() {
             </div>
           </div>
 
-          <div className="hero-panel relative overflow-hidden rounded-[34px] border border-white/10 bg-white/6 p-7 backdrop-blur-xl md:p-9">
+          <div className="hero-panel relative overflow-hidden rounded-3xl border border-white/10 bg-white/6 p-7 backdrop-blur-xl md:p-9">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(200,137,71,0.22),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_30%)]" />
             <div className="relative z-10">
-              <div className="flex items-center justify-between text-xs uppercase tracking-[0.26em] text-white/55">
+              <div className="flex items-center justify-between text-xs uppercase tracking-[0.26em] text-white/70">
                 <span className="font-mono-brand">Factory floor preview</span>
                 <span className="font-mono-brand">90 sec reel</span>
               </div>
-              <div className="mt-6 overflow-hidden rounded-[28px] border border-white/10 bg-black/30 shadow-[0_24px_70px_-40px_rgba(0,0,0,0.85)]">
+              <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-black/30 shadow-hero-video">
                 <div className="relative">
                   <video
                     aria-label="Factory floor video"
                     className="h-[380px] w-full object-cover md:h-[460px] lg:h-[540px]"
                     src={HERO_VIDEO_URL}
+                    poster={`${import.meta.env.BASE_URL}videos/factory-hero-poster.jpg`}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    preload="metadata"
+                    preload="auto"
+                    onError={(e) => {
+                      console.warn('Video load failed');
+                      e.target.style.display = 'none';
+                    }}
                   />
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-6 pb-6 pt-16">
-                    <div className="font-mono-brand text-[11px] uppercase tracking-[0.24em] text-white/60">
+                    <div className="font-mono-brand text-[11px] uppercase tracking-[0.24em] text-white/75">
                       Dongguan production line
                     </div>
                     <p className="mt-3 max-w-md text-sm leading-7 text-slate-200">
@@ -440,7 +445,7 @@ export default function App() {
               ["03", Users, "Pilot validation"],
               ["04", Truck, "Production and shipment"]
             ].map(([step, IconComp, title]) => (
-              <div key={step} className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6">
+              <div key={step} className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
                 <div className="flex items-center justify-between">
                   <span className="font-mono-brand text-xs uppercase tracking-[0.28em] text-white/45">{step}</span>
                   <IconComp className="h-5 w-5 text-[var(--brand-accent)]" />
@@ -477,7 +482,7 @@ export default function App() {
                 "The project felt like working with an engineering team, not chasing a trading company through a checklist.",
                 "CHJ stayed inside the protocol issue until the batch was stable."
               ].map((quote, index) => (
-                <div key={quote} className="rounded-[24px] border border-[var(--brand-line)] bg-white p-6">
+                <div key={quote} className="rounded-2xl border border-[var(--brand-line)] bg-white p-6">
                   <div className="mb-4 flex gap-1 text-[var(--brand-accent)]">
                     {Array.from({ length: 5 }).map((_, starIndex) => (
                       <Star key={`${index}-${starIndex}`} className="h-4 w-4 fill-current" />
@@ -674,15 +679,15 @@ export default function App() {
             }}
           >
             <div className="grid gap-5 md:grid-cols-2">
-              <input className="h-12 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-navy)]" placeholder="Company" required />
-              <input className="h-12 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-navy)]" placeholder="Business email" type="email" required />
+              <input className="h-12 md:h-14 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 transition-all duration-200 placeholder:text-[var(--brand-muted)] placeholder:text-sm" placeholder="Company" required />
+              <input className="h-12 md:h-14 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 transition-all duration-200 placeholder:text-[var(--brand-muted)] placeholder:text-sm" placeholder="Business email" type="email" required />
             </div>
             <div className="grid gap-5 md:grid-cols-2">
-              <input className="h-12 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-navy)]" placeholder="Application" />
-              <input className="h-12 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-navy)]" placeholder="Target market" />
+              <input className="h-12 md:h-14 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 transition-all duration-200 placeholder:text-[var(--brand-muted)] placeholder:text-sm" placeholder="Application" />
+              <input className="h-12 md:h-14 rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 outline-none focus:border-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 transition-all duration-200 placeholder:text-[var(--brand-muted)] placeholder:text-sm" placeholder="Target market" />
             </div>
             <textarea
-              className="min-h-[180px] w-full rounded-[24px] border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 py-4 outline-none focus:border-[var(--brand-navy)]"
+              className="min-h-[180px] w-full rounded-2xl border border-[var(--brand-line)] bg-[var(--brand-soft)] px-4 py-4 outline-none focus:border-[var(--brand-accent)] focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 transition-all duration-200 placeholder:text-[var(--brand-muted)] placeholder:text-sm"
               placeholder="Share protocol, frequency, timing, and annual volume"
               required
             />
@@ -698,7 +703,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-ink)]">
-      <header className={`sticky top-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-[var(--brand-line)] bg-white/90 shadow-[0_18px_40px_-28px_rgba(7,17,31,0.35)] backdrop-blur-xl" : "border-transparent bg-white/78 backdrop-blur-md"}`}>
+      <header className={`sticky top-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-[var(--brand-line)] bg-white/90 shadow-header backdrop-blur-xl" : "border-transparent bg-white/78 backdrop-blur-md"}`}>
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between py-4">
             <button className="flex items-center gap-4 text-left" onClick={() => navigate("home")}>
@@ -729,7 +734,7 @@ export default function App() {
 
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 bg-[rgba(7,17,31,0.96)] px-6 pb-10 pt-24 lg:hidden">
-          <div className="mx-auto max-w-3xl rounded-[30px] border border-white/10 bg-white/[0.04] p-6">
+          <div className="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-white/[0.04] p-6">
             {KNOWN_PAGES.map((page) => (
               <NavButton key={page} mobile label={page.charAt(0).toUpperCase() + page.slice(1)} onClick={() => navigate(page)} />
             ))}

@@ -12,7 +12,7 @@
   --brand-panel: #162032;
   --brand-soft: #f1f5f9;
   --brand-line: rgba(30, 58, 95, 0.08);
-  --brand-muted: #64748b;
+  --brand-muted: #525d6e;
   --brand-accent: #f59e0b;
   --brand-accent-hover: #d97706;
 
@@ -151,7 +151,7 @@
     @apply rounded-2xl border bg-white;
     border-color: var(--brand-line);
     box-shadow: var(--shadow-lg);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .surface-panel:hover {
@@ -197,7 +197,7 @@
     background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-hover));
     color: white;
     box-shadow: var(--shadow-md);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
 
   .btn-primary:hover {
@@ -209,7 +209,7 @@
     @apply px-6 py-3 rounded-xl font-semibold border-2;
     border-color: var(--brand-navy);
     color: var(--brand-navy);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
 
   .btn-secondary:hover {
@@ -223,7 +223,7 @@
     background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(248, 250, 252, 1));
     border-color: var(--brand-line);
     box-shadow: var(--shadow-lg);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .card-featured:hover {
@@ -242,7 +242,7 @@
 
   /* Smooth Transitions */
   .transition-smooth {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Focus States */
@@ -286,6 +286,15 @@
 
   .text-responsive-2xl {
     font-size: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+  }
+
+  /* Custom Shadow Classes */
+  .shadow-hero-video {
+    box-shadow: 0 24px 70px -40px rgba(0, 0, 0, 0.85);
+  }
+
+  .shadow-header {
+    box-shadow: 0 18px 40px -28px rgba(7, 17, 31, 0.35);
   }
 }
 

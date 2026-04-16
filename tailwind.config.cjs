@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: "#1C2D5A",
-        accent: "#FF8A00"
+        brand: "#1e3a5f",
+        accent: "#f59e0b"
       },
       animation: {
         "bounce-slow": "bounce 2s infinite",
