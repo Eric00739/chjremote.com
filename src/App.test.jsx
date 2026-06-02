@@ -39,3 +39,18 @@ test("navigates to the contact page from the global nav", async () => {
     screen.getByRole("heading", { name: /start an oem conversation/i })
   ).toBeInTheDocument();
 });
+
+test("shows the gate remote control buying article on the blog page", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+
+  await user.click(screen.getAllByRole("button", { name: /^blog$/i })[0]);
+
+  expect(
+    screen.getByRole("heading", {
+      name: /how to choose a gate remote control supplier for oem programs/i
+    })
+  ).toBeInTheDocument();
+
+  expect(screen.getByText(/frequency support, code behavior/i)).toBeInTheDocument();
+});
