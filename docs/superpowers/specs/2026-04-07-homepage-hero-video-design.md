@@ -1,12 +1,14 @@
 # Homepage Hero Video Design
 
+> **Status:** Superseded on 2026-08-24. This design is retained only as historical context. The source footage is not approved for public use; the current hero intentionally contains no factory video.
+
 **Date:** 2026-04-07
 
-**Goal:** Replace the homepage hero's right-side capability panel with a muted, autoplaying, looping factory video sourced from the approved `Factory video-90S.mp4` asset.
+**Historical goal:** Replace the homepage hero's right-side capability panel with a muted, autoplaying, looping factory video. The source was assumed to be approved at the time; that assumption was not subsequently verified.
 
 ## Scope
 
-- Change only the homepage hero media block in [E:\Codex_20260402\chjremote\src\App.jsx](E:\Codex_20260402\chjremote\src\App.jsx).
+- Change only the homepage hero media block in `src/App.jsx`.
 - Keep the left-side headline, supporting copy, CTA buttons, and metrics unchanged.
 - Preserve the current rounded panel frame, border treatment, and dark hero atmosphere.
 - Do not change other pages or site navigation behavior.

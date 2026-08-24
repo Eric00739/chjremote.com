@@ -1,5 +1,7 @@
 # Website Brand Refresh Implementation Plan
 
+> **Status:** Historical implementation plan. The site has since been revised by the 2026-08-24 adversarial hardening work. Do not treat the sample copy, claims, or unchecked tasks below as current requirements; use the code, tests, README, and claim register as current authority.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Rework the marketing site into a stronger international manufacturing brand presentation while preserving the existing static multi-page routing and core inquiry actions.
