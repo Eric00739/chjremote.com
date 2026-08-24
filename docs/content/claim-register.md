@@ -4,13 +4,13 @@ This file is the source of truth for claims published on the site. Do not publis
 
 | Claim | Current location | Status | Evidence / owner | Allowed public wording |
 |---|---|---|---|---|
-| 20+ years in RF manufacturing | `src/App.jsx` homepage stats | needs-owner-proof | Unknown — verify | Remove the number until verified |
-| 50+ countries served | `src/App.jsx` homepage stats | needs-owner-proof | Unknown — verify | Remove the number until verified |
-| 7-day pilot sample target | `src/App.jsx` homepage stats | needs-owner-proof | Unknown — verify | Remove the timeline until verified |
-| ISO9001 manufacturer | `about/index.html` metadata | needs-owner-proof | Certificate copy and validity — owner to provide | Remove until verified |
-| Italy gate distributor case | `src/App.jsx` homepage case section | needs-owner-proof | Case evidence and publication permission — owner to provide | Remove until verified |
-| United States access OEM case | `src/App.jsx` homepage case section | needs-owner-proof | Case evidence and publication permission — owner to provide | Remove until verified |
-| Anonymous partner quotes | `src/App.jsx` homepage partner voice | needs-owner-proof | Written permission and attribution — owner to provide | Remove until verified |
+| 20+ years in RF manufacturing | Removed from public pages | remove | Unknown — owner proof required before reconsideration | Do not republish the number until verified |
+| 50+ countries served | Removed from public pages | remove | Unknown — owner proof required before reconsideration | Do not republish the number until verified |
+| 7-day pilot sample target | Removed from public pages | remove | Unknown — owner proof required before reconsideration | Do not republish the timeline until verified |
+| ISO9001 manufacturer | Removed from public metadata | remove | Certificate copy and validity — owner to provide | Do not republish until verified |
+| Italy gate distributor case | Removed from public pages | remove | Case evidence and publication permission — owner to provide | Do not republish until verified |
+| United States access OEM case | Removed from public pages | remove | Case evidence and publication permission — owner to provide | Do not republish until verified |
+| Anonymous partner quotes | Removed from public pages | remove | Written permission and attribution — owner to provide | Do not republish until verified |
 | RF remote, receiver, retrofit, and smart access product families | `src/App.jsx` product data | verified | Current product taxonomy in repository — owner should confirm | May describe the product scope; do not imply every protocol or certification is supported |
 | Contact address, phone, WhatsApp, email | `src/App.jsx` `CONTACT_INFO` | needs-owner-proof | Owner to confirm current sales details | Use only after contact details are confirmed |
 | Product catalog PDF | Local ignored archive: `docs/media-source/catalog-invalid-onedrive.bin` | remove | Previous public asset starts with `%ONEDLP_HEADER%` and is not a readable PDF | Do not link or commit until owner supplies a valid, reviewed PDF |

@@ -1,6 +1,6 @@
 # CHJ Remote 网站第一性原理审核与优化执行计划
 
-> 面向较低能力模型执行。一次只做一个 Task。每个 Task 完成测试和验收后停止，等待人工检查。不要把多个 Task 合并成一次大改。
+> **状态：历史审核与执行记录。** 2026-08-24 的 P0/P1 修复已进入草稿 PR #1，但尚未合并或部署。不要从头顺序重跑本计划；当前事实以代码、测试、README 和 `docs/content/claim-register.md` 为准。尚未完成的独立工作是业务证据、博客静态 URL 和开发工具链升级。
 
 **审核日期：** 2026-08-24
 **审核对象：** `https://www.chjremote.com/` 与仓库 `Eric00739/chjremote.com`
@@ -9,11 +9,13 @@
 
 ## 当前执行记录（2026-08-24）
 
-- Task 0–4：已在本地完成第一轮事实清理、联系路径、语义导航、canonical、robots 和 sitemap 修复；尚未部署。
-- Task 5：已完成海报、2.83 MB fast-start 视频、移动端/减弱动效加载策略、播放入口、菜单状态、对比度和 reduced-motion；无效 catalog 已停止发布并移入 `docs/media-source/`，待负责人提供可读且获授权的 PDF。
-- 额外 QA：发现现有工厂视频带有 `Alibaba.com` 水印，已记录为 `needs-owner-proof`；长期应替换为自有或明确获授权的产线素材。
+- Task 0–4：已在 `codex/adversarial-site-hardening` 完成事实清理、联系路径、语义导航、canonical、robots 和 sitemap 修复；草稿 PR #1 尚未合并或部署。
+- Task 5：最终决定是不发布现有视频和 PDF。视频带有第三方水印且权利与拍摄地点未核实，PDF 不是可读文件；两者已从 `public/` 移除，本地归档位于被 Git 忽略的 `docs/media-source/`。
+- QA：桌面与 390 px 移动端真实浏览器回归通过；首页不再请求视频或 Google Fonts，联系页没有模拟表单。
 - Task 6：等待真实产品型号、公开参数、证书、工厂照片和案例授权；没有这些资料不继续编写数字型证明。
 - Task 7：独立 URL/静态博客架构尚未开始，需在单独上下文中处理。
+- Task 8：开发工具链 major 升级尚未开始；生产依赖审计为 0，开发依赖警告仍需单独处理。
+- Task 9：已增加 9 项关键回归测试，但静态文章 URL 与完整发布检查仍未完成。
 
 ---
 

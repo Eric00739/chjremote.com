@@ -1,8 +1,10 @@
 # Homepage Hero Video Implementation Plan
 
+> **Status:** Superseded on 2026-08-24. The referenced footage was removed from the public site because its ownership and publication rights were not verified and it carried a third-party watermark. Do not reimplement this plan without approved replacement media and owner authorization.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace the homepage hero capability panel with a web-optimized factory video that autoplays silently and loops.
+**Historical goal:** Replace the homepage hero capability panel with a web-optimized factory video that autoplays silently and loops. The media approval assumed by this plan was not subsequently verified.
 
 **Architecture:** Keep the existing homepage content structure intact, add one focused homepage regression test for the video behavior, transcode the approved source into `public/videos/`, then swap the hero media block in `src/App.jsx` to a video-based panel that respects Vite's base path.
 
@@ -42,7 +44,7 @@ Expected: FAIL because the homepage does not render a video element yet.
 
 - [ ] **Step 1: Transcode the approved source video**
 
-Run a web-focused H.264 transcode from `\\192.168.5.254\公司资料\业务\02黄\Factory video-90S.mp4` into `public/videos/factory-hero.mp4`.
+Historical step only: transcode the then-proposed source into `public/videos/factory-hero.mp4`. Do not run this step with the archived footage.
 
 - [ ] **Step 2: Verify the output asset exists and is materially smaller than the source**
 
